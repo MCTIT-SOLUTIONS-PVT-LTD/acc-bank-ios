@@ -3,20 +3,11 @@ import SwiftUI
 struct HomeView: View {
     var username: String
     @State private var selectedAccount: String = "Chequing" // Default selected account
-    //test comment
-    //test 2
+    let cardImages = ["Card", "Card", "Card"] // Replace with actual image names
 
     var body: some View {
         ZStack {
             // Background Gradient
-//            LinearGradient(
-//                gradient: Gradient(colors: [
-//                    Color.blue.opacity(0.8),
-//                    Color.blue
-//                ]),
-//                startPoint: .top, endPoint: .bottom
-//            )
-//            .edgesIgnoringSafeArea(.all)
             LinearGradient(
                 gradient: Gradient(colors: [
                     Color.deepTeal,
@@ -26,22 +17,22 @@ struct HomeView: View {
                 endPoint: .trailing
             )
             .edgesIgnoringSafeArea(.all)
+
             VStack {
                 Spacer()
 
                 // Profile Image
                 Image("profilePic")
                     .resizable()
-                    .frame(width: 80, height: 80)
+                    .frame(width: 60, height: 60)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
                     .shadow(radius: 5)
 
                 // Welcome Text
                 Text("Welcome \(username) to")
                     .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.white)
-                
+
                 Text("Acceinfo Bank")
                     .font(.system(size: 22, weight: .bold))
                     .foregroundColor(.white)
@@ -56,45 +47,129 @@ struct HomeView: View {
                 // Account Summary Section
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color.white)
-                    .frame(width: 360, height: 400)
+                    .frame(width: 360, height: 450) // Increased height for better fit
                     .shadow(radius: 5)
                     .overlay(
-                        VStack {
+                        VStack(spacing: 15) {
+                            // Accounts Section
                             HStack {
                                 AccountView(icon: "house.fill", title: "Savings", number: "(1234)", amount: "USD 1245.45", isSelected: selectedAccount == "Savings")
                                     .onTapGesture { selectedAccount = "Savings" }
-                                
-                                Divider() // Horizontal line between items
-                                    .frame(height: 40) // Adjust height of the line
+
+                                Divider()
+                                    .frame(width: 1, height: 40)
                                     .background(Color.black)
-                            
 
                                 AccountView(icon: "creditcard.fill", title: "Chequing", number: "(3456)", amount: "USD 2000.45", isSelected: selectedAccount == "Chequing")
                                     .onTapGesture { selectedAccount = "Chequing" }
 
-                                Divider() // Another divider between items
-                                    .frame(height: 40)
+                                Divider()
+                                    .frame(width: 1, height: 40)
                                     .background(Color.black)
-                                   //.alignmentGuide(.center) { d in d[.center] } // Ensures it stays in center
 
-                              
-
-                                AccountView(icon: "magnifyingglass.circle.fill", title: "Loan", number: "(9999)", amount: "USD 5555.45", isSelected: selectedAccount == "Loan")
+                                AccountView(icon: "magnifyingglass.circle.fill", title: "Loan", number: "(9999)", amount: "USD -5555.45", isSelected: selectedAccount == "Loan")
                                     .onTapGesture { selectedAccount = "Loan" }
                             }
-                            .padding(.bottom,250)
+                            .padding(.bottom, 30) // Reduce space to fit better
                             .padding(.horizontal, 10)
 
-
+                            // Scrollable Credit Cards Section
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 10) {
+                                    ForEach(cardImages, id: \.self) { card in
+                                        CreditCardView(imageName: card)
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                            .frame(height: 190) // Make sure the scrollable view has proper height
+                            .padding(.bottom, 20) // Reduce gap
                         }
                     )
 
                 Spacer()
             }
-            .padding(.bottom, 50)
+            .padding(.bottom, 80) // Ensures spacing above the navigation bar
+
+            // **Bottom Black Navigation Bar**
+            VStack {
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        // Home button action
+                    }) {
+                        Image(systemName: "house.fill")
+                            .font(.system(size: 28))
+                            .foregroundColor(.white)
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        // Settings button action
+                    }) {
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 28))
+                            .foregroundColor(.white)
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        // Add button action
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.blue)
+                                .frame(width: 55, height: 55)
+                                .shadow(radius: 5)
+
+                            Image(systemName: "plus")
+                                .font(.system(size: 30, weight: .bold))
+                                .foregroundColor(.white)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        // Profile button action
+                    }) {
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 28))
+                            .foregroundColor(.white)
+                    }
+                    
+                    Spacer()
+                    Button(action: {
+                        // Home button action
+                    }) {
+                        Image(systemName: "house.fill")
+                            .font(.system(size: 28))
+                            .foregroundColor(.white)
+                    }
+                    
+                    Spacer()
+                }
+//                .frame(height: 90)
+//                .background(Color.black)
+//                //.cornerRadius(20)
+//                .clipShape(RoundedCorner(radius: 25, corners: [.topLeft, .topRight]))
+//                .ignoresSafeArea(edges: .bottom)
+                .frame(height: 85) // Adjusted height for better fitting
+                .frame(maxWidth: .infinity, alignment: .bottom) // Ensure it stays at bottom
+                .background(Color.black)
+                //.clipShape(RoundedCorner(radius: 25, corners: [.topLeft, .topRight])) // Top rounded corners only
+                .padding(.bottom, 0) // E
+                .ignoresSafeArea(.all, edges: .bottom) //
+            
+            }
         }
     }
-
+    
     func getGreeting() -> String {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
@@ -107,9 +182,31 @@ struct HomeView: View {
         }
     }
 }
+struct RoundedCorner: Shape {
+    var radius: CGFloat
+    var corners: UIRectCorner
+    
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(
+            roundedRect: rect,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
+        return Path(path.cgPath)
+    }
+}
+// Credit Card View
+struct CreditCardView: View {
+    var imageName: String
 
-
-
+    var body: some View {
+        Image(imageName)
+            .resizable()
+            .scaledToFill()
+            .frame(width: 280, height: 200)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+    }
+}
 
 // Preview
 struct HomeView_Previews: PreviewProvider {
