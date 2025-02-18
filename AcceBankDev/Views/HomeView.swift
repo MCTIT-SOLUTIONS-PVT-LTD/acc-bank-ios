@@ -4,6 +4,7 @@ struct HomeView: View {
     var username: String
     @State private var selectedAccount: String = "Chequing" // Default selected account
     //test comment
+    //test 2
 
     var body: some View {
         ZStack {
