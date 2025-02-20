@@ -87,7 +87,7 @@ struct CustomTextField: View {
                     .frame(width: 350, height: 50, alignment: .leading) // Ensure input is aligned left
             }
         }
-        .frame(maxWidth: .infinity) // Center horizontally
+        .frame(maxWidth: .infinity)
         .padding(.horizontal, 40)
         .animation(.easeInOut(duration: 0.2), value: text)
     }

@@ -5,6 +5,7 @@
 //  Created by MCT on 18/02/25.
 //
 
+
 import SwiftUI
 
 struct AccountView: View {
@@ -17,14 +18,20 @@ struct AccountView: View {
     var body: some View {
         VStack(spacing: 5) { // Vertical stack with spacing
             ZStack {
+                Circle()
+                    .stroke(Color.gray, lineWidth: 1) // Always gray, even when selected
+                    .frame(width: 50, height: 50)
+
                 Image(systemName: icon)
-                    .font(.system(size: 25)) // Adjust icon size
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24) // Ensures icon does not shrink
                     .foregroundColor(.gray)
                 
                 if isSelected {
                     Circle()
                         .fill(
-                            LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom)
+                            LinearGradient(gradient: Gradient(colors: [Color.dodgerBlue, Color.deepTeal]), startPoint: .top, endPoint: .bottom)
                         )
                         .frame(width: 22, height: 22)
                         .overlay(
@@ -37,18 +44,16 @@ struct AccountView: View {
             }
             
             VStack(spacing: 0) { // Stack title & number closer
-                Text(title)
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(.gray)
+                Text("\(title) \(number)")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(.black)
+                    .fixedSize(horizontal: false, vertical: true) // Prevents text from shrinking
 
-                Text(number)
-                    .font(.system(size: 14, weight: .bold))
+                Text(amount)
+                    .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.gray)
             }
-            
-            Text(amount)
-                .font(.system(size: 10, weight: .bold))
-                .foregroundColor(.gray)
+            .frame(maxWidth: .infinity) // Ensures text does not compress
         }
         .frame(maxWidth: .infinity)
     }
