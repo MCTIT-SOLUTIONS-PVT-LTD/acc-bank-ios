@@ -1,139 +1,80 @@
-//
-//  BottomNavigationView.swift
-//  AcceBankDev
-//
-//  Created by MCT on 19/02/25.
-//
-
 import SwiftUI
 
 struct BottomNavigationBar: View {
+    @Binding var selectedTab: Int // ✅ Binding to track selected tab
 
     var body: some View {
         VStack {
             Spacer()
-            
+
             HStack {
                 Spacer()
-                
+
+                // ✅ Home Button
                 Button(action: {
-                    // Home button action
+                    selectedTab = 0 // Switch to Home
                 }) {
                     Image(systemName: "house.fill")
-                        .font(.system(size:28))
-                        .foregroundColor(.white)
-//                    Image("Bank")
-//                        .resizable() // Allows resizing
-//                        .scaledToFit() // Ensures the image maintains its aspect ratio
-//                        .frame(width: 40, height: 40) // Set the desired size
-//                        .foregroundColor(.white) // If the image is a system icon (SF Symbol)
-
-
+                        .font(.system(size: 28))
+                        .foregroundColor(selectedTab == 0 ? .white : .gray)
                 }
-                
+
                 Spacer()
-                
+
+                // ✅ Move Money Button
                 Button(action: {
-                    // Settings button action
+                    selectedTab = 1 // Switch to MoveMoneyView
                 }) {
                     Image(systemName: "creditcard")
                         .font(.system(size: 28))
-                        .foregroundColor(.white)
+                        .foregroundColor(selectedTab == 1 ? .white : .gray)
                 }
-                
+
                 Spacer()
-                
-                Button(action: {
-                    // Add button action
-                }) {
+
+                Button(action: { selectedTab = 2 }) {
                     ZStack {
                         Circle()
-                            .fill(Color.deepTeal) // Replace "deepTeal" with a color of your choice
+                            .fill(Color.deepTeal)
                             .frame(width: 65, height: 65)
                             .shadow(radius: 5)
-
                         Image(systemName: "plus")
                             .font(.system(size: 30, weight: .bold))
                             .foregroundColor(.white)
                     }
                 }
-                
+
                 Spacer()
-                
-                Button(action: {
-                    // Profile button action
-                }) {
+
+                Button(action: { selectedTab = 3 }) {
                     Image(systemName: "dollarsign.bank.building")
                         .font(.system(size: 28))
-                        .foregroundColor(.white)
-//                    Image("Dollar")
-//                        .resizable() // Allows resizing
-//                        .scaledToFit() // Ensures the image maintains its aspect ratio
-//                        .frame(width: 40, height: 40) // Set the desired size
-//                        .foregroundColor(.white) // If the image is a system icon (SF Symbol)
-
+                        .foregroundColor(selectedTab == 3 ? .white : .gray)
                 }
-                
+
                 Spacer()
-                
-                Button(action: {
-                    // Home button action
-                }) {
+
+                Button(action: { selectedTab = 4 }) {
                     Image(systemName: "house.fill")
                         .font(.system(size: 28))
-                        .foregroundColor(.white)
-//                    Image("Cardicon")
-//                        .resizable() // Allows resizing
-//                        .scaledToFit() // Ensures the image maintains its aspect ratio
-//                        .frame(width: 30, height: 30) // Set the desired size
-//                        .foregroundColor(.white)
+                        .foregroundColor(selectedTab == 4 ? .white : .gray)
                 }
-                
+
                 Spacer()
             }
-            //**************
-//            .frame(height: 85)
-//            .frame(maxWidth: .infinity)
-//            .background(
-//                RoundedRectangle(cornerRadius: 30, style: .continuous)
-//                    .fill(Color.black.opacity(0.8))
-//                    .ignoresSafeArea(.all, edges: .bottom)
-//            )
-            //*************************************
-            
-            //                .background(Color.black)
-            //                //.cornerRadius(20)
-            //                .clipShape(RoundedCorner(radius: 25, corners: [.topLeft, .topRight]))
-            //                .ignoresSafeArea(edges: .bottom)
-            
-            //                .frame(height: 85) // Adjusted height for better fitting
-            //                .frame(maxWidth: .infinity, alignment: .bottom) // Ensure it stays at bottom
-            //                .background(Color.black)
-            //                .clipShape(RoundedCorner(radius: 25, corners: [.topLeft, .topRight])) // Top rounded corners only
-            //                .padding(.bottom, 0) // E
-            //                .ignoresSafeArea(.all, edges: .bottom) //
-                            //below is working
-                            //.padding(.bottom, 1)
             .frame(height: 90)
-            .frame(height: 85)
-            .frame(maxWidth: .infinity)
-            
-            //                .background(RoundedRectangle(cornerRadius: 30, style: .continuous)
-            //                    .fill(Color.black)
-            //                    .opacity(0.6)
-            //                    .ignoresSafeArea(.all, edges: .bottom)
-            //                )
-            .background(RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .fill(Color.black.opacity(0.99))
-                        .ignoresSafeArea(.all, edges: .bottom)
-                            )
+            .background(
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .fill(Color.black.opacity(0.99))
+                    .ignoresSafeArea(.all, edges: .bottom)
+            )
         }
     }
 }
 
-// Preview
+// ✅ Preview
 struct BottomNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        BottomNavigationBar()
+        BottomNavigationBar(selectedTab: .constant(0)) // ✅ Provide default binding
     }
 }
