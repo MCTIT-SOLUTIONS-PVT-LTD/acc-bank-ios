@@ -5,16 +5,16 @@ struct MainView: View {
 
     var body: some View {
         ZStack {
-            selectedView // ✅ Calls the selected view dynamically
+            selectedView //  Calls the selected view dynamically
 
             VStack {
                 Spacer()
-                BottomNavigationBar(selectedTab: $selectedTab) // ✅ Pass binding
+                BottomNavigationBar(selectedTab: $selectedTab) // Pass binding
             }
         }
     }
 
-    /// ✅ Returns the view based on selectedTab
+    //Returns the view based on selectedTab
     private var selectedView: some View {
         Group {
             switch selectedTab {
@@ -29,7 +29,7 @@ struct MainView: View {
     }
 }
 
-// ✅ Preview
+// Preview
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()

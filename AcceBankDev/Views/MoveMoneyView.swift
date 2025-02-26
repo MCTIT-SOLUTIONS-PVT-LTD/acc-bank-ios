@@ -17,7 +17,7 @@ struct MoveMoneyView: View {
                     .font(.title)
                     .bold()
                     .foregroundColor(.black)
-      		              .padding(.top, 30)
+                            .padding(.top, 30)
                     .padding(.bottom, 35)
 
                 optionButton(title: "Transfers")
@@ -187,11 +187,11 @@ struct TransferOptionsView: View {
         }
     }
     
-    
+}
     // ✅ Preview
     struct MoveMoneyView_Previews: PreviewProvider {
         static var previews: some View {
             MoveMoneyView()
         }
     }
-}
+
