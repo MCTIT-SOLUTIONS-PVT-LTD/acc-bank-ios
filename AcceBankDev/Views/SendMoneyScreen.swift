@@ -21,222 +21,292 @@ struct SendMoneyView: View {
     
     
     var body: some View {
-        
-        VStack {
-            // ✅ Top Bar with Back Button
-            HStack {
-                Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                    Image(systemName: "arrow.left")
-                        .font(.title2)
-                        .foregroundColor(.black)
-                }
-                Spacer()
-                Text("Send Money")
-                    .font(.title2)
-                    .bold()
-                Spacer()
-            }
-            .padding()
+        NavigationStack {
+
+        ScrollView {
             
-            // ✅ Payment Error Banner
-            if showPaymentError {
+            VStack {
+                //  Top Bar with Back Button
                 HStack {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundColor(.white)
-                    VStack(alignment: .leading) {
-                        Text("Payment failed")
-                            .font(.headline)
-                            .bold()
-                        Text("This payment amount exceeds your transaction limit. Please try again.")
-                            .font(.subheadline)
+                    Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                        Image(systemName: "arrow.left")
+                            .font(.title2)
+                            .foregroundColor(.black)
                     }
+                    Spacer()
+                    Text("Send Money")
+                        .font(.title2)
+                        .bold()
                     Spacer()
                 }
                 .padding()
-                .background(Color.red.opacity(0.9))
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .padding(.horizontal)
-            }
-            
-            VStack(alignment: .leading, spacing: 15) {
-                // ✅ Transfer From
-                Text("Transfer from")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
                 
-                Button(action: { showAccountSheet = true }) {
+                //  Payment Error Banner
+                if showPaymentError {
                     HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(accountManager.selectedAccount?.accountName ?? "Select Account")
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(.white)
+                        VStack(alignment: .leading) {
+                            Text("Payment failed")
                                 .font(.headline)
                                 .bold()
-                                .foregroundColor(.black)
-                            Text(accountManager.selectedAccount?.accountType ?? "")
+                            Text("This payment amount exceeds your transaction limit. Please try again.")
                                 .font(.subheadline)
-                                .foregroundColor(.gray)
-                            Text(accountManager.selectedAccount?.accountNumber ?? "")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
                         }
                         Spacer()
-                        Text(accountManager.selectedAccount?.balance ?? "")
-                            .font(.headline)
-                            .bold()
-                            .foregroundColor(.black)
-                        
-                        Image(systemName: "chevron.down")
-                            .foregroundColor(.black)
                     }
                     .padding()
-                    .background(Color(.systemGray6))
+                    .background(Color.red.opacity(0.9))
+                    .foregroundColor(.white)
                     .cornerRadius(10)
+                    .padding(.horizontal)
                 }
                 
-                // ✅ Send To (Dropdown with Contact List)
-                Text("Send to")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                
-                Button(action: { showContactSheet = true }) { // ✅ Show Contact Picker
-                    HStack {
-                        Text(selectedContact?.name ?? "Select Contact")
-                        Spacer()
-                        Image(systemName: "chevron.down")
-                    }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                }
-                
-                // ✅ Add Contact Button (Opens Form)
-                Button(action: { showAddContactSheet = true }) {
-                    HStack {
-                        Image(systemName: "plus")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.purple)
-                            .clipShape(Circle())
-                        Text("Add contact")
-                            .foregroundColor(.purple)
-                    }
-                }
-                .padding(.vertical)
-                
-                // ✅ Show only Security Question if a contact is selected
-                if let contact = selectedContact, !contact.securityQuestion.isEmpty {
-                    Text("Security Question")
+                VStack(alignment: .leading, spacing: 15) {
+                    //Transfer From
+                    Text("Transfer from")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                     
-                    TextField("", text: .constant(contact.securityQuestion))
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .disabled(true) // ✅ Make it non-editable
-                        .foregroundColor(.gray) // ✅ Display as read-only
-                        .padding(.bottom, 10)
-                }
-                
-                // ✅ Transfer Amount & Message Fields
-                TextField("Enter transfer amount", text: $transferAmount)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.top, 5)
-                
-                
-                
-                TextField("Message (optional)", text: $message)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                // ✅ Auto-Deposit Acknowledgment Checkbox
-                HStack(alignment: .top) {
-                    Button(action: {
-                        isAcknowledged.toggle() // ✅ Toggle checkbox state
-                    }) {
-                        Image(systemName: isAcknowledged ? "checkmark.square.fill" : "square")
-                            .foregroundColor(.purple)
+                    Button(action: { showAccountSheet = true }) {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(accountManager.selectedAccount?.accountName ?? "Select Account")
+                                    .font(.headline)
+                                    .bold()
+                                    .foregroundColor(.black)
+                                Text(accountManager.selectedAccount?.accountType ?? "")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                Text(accountManager.selectedAccount?.accountNumber ?? "")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                            Spacer()
+                            Text(accountManager.selectedAccount?.balance ?? "")
+                                .font(.headline)
+                                .bold()
+                                .foregroundColor(.black)
+                            
+                            Image(systemName: "chevron.down")
+                                .foregroundColor(.black)
+                        }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
                     }
-                    Text("I acknowledge that this recipient has auto-deposit enabled. They won't need to answer a security question, and the funds will be deposited automatically.")
-                        .font(.footnote)
-                        .foregroundColor(.black)
-                        .padding(.leading, 5)
+                    
+                    // ✅ Send To (Dropdown with Contact List)
+                    Text("Send to")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    
+                    Button(action: { showContactSheet = true }) {
+                        HStack {
+                            Text(selectedContact?.name ?? "Select Contact")
+                            Spacer()
+                            Image(systemName: "chevron.down")
+                        }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                    }
+                    
+                    // ✅ Add Contact Button (Opens Form)
+                    Button(action: { showAddContactSheet = true }) {
+                        HStack {
+                            Image(systemName: "plus")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .clipShape(Circle())
+                            Text("Add contact")
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    .padding(.vertical)
+                    .fullScreenCover(isPresented: $showAddContactSheet) { // ✅ Full screen instead of sheet
+                        AddContactFormView(isPresented: $showAddContactSheet, contactManager: contactManager)
+                    }
+                    
+                    // ✅ Show only Security Question if a contact is selected
+                    if let contact = selectedContact, !contact.securityQuestion.isEmpty {
+                        Text("Security Question")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        
+                        TextField("", text: .constant(contact.securityQuestion))
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .disabled(true) // ✅ Make it non-editable
+                            .foregroundColor(.gray) // ✅ Display as read-only
+                            .padding(.bottom, 10)
+                    }
+                    
+                    // ✅ Transfer Amount & Message Fields
+                    //                    TextField("Enter transfer amount", text: $transferAmount)
+                    //                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    //                        .padding(.top, 5)
+                    TextField("Enter transfer amount", text: $transferAmount)
+                        .keyboardType(.decimalPad) // Ensure numeric input
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.top,5)
+                        .onChange(of: transferAmount) { newValue in
+                            transferAmount = formatCurrencyInput(newValue)
+                        }
+                    
+                    
+                    
+                    
+                    
+                    TextField("Message (optional)", text: $message)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    // ✅ Auto-Deposit Acknowledgment Checkbox
+                    HStack(alignment: .top) {
+                        Button(action: {
+                            isAcknowledged.toggle() // ✅ Toggle checkbox state
+                        }) {
+                            Image(systemName: isAcknowledged ? "checkmark.square.fill" : "square")
+                                .foregroundColor(.purple)
+                        }
+                        Text("I acknowledge that this recipient has auto-deposit enabled. They won't need to answer a security question, and the funds will be deposited automatically.")
+                            .font(.footnote)
+                            .foregroundColor(.black)
+                            .padding(.leading, 5)
+                    }
+                    .padding()
+                    .background(Color.purple.opacity(0.2))
+                    .cornerRadius(8)
+                    
+                    // ✅ Error Message
+                    if showError {
+                        Text("⚠️ Please select a contact, enter an amount, and acknowledge the terms.")
+                            .foregroundColor(.red)
+                            .font(.footnote)
+                            .padding(.top, 5)
+                    }
+                    
+                    // ✅ Continue Button with Validation
+                    Button(action: {
+                        //validateAndContinue()
+                        validateAndShowSummary()
+                    }) {
+                        Text("Continue")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color.black)
+                            .cornerRadius(10)
+                    }
+                    .padding(.top, 20)
+                    
+                    Spacer()
                 }
                 .padding()
-                .background(Color.purple.opacity(0.2))
-                .cornerRadius(8)
-                
-                // ✅ Error Message
-                if showError {
-                    Text("⚠️ Please select a contact, enter an amount, and acknowledge the terms.")
-                        .foregroundColor(.red)
-                        .font(.footnote)
-                        .padding(.top, 5)
-                }
-                
-                // ✅ Continue Button with Validation
-                Button(action: {
-                    //validateAndContinue()
-                    validateAndShowSummary()
-                }) {
-                    Text("Continue")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color.black)
-                        .cornerRadius(10)
-                }
-                .padding(.top, 20)
-                
-                Spacer()
             }
-            .padding()
+            .background(Color(.white))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .padding(.horizontal, 20)
+            //show account list
+            .sheet(isPresented: $showAccountSheet) {
+                AccountSelectionSheet(accountManager: accountManager, isPresented: $showAccountSheet)
+            }
+            //show contact creation
+            .sheet(isPresented: $showAddContactSheet) {
+                AddContactFormView(isPresented: $showAddContactSheet, contactManager: contactManager)
+            }
+            //show contact list
+            .sheet(isPresented: $showContactSheet) {
+                ContactSelectionSheet(contactManager: contactManager, selectedContact: $selectedContact, isPresented: $showContactSheet)
+            }
+            .sheet(isPresented: $showPaymentSummarySheet) {
+                PaymentSummaryView(
+                    isPresented: $showPaymentSummarySheet,
+                    account: accountManager.selectedAccount,
+                    contact: selectedContact,
+                    amount: transferAmount,
+                    message: message
+                )
+            }
+            .navigationBarHidden(true) // ✅ Hide top navigation bar for a full-screen look
+
+            
         }
-        .background(Color(.white))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .padding(.horizontal, 20)
-        //show account list
-        .sheet(isPresented: $showAccountSheet) {
-            AccountSelectionSheet(accountManager: accountManager, isPresented: $showAccountSheet)
-        }
-        //show contact creation
-        .sheet(isPresented: $showAddContactSheet) {
-            AddContactFormView(isPresented: $showAddContactSheet, contactManager: contactManager)
-        }
-        //show contact list
-        .sheet(isPresented: $showContactSheet) {
-            ContactSelectionSheet(contactManager: contactManager, selectedContact: $selectedContact, isPresented: $showContactSheet)
-        }
-        .sheet(isPresented: $showPaymentSummarySheet) {
-            PaymentSummaryView(
-                isPresented: $showPaymentSummarySheet,
-                account: accountManager.selectedAccount,
-                contact: selectedContact,
-                amount: transferAmount,
-                message: message
-            )
-        }
+        .frame(maxWidth: .infinity, alignment: .center)
         
     }
-    
+}
+    func formatCurrencyInput(_ input: String) -> String {
+        // Remove non-numeric characters except `.`
+        let filtered = input.filter { "0123456789.".contains($0) }
+        
+        // Ensure there is at most one `.`
+        let components = filtered.split(separator: ".")
+        if components.count > 2 {
+            return "$" + String(components[0]) + "." + String(components[1].prefix(2)) // Keep two decimal places
+        }
+        
+        return "$" + filtered
+    }
+
     //function valiadate amount with balance and give summary
     private func validateAndShowSummary() {
+        showError = false  // ✅ Reset error state before validation
+        showPaymentError = false  // ✅ Reset payment error
+
+        print("DEBUG: Starting validation...")
+
         guard let balanceString = accountManager.selectedAccount?.balance
-            .replacingOccurrences(of: "$", with: "")
-            .replacingOccurrences(of: ",", with: ""),
-              let accountBalance = Double(balanceString),
-              let enteredAmount = Double(transferAmount) else {
+                .replacingOccurrences(of: "$", with: "")
+                .replacingOccurrences(of: ",", with: ""),
+              let accountBalance = Double(balanceString) else {
+            print("DEBUG: Could not retrieve account balance.")
             showError = true
             return
         }
+
+        print("DEBUG: Account Balance - \(accountBalance)")
+
+        // ✅ Ensure transferAmount is valid and convert to a number
+        let cleanedAmount = transferAmount.replacingOccurrences(of: "$", with: "").trimmingCharacters(in: .whitespaces)
         
-        if selectedContact == nil || transferAmount.isEmpty || !isAcknowledged {
+        guard let enteredAmount = Double(cleanedAmount), !cleanedAmount.isEmpty else {
+            print("DEBUG: Invalid or empty transfer amount.")
             showError = true
-        } else if enteredAmount > accountBalance {
-            showPaymentError = true
-        } else {
-            showPaymentError = false
-            showPaymentSummarySheet = true // ✅ Open Payment Summary Sheet
+            return
         }
+
+        print("DEBUG: Transfer Amount - \(enteredAmount)")
+
+        // ✅ Check if a contact is selected
+        if selectedContact == nil {
+            print("DEBUG: No contact selected.")
+            showError = true
+            return
+        }
+
+        print("DEBUG: Contact selected - \(selectedContact?.name ?? "Unknown")")
+
+        // ✅ Ensure user acknowledges the terms
+        if !isAcknowledged {
+            print("DEBUG: User did not acknowledge the terms.")
+            showError = true
+            return
+        }
+
+        // ✅ Check if entered amount exceeds account balance
+        if enteredAmount > accountBalance {
+            print("DEBUG: Entered amount exceeds account balance.")
+            showPaymentError = true
+            return
+        }
+
+        // ✅ If everything is valid, proceed to payment summary
+        print("DEBUG: Validation successful! Opening Payment Summary.")
+        showError = false
+        showPaymentSummarySheet = true
     }
-    
+
     
     //            private func validateAndContinue() {
     //                // ✅ Ensure that selectedAccount and balance are safely unwrapped
@@ -270,79 +340,124 @@ struct SendMoneyView: View {
     
     //this shows final screen of payment
     struct PaymentSuccessView: View {
+        @State private var navigateToMainView = false
+
+        @State private var selectedTab = 0
+        @State private var isSuccess = true // ✅ Toggle for success or failure message
+
+        // ✅ Payment Data
+        var account: BankAccount?
+        var contact: Contact?
+        var amount: String
+        var message: String
+
         var body: some View {
-            VStack {
-                Spacer()
-                
-                // ✅ Payment Confirmation Bubble
-                Text("Payment sent. Your money is on its way")
-                    .font(.headline)
-                    .bold()
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.black)
-                //.clipShape(BubbleShape()) // ✅ Custom Bubble Shape
-                
-                // ✅ Confirmation Number
-                Text("Confirmation number: CAqVsmac")
-                    .font(.subheadline)
-                    .foregroundColor(.white)
-                    .padding(.top, 10)
-                
-                // ✅ Share Details Button
-                Button(action: {
-                    print("Share details tapped")
-                }) {
-                    Text("Share details")
-                        .font(.headline)
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color.white)
+            VStack(spacing: 0) {
+                ZStack {
+                    // ✅ Full Screen White Background
+                    Color.white
+                        .edgesIgnoringSafeArea(.all)
+
+                    VStack(spacing: 20) {
+                        // ✅ Success / Failure Message Box
+                        HStack {
+                            Image(systemName: isSuccess ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
+                                .foregroundColor(.white)
+
+                            VStack(alignment: .leading) {
+                                Text(isSuccess ? "Payment Sent" : "Payment Failed")
+                                    .font(.headline)
+                                    .bold()
+                                    .foregroundColor(.white)
+
+                                Text(isSuccess
+                                     ? "Your money has been successfully transferred."
+                                     : "This payment amount exceeds your transaction limit. Please try again.")
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                            }
+                            Spacer()
+                        }
+                        .padding()
+                        .background(isSuccess ? Color.green : Color.red) // ✅ Green for success, Red for failure
                         .cornerRadius(10)
+                        .padding(.horizontal, 20)
+
+                        // ✅ Full Page Payment Summary Box with Increased Height
+                        ScrollView {
+                            VStack {
+                                Text("Payment Summary")
+                                    .font(.headline)
+                                    .bold()
+                                    .padding(.top, 10)
+
+                                VStack(alignment: .leading, spacing: 10) {
+                                    PaymentDetailRow(title: "Transfer from", value: "\(account?.accountName ?? "N/A") - \(account?.accountNumber ?? "N/A")")
+                                    PaymentDetailRow(title: "Transfer to", value: contact?.name ?? "N/A")
+                                    PaymentDetailRow(title: "Send transfer to", value: contact?.email ?? "N/A")
+                                    PaymentDetailRow(title: "Amount", value: "$\(amount)", bold: true)
+                                    PaymentDetailRow(title: "Service fee", value: "$0.00")
+                                    PaymentDetailRow(title: "Total amount", value: "$\(amount)")
+
+                                    if !message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                                        PaymentDetailRow(title: "Message", value: message)
+                                    }
+
+                                    PaymentDetailRow(title: "Security question", value: contact?.securityQuestion ?? "N/A", bold: true)
+                                }
+                                .padding()
+                            }
+                            .background(Color.white) // ✅ White background
+                            .cornerRadius(12) // ✅ Rounded corners
+                            .shadow(radius: 5) // ✅ Shadow for elevation
+                            .padding(.horizontal, 20)
+                            .frame(minHeight: 400, maxHeight: .infinity) // ✅ Increase height
+                        }
+
+                        Spacer() // ✅ Push everything to the top
+                    }
+                    .frame(maxHeight: .infinity)
                 }
-                .padding(.top, 20)
-                .padding(.horizontal, 40)
-                
-                Spacer()
-            }
-            .background(Color.purple.edgesIgnoringSafeArea(.all))
+                // ✅ Done Button - Navigates to MainView()
+                            Button(action: {
+                                navigateToMainView = true
+                            }) {
+                                Text("Done")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(width: 150)
+                                    .background(Color.black)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal, 20)
+                                    .padding(.bottom, 40)
+                            }
+                            .fullScreenCover(isPresented: $navigateToMainView) {
+                                MainView() // ✅ Opens MainView when button is clicked
+                            }
+                // ✅ Fixed Bottom Navigation
+                //BottomNavigationBar()
+//                BottomNavigationBar(selectedTab: $selectedTab)
+//                    .edgesIgnoringSafeArea(.bottom)
+//                    .frame(height: 50) // ✅ Adjust height if needed
+                MainView()
+                    }
+            //.navigationBarHidden(true) // ✅ Remove the navigation bar
         }
     }
+
+
     
-    // ✅ Custom Bubble Shape for Payment Confirmation
-    struct BubbleShape: Shape {
-        func path(in rect: CGRect) -> Path {
-            var path = Path()
-            let bubbleTailSize: CGFloat = 20
-            
-            path.move(to: CGPoint(x: rect.minX + 10, y: rect.minY))
-            path.addLine(to: CGPoint(x: rect.maxX - 10, y: rect.minY))
-            path.addQuadCurve(to: CGPoint(x: rect.maxX, y: rect.minY + 10), control: CGPoint(x: rect.maxX, y: rect.minY))
-            path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY - 10))
-            path.addQuadCurve(to: CGPoint(x: rect.maxX - 10, y: rect.maxY), control: CGPoint(x: rect.maxX, y: rect.maxY))
-            path.addLine(to: CGPoint(x: rect.minX + bubbleTailSize, y: rect.maxY))
-            
-            // Bubble Tail
-            path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.maxY + bubbleTailSize), control: CGPoint(x: rect.minX + 10, y: rect.maxY + bubbleTailSize))
-            path.addQuadCurve(to: CGPoint(x: rect.minX + bubbleTailSize * 2, y: rect.maxY), control: CGPoint(x: rect.minX + 10, y: rect.maxY + bubbleTailSize))
-            
-            path.addLine(to: CGPoint(x: rect.minX + 10, y: rect.maxY))
-            path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.maxY - 10), control: CGPoint(x: rect.minX, y: rect.maxY))
-            path.addLine(to: CGPoint(x: rect.minX, y: rect.minY + 10))
-            path.addQuadCurve(to: CGPoint(x: rect.minX + 10, y: rect.minY), control: CGPoint(x: rect.minX, y: rect.minY))
-            
-            return path
-        }
-    }
     
     //this give summary of payments after click continue
+    
     struct PaymentSummaryView: View {
         @Binding var isPresented: Bool
         var account: BankAccount?
         var contact: Contact?
         var amount: String
         var message: String
-        @State private var showPaymentSuccess = false // Show Payment Success Screen
+        @State private var showPaymentSuccess = false // ✅ Show Payment Success Screen
         
         var body: some View {
             VStack {
@@ -369,10 +484,14 @@ struct SendMoneyView: View {
                     PaymentDetailRow(title: "Transfer from", value: "\(account?.accountName ?? "") - \(account?.accountNumber ?? "")")
                     PaymentDetailRow(title: "Transfer to", value: contact?.name ?? "")
                     PaymentDetailRow(title: "Send transfer to", value: contact?.email ?? "")
-                    PaymentDetailRow(title: "Amount", value: "$\(amount)", bold: true)
+                    PaymentDetailRow(title: "Amount", value: "\(amount)", bold: true)
                     PaymentDetailRow(title: "Service fee", value: "$0.00")
-                    PaymentDetailRow(title: "Total amount", value: "$\(amount)")
-                    PaymentDetailRow(title: "Message", value: message)
+                    PaymentDetailRow(title: "Total amount", value: "\(amount)")
+
+                    if !message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        PaymentDetailRow(title: "Message", value: message)
+                    }
+
                     PaymentDetailRow(title: "Security question", value: contact?.securityQuestion ?? "", bold: true)
                 }
                 .padding(.horizontal)
@@ -389,13 +508,21 @@ struct SendMoneyView: View {
                         .cornerRadius(10)
                 }
                 .padding(.top, 20)
+
+                Spacer()
             }
             .padding(.horizontal, 20)
             .fullScreenCover(isPresented: $showPaymentSuccess) { // ✅ Open Payment Success Screen
-                PaymentSuccessView()
+                PaymentSuccessView(
+                    account: account,
+                    contact: contact,
+                    amount: amount,
+                    message: message
+                )
             }
         }
     }
+
     
     // Renamed DetailRow to PaymentDetailRow show all details in confirmation
     struct PaymentDetailRow: View {
@@ -499,9 +626,12 @@ struct SendMoneyView: View {
     //for showing account form
     
     
+
+
+
     struct AddContactFormView: View {
         @Binding var isPresented: Bool
-        @ObservedObject var contactManager: ContactManager // ✅ Contact Manager
+        @ObservedObject var contactManager: ContactManager
         
         @State private var name = ""
         @State private var email = ""
@@ -512,7 +642,24 @@ struct SendMoneyView: View {
         @State private var securityAnswer = ""
         @State private var reEnterSecurityAnswer = ""
         
-        @State private var showConfirmationSheet = false // ✅ Show confirmation preview
+        @State private var showConfirmationSheet = false
+        @State private var showError = false
+        
+        // ✅ Default country is Canada
+        @State private var selectedCountry = "+1"
+
+        // ✅ Validation States
+        @State private var nameError = false
+        @State private var emailError = false
+        @State private var mobilePhoneError = false
+        @State private var securityAnswerError = false
+        @State private var reEnterSecurityAnswerError = false
+        
+        // ✅ Country Code Options
+        let countryCodes = [
+            "+1",  // Canada
+            "+91"   // India
+        ]
         
         var body: some View {
             VStack {
@@ -537,33 +684,69 @@ struct SendMoneyView: View {
                             .padding()
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
-                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.red, lineWidth: name.isEmpty ? 1 : 0))
-                        Text("Required field.")
-                            .font(.footnote)
-                            .foregroundColor(.red)
-                            .opacity(name.isEmpty ? 1 : 0)
+                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(nameError ? Color.red : Color.clear, lineWidth: 1))
+                        if nameError {
+                            Text("Required field.")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
                         
                         // ✅ Email Field
                         TextField("Email", text: $email)
                             .padding()
+                            .autocapitalization(.none) // ✅ Prevents automatic capitalization
+                            .keyboardType(.emailAddress) // ✅ Optimizes keyboard for email input
+
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
-                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.red, lineWidth: email.isEmpty ? 1 : 0))
-                        Text("Required field.")
-                            .font(.footnote)
-                            .foregroundColor(.red)
-                            .opacity(email.isEmpty ? 1 : 0)
+                            //.overlay(RoundedRectangle(cornerRadius: 8).stroke(emailError ? Color.red : Color.clear, lineWidth: 1))
+                        if emailError {
+                            Text(email.isEmpty ? "Required field." : "Invalid email format.")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
                         
-                        // ✅ Mobile Field
-                        TextField("Mobile phone", text: $mobilePhone)
-                            .padding()
+                        // ✅ Mobile Field with Country Code
+                        HStack {
+                            // Country Code Picker
+                            Picker(selection: $selectedCountry, label: Text("")) {
+                                ForEach(countryCodes, id: \.self) { country in
+                                    Text(country).tag(country)
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            .frame(width: 90)
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
-                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.red, lineWidth: mobilePhone.isEmpty ? 1 : 0))
-                        Text("Required field.")
-                            .font(.footnote)
-                            .foregroundColor(.red)
-                            .opacity(mobilePhone.isEmpty ? 1 : 0)
+//                            .onChange(of: selectedCountry) { _ in
+//                                mobilePhone = "" // Reset number on country change
+//                            }
+                            .onChange(of: selectedCountry) {
+                                mobilePhone = "" // ✅ Reset number when country changes
+                            }
+
+                            
+                            // Mobile Number Input
+                            TextField("Mobile phone", text: $mobilePhone)
+                                .keyboardType(.numberPad)
+                                .padding()
+                                .background(Color(.systemGray6))
+                                .cornerRadius(8)
+                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(mobilePhoneError ? Color.red : Color.clear, lineWidth: 1))
+//                                .onChange(of: mobilePhone) { newValue in
+//                                    mobilePhone = formatPhoneNumber(newValue)
+//                                }
+                                .onChange(of: mobilePhone) {
+                                    mobilePhone = formatPhoneNumber(mobilePhone)
+                                }
+
+                        }
+                        
+                        if mobilePhoneError {
+                            Text(mobilePhone.isEmpty ? "Required field." : "Invalid phone number format.")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
                         
                         // ✅ Send Transfers By
                         Toggle("Send transfers by Email", isOn: $sendByEmail)
@@ -572,12 +755,32 @@ struct SendMoneyView: View {
                         // ✅ Security Details
                         TextField("Security question", text: $securityQuestion)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
                         SecureField("Security answer", text: $securityAnswer)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(securityAnswerError ? Color.red : Color.clear, lineWidth: 1))
+                        if securityAnswerError {
+                            Text("Required field.")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
                         
-                        // ✅ Add Contact Button (Opens Confirmation)
+                        SecureField("Re-enter security answer", text: $reEnterSecurityAnswer)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(reEnterSecurityAnswerError ? Color.red : Color.clear, lineWidth: 1))
+                        if reEnterSecurityAnswerError {
+                            Text("Answers do not match.")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
+                        
+                        // ✅ Review Contact Button with Validation
                         Button(action: {
-                            showConfirmationSheet = true // ✅ Open preview
+                            if validateFields() {
+                                showConfirmationSheet = true
+                            } else {
+                                showError = true
+                            }
                         }) {
                             Text("Review Contact")
                                 .font(.headline)
@@ -597,20 +800,68 @@ struct SendMoneyView: View {
                     contactManager: contactManager,
                     name: name,
                     email: email,
-                    mobilePhone: mobilePhone,
+                    mobilePhone: fullPhoneNumber(),
                     sendByEmail: sendByEmail,
                     sendByMobile: sendByMobile,
                     securityQuestion: securityQuestion,
                     securityAnswer: securityAnswer
                 )
-                .presentationDetents([.large]) // ✅ Forces full height
-                .presentationDragIndicator(.hidden) // ✅ Hides drag indicator
-                
+                .presentationDetents([.large])
+                .presentationDragIndicator(.hidden)
             }
         }
+        
+        // ✅ Function to Validate Fields
+        func validateFields() -> Bool {
+            nameError = name.isEmpty
+            //emailError = email.isEmpty || !isValidEmail(email)
+            mobilePhoneError = mobilePhone.isEmpty || mobilePhone.count < 10
+            securityAnswerError = securityAnswer.isEmpty
+            reEnterSecurityAnswerError = securityAnswer != reEnterSecurityAnswer
+            
+            return !(nameError || emailError || mobilePhoneError || securityAnswerError || reEnterSecurityAnswerError)
+        }
+//        func isValidEmail(_ email: String) -> Bool {
+//                let emailRegex = #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#
+//                return email.range(of: emailRegex, options: .regularExpression, range: nil, locale: nil) != nil
+//            }
+
+        // ✅ Function to Get Full Phone Number with Country Code
+        func fullPhoneNumber() -> String {
+            let countryCode = selectedCountry.contains("+91") ? "+91" : "+1"
+            return "\(countryCode) \(mobilePhone)"
+        }
+        
+        // ✅ Function to Format Phone Number Based on Country
+        func formatPhoneNumber(_ number: String) -> String {
+            let digits = number.filter { $0.isNumber }
+            
+            if selectedCountry.contains("+1") { // Canada format: (123) 456-7890
+                return formatAsCanadianNumber(digits)
+            } else { // India format: 12345-67890
+                return formatAsIndianNumber(digits)
+            }
+        }
+        
+        func formatAsCanadianNumber(_ digits: String) -> String {
+            let maxLength = 10
+            let trimmed = String(digits.prefix(maxLength))
+            if trimmed.count >= 6 {
+                return "(\(trimmed.prefix(3))) \(trimmed.dropFirst(3).prefix(3))-\(trimmed.dropFirst(6))"
+            }
+            return trimmed
+        }
+        
+        func formatAsIndianNumber(_ digits: String) -> String {
+            let maxLength = 10
+            let trimmed = String(digits.prefix(maxLength))
+            if trimmed.count >= 5 {
+                return "\(trimmed.prefix(5))-\(trimmed.dropFirst(5))"
+            }
+            return trimmed
+        }
     }
-    
-    
+
     // summary form of conatct
     struct ContactConfirmationView: View {
         @Binding var isPresented: Bool
@@ -623,59 +874,67 @@ struct SendMoneyView: View {
         var sendByMobile: Bool
         var securityQuestion: String
         var securityAnswer: String
-        
+
+        @State private var showSuccessScreen = false // ✅ State to show success screen
+        @State private var navigateToSendMoney = false // ✅ State to go back to Send Money
+
         var body: some View {
-            VStack {
-                // ✅ Header
-                HStack {
-                    Text("Confirmation")
-                        .font(.headline)
-                        .bold()
-                    Spacer()
-                    Button(action: { isPresented = false }) {
-                        Image(systemName: "xmark")
-                            .font(.title3)
-                            .foregroundColor(.gray)
+            NavigationStack {
+                VStack {
+                    HStack {
+                        Text("Confirmation")
+                            .font(.headline)
+                            .bold()
+                        Spacer()
+                        Button(action: { isPresented = false }) {
+                            Image(systemName: "xmark")
+                                .font(.title3)
+                                .foregroundColor(.gray)
+                        }
                     }
+                    .padding()
+                    
+                    Text("Are you sure you want to add this contact?")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .padding(.bottom, 10)
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        DetailRow(title: "Name", value: name)
+                        DetailRow(title: "Email", value: email)
+                        DetailRow(title: "Mobile phone", value: mobilePhone)
+                        DetailRow(title: "Send transfer by", value: sendByEmail ? "Email" : "Mobile phone")
+                        DetailRow(title: "Security question", value: securityQuestion, bold: true)
+                        DetailRow(title: "Security answer", value: "*******") // Hide security answer
+                    }
+                    .padding(.horizontal)
+
+                    // ✅ Confirm Button
+                    Button(action: {
+                        saveContact()
+                    }) {
+                        Text("Confirm")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color.black)
+                            .cornerRadius(10)
+                    }
+                    .padding(.top, 20)
+
+                    Spacer()
                 }
-                .padding()
-                
-                Text("Are you sure you want to add this contact?")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .padding(.bottom, 10)
-                
-                // ✅ Contact Details
-                VStack(alignment: .leading, spacing: 10) {
-                    DetailRow(title: "Name", value: name)
-                    DetailRow(title: "Email", value: email)
-                    DetailRow(title: "Mobile phone", value: mobilePhone)
-                    DetailRow(title: "Send transfer by", value: sendByEmail ? "Email" : "Mobile phone")
-                    DetailRow(title: "Security question", value: securityQuestion, bold: true)
-                    DetailRow(title: "Security answer", value: "*******") // Hide security answer
+                .padding(.horizontal, 20)
+                .fullScreenCover(isPresented: $showSuccessScreen) {
+                    ContactSuccessView(navigateToSendMoney: $navigateToSendMoney) // ✅ Pass navigation state
                 }
-                .padding(.horizontal)
-                
-                // ✅ Confirm Button
-                Button(action: {
-                    saveContact()
-                    isPresented = false
-                }) {
-                    Text("Confirm")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color.black)
-                        .cornerRadius(10)
+                .navigationDestination(isPresented: $navigateToSendMoney) {
+                    SendMoneyView() // ✅ Navigate to Send Money screen
                 }
-                .padding(.top, 20)
-                
-                Spacer()
             }
-            .padding(.horizontal, 20)
         }
-        
-        // ✅ Save contact to JSON
+
+        // ✅ Save contact function
         private func saveContact() {
             let newContact = Contact(
                 name: name,
@@ -686,10 +945,62 @@ struct SendMoneyView: View {
                 securityQuestion: securityQuestion,
                 securityAnswer: securityAnswer
             )
+            
             contactManager.addContact(newContact)
+            showSuccessScreen = true // ✅ Show success message
         }
     }
-    
+
+
+    struct ContactSuccessView: View {
+        @Environment(\.presentationMode) var presentationMode // ✅ To dismiss both views
+        @Binding var navigateToSendMoney: Bool // ✅ State to trigger navigation
+        @State private var showSendMoneyScreen = false // ✅ State to open full screen
+
+
+        var body: some View {
+            VStack {
+                Spacer()
+                
+                // ✅ Success Message
+                Text("New Contact Added Successfully!")
+                    .font(.title2)
+                    .bold()
+                    .multilineTextAlignment(.center)
+                    .padding()
+                
+                Image(systemName: "checkmark.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                    .foregroundColor(.green)
+                    .padding()
+                
+                Spacer()
+                
+                // ✅ Done Button - Navigate to "Send Money"
+                Button(action: {
+                    //navigateToSendMoney = true // ✅ Trigger navigation to "Send Money"
+                    //presentationMode.wrappedValue.dismiss() // ✅ Close success screen
+                    showSendMoneyScreen = true // ✅ Open full-screen Send Money
+
+                }) {
+                    Text("Done")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, minHeight: 50)
+                        .background(Color.black)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal, 40)
+                .padding(.bottom, 40)
+            }
+            .fullScreenCover(isPresented: $showSendMoneyScreen) { // ✅ Open in full screen
+                        SendMoneyView()
+                    }
+        }
+    }
+
     // Helper View for Detail Row
     struct DetailRow: View {
         var title: String
