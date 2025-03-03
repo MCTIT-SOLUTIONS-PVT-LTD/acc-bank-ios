@@ -1,16 +1,11 @@
 import SwiftUI
 
-// ✅ Fix: Convert `backgroundGradient` into a computed property
+// Fix: Convert `backgroundGradient` into a computed property
 var backgroundGradient: some View {
-    LinearGradient(
-        gradient: Gradient(colors: [Color.deepTeal, Color.dodgerBlue]),
-        startPoint: .leading,
-        endPoint: .trailing
-    )
-    .edgesIgnoringSafeArea(.all)
+    Color.backgroundGradient.edgesIgnoringSafeArea(.all)
 }
 
-// ✅ Fix: No change needed for `actionButton`
+// Fix: No change needed for `actionButton`
 func actionButton(title: String) -> some View {
     Text(title)
         .fontWeight(.bold)
@@ -20,12 +15,12 @@ func actionButton(title: String) -> some View {
         .clipShape(Capsule())
 }
 
-// ❌ Remove this since `Utilities` is not a view
+// Remove this since `Utilities` is not a view
 // #Preview {
 //     Utilities()
 // }
 
-// ✅ Fix: Use an actual view for preview
+// Fix: Use an actual view for preview
 #Preview {
     ZStack {
         backgroundGradient

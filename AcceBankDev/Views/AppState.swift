@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-/// ✅ Global App State for Navigation
+///  Global App State for Navigation
 class AppState: ObservableObject {
-    @Published var selectedTab: Int = 0 // ✅ Keeps track of selected navigation tab
+    @Published var selectedTab: Int = 0 // Keeps track of selected navigation tab
 }
 

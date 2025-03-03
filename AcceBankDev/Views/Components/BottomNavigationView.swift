@@ -129,7 +129,7 @@ struct BottomNavigationBar: View {
                 Button(action: { selectedTab = 2 }) {
                     ZStack {
                         Circle()
-                            .fill(Color.deepTeal)
+                            .fill(Color.colorTeal)
                             .frame(width: 65, height: 65)
                             .shadow(radius: 5)
                         Image(systemName: "plus")

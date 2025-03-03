@@ -30,9 +30,10 @@ struct AccountView: View {
                 
                 if isSelected {
                     Circle()
-                        .fill(
-                            LinearGradient(gradient: Gradient(colors: [Color.dodgerBlue, Color.deepTeal]), startPoint: .top, endPoint: .bottom)
-                        )
+                        //.fill(
+//                            LinearGradient(gradient: Gradient(colors: [Color.dodgerBlue, Color.deepTeal]), startPoint: .top, endPoint: .bottom)
+//                        )
+                        Color.backgroundGradient.edgesIgnoringSafeArea(.all)
                         .frame(width: 22, height: 22)
                         .overlay(
                             Image(systemName: "checkmark")
