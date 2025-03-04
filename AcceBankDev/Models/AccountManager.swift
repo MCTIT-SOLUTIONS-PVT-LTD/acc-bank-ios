@@ -2,13 +2,13 @@
 //json file
 import Foundation
 
-// 1️⃣ Define the BankAccount Model
+// Define the BankAccount Model
 struct BankAccount: Identifiable, Codable, Equatable {
     var id = UUID()
-    var accountName: String  // e.g., "No Fee"
-    var accountType: String  // e.g., "Chequing"
-    var accountNumber: String // e.g., "100108226953"
-    var balance: String       // e.g., "$51,494.78"
+    var accountName: String  //  No Fee
+    var accountType: String  // Chequing
+    var accountNumber: String // 100108226953
+    var balance: String       // $51,494.78
 }
 
 
@@ -16,7 +16,7 @@ struct BankAccount: Identifiable, Codable, Equatable {
 
 
 
-// 2️⃣ Account Manager for Handling JSON Read/Write
+// Account Manager for Handling JSON Read/Write
 class AccountManager: ObservableObject {
     @Published var accounts: [BankAccount] = []
     @Published var selectedAccount: BankAccount?
@@ -29,7 +29,7 @@ class AccountManager: ObservableObject {
         let fileManager = FileManager.default
         if let directory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
             let filePath = directory.appendingPathComponent("accounts.json")
-            print("📂 JSON File Path: \(filePath.path)") // ✅ PRINT PATH
+            print("JSON File Path: \(filePath.path)") // PRINT PATH
             return filePath
         }
         return nil
@@ -39,7 +39,7 @@ class AccountManager: ObservableObject {
     // Function to Create and Save a JSON File
     func createJSONFile() {
         if let fileURL = getJSONFileURL(), FileManager.default.fileExists(atPath: fileURL.path) {
-            print("✅ JSON File Already Exists: \(fileURL.path)") // ✅ Do not overwrite
+            print("JSON File Already Exists: \(fileURL.path)") //  Do not overwrite
             return
         }
 
@@ -58,12 +58,12 @@ class AccountManager: ObservableObject {
             let jsonData = try encoder.encode(defaultAccounts)
             if let fileURL = getJSONFileURL() {
                 try jsonData.write(to: fileURL, options: .atomic)
-                print("✅ New JSON File Created at: \(fileURL.path)")
+                print("New JSON File Created at: \(fileURL.path)")
             }
             self.accounts = defaultAccounts
             self.selectedAccount = defaultAccounts.first
         } catch {
-            print("❌ Error creating JSON file: \(error)")
+            print("Error creating JSON file: \(error)")
         }
     }
 
@@ -76,14 +76,14 @@ class AccountManager: ObservableObject {
                 DispatchQueue.main.async {
                     self.accounts = decodedAccounts
                     self.selectedAccount = decodedAccounts.first
-                    self.objectWillChange.send() // ✅ Force UI update
-                    print("✅ Loaded Updated Accounts from JSON: \(self.accounts)")
+                    self.objectWillChange.send() // force UI update
+                    print("Loaded Updated Accounts from JSON: \(self.accounts)")
                 }
             } catch {
-                print("❌ Error reading JSON file: \(error)")
+                print("Error reading JSON file: \(error)")
             }
         } else {
-            print("📂 JSON file not found, creating a new one.")
+            print("JSON file not found, creating a new one.")
             createJSONFile()
         }
     }
@@ -103,10 +103,10 @@ class AccountManager: ObservableObject {
             let jsonData = try encoder.encode(accounts)
             if let fileURL = getJSONFileURL() {
                 try jsonData.write(to: fileURL, options: .atomic)
-                print("✅ New account added successfully!")
+                print("New account added successfully!")
             }
         } catch {
-            print("❌ Error updating JSON file: \(error)")
+            print("Error updating JSON file: \(error)")
         }
     }
 }

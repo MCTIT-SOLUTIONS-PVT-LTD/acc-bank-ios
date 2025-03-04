@@ -1,7 +1,7 @@
 import SwiftUI
 //in this file add logic that open icon wise on home click open home 
 struct MainView: View {
-    @State private var selectedTab = 0 // ✅ Tracks the selected tab
+    @State private var selectedTab = 0 // Tracks the selected tab
 
     var body: some View {
         ZStack {

@@ -1,0 +1,150 @@
+/* 
+  Localizable.strings
+  AcceBankDev
+
+  Created by MCT on 27/02/25.
+  
+*/
+"registration_success" = "You have successfully registered.";
+//below is for LoginView file
+"quote_of_the_day" = "QUOTE OF THE DAY";
+"money_quote" = "Money isn’t everything,\n but everything needs \nmoney.";
+"username_placeholder" = "Username";
+"password_placeholder" = "Password";
+"keep_me_logged_in" = "Keep me logged in";
+"register" = "Register";
+"sign_in" = "Sign In";
+"incorrect_password" = "Incorrect password. Please try again.";
+"enable_face_id" = "Enable Face ID?";
+"face_id_description" = "Would you like to use Face ID for future logins?";
+"face_id_yes" = "Yes";
+"face_id_no" = "No";
+"use_face_id" = "Use Face ID";
+"face_id_failed" = "Face ID setup failed. Please try again.";
+"face_id_not_available" = "Face ID is not available on this device.";
+"login_using_faceid" = "Login using Face ID";
+"user_not_found" = "User not found.";
+//^^^^^^^^^^^^^^^^^^^^^^^
+
+//below is for MoveMoneyView file
+// Move Money Screen
+"move_money_title" = "Move money";
+"transfers_option" = "Transfers";
+"interac_transfer" = "Interac e-Transfer®";
+"payments_option" = "Payments";
+"scheduled_transfers" = "Scheduled transfers & payments";
+
+// Payments Bottom Sheet
+"payments_title" = "Payments";
+"pay_bills" = "Pay bills";
+"transfer_accounts" = "Transfer between accounts";
+"scheduled_payments" = "Manage scheduled payments";
+"payment_settings" = "Payment settings";
+
+// Transfer Options Bottom Sheet
+"send_money" = "Send money";
+"request_money" = "Request money";
+"manage_contacts" = "Manage contacts";
+"pending_transactions" = "Pending";
+"transfer_history" = "History";
+"auto_deposit" = "Autodeposit settings";
+"profile_settings" = "Profile settings";
+
+// General UI Elements
+"close_button" = "Close";
+
+//^^^^^^^^^^^^^^^^^^^^
+
+
+//below is for SendMoneyScreenView file
+// Common Labels
+"send_to"="Send to";
+"send_money" = "Send Money";
+"select_contact" = "Select Contact";
+"add_contact" = "Add Contact";
+"transfer_from" = "Transfer from";
+"transfer_to" = "Transfer to";
+"amount" = "Amount";
+"message" = "Message (optional)";
+"continue" = "Continue";
+"confirm" = "Confirm";
+"done" = "Done";
+"security_question" = "Security Question";
+"security_answer" = "Security Answer";
+"mobile_phone" = "Mobile Phone";
+"name"="Name";
+"email" = "Email";
+"review_contact" = "Review Contact";
+"transaction_limit_exceeded" = "This payment amount exceeds your transaction limit. Please try again.";
+"payment_failed" = "Payment Failed";
+"payment_sent" = "Payment Sent";
+"payment_summary" = "Payment Summary";
+"service_fee" = "Service Fee";
+"total_amount" = "Total Amount";
+"acknowledge_auto_deposit" = "I acknowledge that this recipient has auto-deposit enabled. They won't need to answer a security question, and the funds will be deposited automatically.";
+"search" = "Search";
+"confirmation" = "Confirmation";
+"new_contact_success" = "New Contact Added Successfully!";
+"cancel" = "Cancel";
+
+// Validation Errors
+"error_select_contact" = "⚠️ Please select a contact, enter an amount, and acknowledge the terms.";
+"error_required_field" = "Required field.";
+"error_invalid_email" = "Invalid email format.";
+"error_invalid_phone" = "Invalid phone number format.";
+"error_answers_mismatch" = "Answers do not match.";
+"error_exceeds_balance" = "Entered amount exceeds account balance.";
+
+// Payment Summary
+"send_transfer_to" = "Send transfer to";
+"security_question_label" = "Security Question";
+"security_answer_label" = "Security Answer";
+"transfer_confirmation" = "Once you click Send Now, we’ll transfer the funds from your account. You may cancel the transfer while it is still pending. The service charge (if applicable) is non-refundable.";
+"confirm_add_contact" = "Are you sure you want to add this contact?";
+
+"transfer_sucess"="Your money has been successfully transferred.";
+"re-enter_sec_answer"="Re-enter security answer";
+"answer_not_match"="Answers do not match.";
+"search"="Search";
+"enter_transfer_amount"="enter transfer amount";
+//"message_optional"="Message(Optional)";
+"select_account"="Select Contact";
+"send_transfers_by_email"="Send transfers by Email";
+"send_transfers_by_mobile"="Send transfers by Mobile phone";
+
+//^^^^^^^^^^^^^^^^^
+
+//below is for emailview of register
+"enter_email_address" = "Enter Email Address";
+"email_address_placeholder" = "Email Address";
+"enter_otp" = "Enter OTP";
+"submit" = "Submit";
+"send_otp" = "Send OTP";
+"invalid_email_format" = "Invalid email format";
+"invalid_otp" = "Invalid OTP. Please try again.";
+///^^^^^^^^^^^^^^^^^^^^^^
+
+//below is for phonenumberview of register
+"enter_mobile_number" = "Enter Mobile Number";
+"mobile_number_placeholder" = "Mobile Number";
+//"enter_otp" = "Enter OTP";
+"next" = "Next";
+//"send_otp" = "Send OTP";
+"invalid_phone_number" = "Invalid phone number for %@";
+//"invalid_otp" = "Invalid OTP. Please try again.";
+
+//below is for register view of register
+"register_title" = "Register";
+"username_placeholder" = "Username";
+"password_placeholder" = "Password";
+"confirm_password_placeholder" = "Confirm Password";
+"all_fields_required" = "All fields are required.";
+"passwords_do_not_match" = "Passwords do not match!";
+"user_already_registered" = "You are already registered.";
+"password_empty_error" = "Password cannot be empty.";
+"password_length_error" = "Password must be at least 10 characters long.";
+"password_uppercase_error" = "Password must contain at least one uppercase letter.";
+"password_lowercase_error" = "Password must contain at least one lowercase letter.";
+"password_number_error" = "Password must contain at least one number.";
+"password_special_character_error" = "Password must contain at least one special character (@$!%*?&).";
+

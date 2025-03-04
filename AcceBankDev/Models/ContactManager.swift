@@ -18,7 +18,7 @@ class ContactManager: ObservableObject {
         loadContacts()
     }
 
-    // ✅ Get JSON file path for contacts
+    // Get JSON file path for contacts
     func getContactsFileURL() -> URL? {
         let fileManager = FileManager.default
         if let directory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -27,7 +27,7 @@ class ContactManager: ObservableObject {
         return nil
     }
 
-    // ✅ Save contacts to JSON file
+    // save contacts to JSON file
     func saveContacts() {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -36,14 +36,14 @@ class ContactManager: ObservableObject {
             let jsonData = try encoder.encode(contacts)
             if let fileURL = getContactsFileURL() {
                 try jsonData.write(to: fileURL, options: .atomic)
-                print("✅ Contacts saved successfully at: \(fileURL.path)")
+                print("Contacts saved successfully at: \(fileURL.path)")
             }
         } catch {
-            print("❌ Error saving contacts: \(error)")
+            print("Error saving contacts: \(error)")
         }
     }
 
-    // ✅ Load contacts from JSON file
+    // Load contacts from JSON file
     func loadContacts() {
         if let fileURL = getContactsFileURL(), FileManager.default.fileExists(atPath: fileURL.path) {
             do {
@@ -51,17 +51,17 @@ class ContactManager: ObservableObject {
                 let decodedContacts = try JSONDecoder().decode([Contact].self, from: data)
                 DispatchQueue.main.async {
                     self.contacts = decodedContacts
-                    print("✅ Contacts loaded from JSON: \(self.contacts)")
+                    print("Contacts loaded from JSON: \(self.contacts)")
                 }
             } catch {
-                print("❌ Error loading contacts: \(error)")
+                print("Error loading contacts: \(error)")
             }
         } else {
-            print("📂 No contacts found, starting fresh.")
+            print("No contacts found, starting fresh.")
         }
     }
 
-    // ✅ Add a new contact and save to JSON
+    // Add a new contact and save to JSON
     func addContact(_ contact: Contact) {
         contacts.append(contact)
         saveContacts()

@@ -16,7 +16,9 @@ struct PhoneNumberView: View {
                 backgroundGradient
                 
                 VStack(spacing: 20) {
-                    Text("Enter Mobile Number")
+                    //Text("Enter Mobile Number")
+                    Text(NSLocalizedString("enter_mobile_number", comment: ""))
+
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -31,14 +33,16 @@ struct PhoneNumberView: View {
                         .frame(width: 70)
                         .background(Color.clear)
                         .accentColor(.white)
-                        TextField("", text: $mobileNumber, prompt: Text("Mobile Number")
+//                        TextField("", text: $mobileNumber, prompt: Text("Mobile Number")
+                        TextField("", text: $mobileNumber, prompt: Text(NSLocalizedString("mobile_number_placeholder", comment: ""))
+
                             .foregroundColor(.white.opacity(0.7)))
                                 .keyboardType(.numberPad)
-                                .padding(.leading, 15) // ✅ Adjusts left padding
+                                .padding(.leading, 15) // Adjusts left padding
                                 .foregroundColor(.white)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
-                                .frame(height: 50, alignment: .leading) // ✅ Matches height of picker
+                                .frame(height: 50, alignment: .leading) // Matches height of picker
                                 .onChange(of: mobileNumber) { _, newValue in
                                     mobileNumber = formatPhoneNumber(newValue, countryCode: selectedCountry)
                                 }
@@ -60,12 +64,13 @@ struct PhoneNumberView: View {
                     }
                     
                     if isMobileOTPFieldVisible {
-                        Text("Enter OTP")
+                        //Text("Enter OTP")
+                        Text(NSLocalizedString("enter_otp", comment: ""))
+
                             .font(.headline)
                             .foregroundColor(.white)
-                        TextField("Enter OTP", text: $mobileOtp)
-
-                            .foregroundColor(.white)
+                        //TextField("Enter OTP", text: $mobileOtp)
+                        TextField("", text: $mobileOtp, prompt: Text(NSLocalizedString("enter_otp", comment: ""))     )                       .foregroundColor(.white)
                             .keyboardType(.numberPad)
                             .multilineTextAlignment(.center)
                             .padding()
@@ -83,24 +88,30 @@ struct PhoneNumberView: View {
                         if !isMobileOTPFieldVisible {
                             
                             if validatePhoneNumber(mobileNumber, countryCode: selectedCountry) {
-                                print("✅ OTP Sent (Static: 1234)")
+                                print("OTP Sent (Static: 1234)")
                                 withAnimation {
                                     isMobileOTPFieldVisible = true
                                 }
                                 errorMessage = nil
                             } else {
-                                errorMessage = "❌ Invalid phone number for \(selectedCountry)"
+//                                errorMessage = "Invalid phone number for \(selectedCountry)"
+                                errorMessage = String(format: NSLocalizedString("invalid_phone_number", comment: ""), selectedCountry)
+
                             }
                         } else {
                             if validateOTP(mobileOtp) {
-                                print("✅ OTP Verified")
+                                print("OTP Verified")
                                 isMobileNumberFormCompleted = true
                             } else {
-                                errorMessage = "❌ Invalid OTP. Please try again."
+//                                errorMessage = "Invalid OTP. Please try again."
+                                errorMessage = "invalid_otp"
+
                             }
                         }
                     }) {
-                        actionButton(title: isMobileOTPFieldVisible ? "Next" : "Send OTP")
+//                        actionButton(title: isMobileOTPFieldVisible ? "Next" : "Send OTP")
+                        actionButton(title: NSLocalizedString(isMobileOTPFieldVisible ? "next" : "send_otp", comment: ""))
+
                     }
                     .padding(.top, 20)
                     
@@ -110,18 +121,18 @@ struct PhoneNumberView: View {
                 .padding(.horizontal, 30)
             }
             .onAppear {
-                print("✅ Username in PhoneNumberView: \(username)") // ✅ Debugging
+                print("Username in PhoneNumberView: \(username)") //  Debugging
             }
 
         }
     }
         
-    // ✅ Validate OTP
+    // Validate OTP
     private func validateOTP(_ otp: String) -> Bool {
         return otp == "1234"
     }
 
-    // ✅ Validate phone number based on selected country
+    // Validate phone number based on selected country
     private func validatePhoneNumber(_ number: String, countryCode: String) -> Bool {
         let pattern: String
         switch countryCode {
@@ -135,7 +146,7 @@ struct PhoneNumberView: View {
         return NSPredicate(format: "SELF MATCHES %@", pattern).evaluate(with: number)
     }
 
-    // ✅ Format phone number while typing
+    // Format phone number while typing
     private func formatPhoneNumber(_ number: String, countryCode: String) -> String {
         let digits = number.filter { "0123456789".contains($0) } // Remove non-numeric characters
 

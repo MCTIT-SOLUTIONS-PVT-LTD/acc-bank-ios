@@ -34,7 +34,9 @@ struct SendMoneyView: View {
                             .foregroundColor(.black)
                     }
                     Spacer()
-                    Text("Send Money")
+                   // Text("Send Money")//
+                    Text(NSLocalizedString("send_money", comment: ""))
+
                         .font(.title2)
                         .bold()
                     Spacer()
@@ -47,10 +49,13 @@ struct SendMoneyView: View {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .foregroundColor(.white)
                         VStack(alignment: .leading) {
-                            Text("Payment failed")
+                            //Text("Payment failed")//
+                            Text(NSLocalizedString("payment_failed", comment: ""))
+
                                 .font(.headline)
                                 .bold()
-                            Text("This payment amount exceeds your transaction limit. Please try again.")
+//                            Text("This payment amount exceeds your transaction limit. Please try again.")//
+                            Text(NSLocalizedString("transaction_limit_exceeded", comment: ""))
                                 .font(.subheadline)
                         }
                         Spacer()
@@ -64,15 +69,18 @@ struct SendMoneyView: View {
                 
                 VStack(alignment: .leading, spacing: 15) {
                     //Transfer From
-                    Text("Transfer from")
+                    //Text("Transfer from")//
+                    Text(NSLocalizedString("transfer_from", comment: ""))
                         .font(.subheadline)
                         .foregroundColor(.gray)
                     
                     Button(action: { showAccountSheet = true }) {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(accountManager.selectedAccount?.accountName ?? "Select Account")
-                                    .font(.headline)
+//                                Text(accountManager.selectedAccount?.accountName ?? "Select Account")
+                                Text(accountManager.selectedAccount?.accountName ?? NSLocalizedString("select_account", comment: ""))
+
+                                .font(.headline)
                                     .bold()
                                     .foregroundColor(.black)
                                 Text(accountManager.selectedAccount?.accountType ?? "")
@@ -96,14 +104,17 @@ struct SendMoneyView: View {
                         .cornerRadius(10)
                     }
                     
-                    // ✅ Send To (Dropdown with Contact List)
-                    Text("Send to")
-                        .font(.subheadline)
+                    // Send To (Dropdown with Contact List)
+                    //Text("Send to")//
+                    Text(NSLocalizedString("send_to", comment: ""))
+
+                    .font(.subheadline)
                         .foregroundColor(.gray)
                     
                     Button(action: { showContactSheet = true }) {
                         HStack {
-                            Text(selectedContact?.name ?? "Select Contact")
+//                            Text(selectedContact?.name ?? "Select Contact")
+                            Text(selectedContact?.name ?? NSLocalizedString("select_contact", comment: ""))
                             Spacer()
                             Image(systemName: "chevron.down")
                         }
@@ -112,86 +123,98 @@ struct SendMoneyView: View {
                         .cornerRadius(10)
                     }
                     
-                    // ✅ Add Contact Button (Opens Form)
+                    // Add Contact Button (Opens Form)
                     Button(action: { showAddContactSheet = true }) {
                         HStack {
                             Image(systemName: "plus")
                                 .foregroundColor(.white)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color.colorBlue)
                                 .clipShape(Circle())
-                            Text("Add contact")
-                                .foregroundColor(.blue)
+                            //Text("Add contact")//
+                            Text(NSLocalizedString("add_contact", comment: ""))
+                                .foregroundColor(.colorBlue)
                         }
                     }
                     .padding(.vertical)
-                    .fullScreenCover(isPresented: $showAddContactSheet) { // ✅ Full screen instead of sheet
+                    .fullScreenCover(isPresented: $showAddContactSheet) { //  Full screen instead of sheet
                         AddContactFormView(isPresented: $showAddContactSheet, contactManager: contactManager)
                     }
                     
-                    // ✅ Show only Security Question if a contact is selected
+                    // Show only Security Question if a contact is selected
                     if let contact = selectedContact, !contact.securityQuestion.isEmpty {
-                        Text("Security Question")
+                        //Text("Security Question")//
+                        Text(NSLocalizedString("security_question", comment: ""))
                             .font(.subheadline)
                             .foregroundColor(.gray)
                         
                         TextField("", text: .constant(contact.securityQuestion))
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .disabled(true) // ✅ Make it non-editable
-                            .foregroundColor(.gray) // ✅ Display as read-only
+                            .disabled(true) // Make it non-editable
+                            .foregroundColor(.gray) // Display as read-only
                             .padding(.bottom, 10)
                     }
                     
-                    // ✅ Transfer Amount & Message Fields
+                    // Transfer Amount & Message Fields
                     //                    TextField("Enter transfer amount", text: $transferAmount)
                     //                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     //                        .padding(.top, 5)
-                    TextField("Enter transfer amount", text: $transferAmount)
+//                    TextField("Enter transfer amount", text: $transferAmount)//
+                    TextField(NSLocalizedString("enter_transfer_amount", comment: ""), text: $transferAmount)
+
                         .keyboardType(.decimalPad) // Ensure numeric input
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding(.top,5)
                         .onChange(of: transferAmount) { newValue in
                             transferAmount = formatCurrencyInput(newValue)
                         }
+                        
                     
                     
                     
                     
-                    
-                    TextField("Message (optional)", text: $message)
+                    //TextField("Message (optional)", text: $message)//
+                    TextField(NSLocalizedString("message_optional", comment: ""), text: $message)
+
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    // ✅ Auto-Deposit Acknowledgment Checkbox
+                    // Auto-Deposit Acknowledgment Checkbox
                     HStack(alignment: .top) {
                         Button(action: {
-                            isAcknowledged.toggle() // ✅ Toggle checkbox state
+                            isAcknowledged.toggle() // Toggle checkbox state
                         }) {
                             Image(systemName: isAcknowledged ? "checkmark.square.fill" : "square")
-                                .foregroundColor(.purple)
+                                .foregroundColor(.colorBlue)
                         }
-                        Text("I acknowledge that this recipient has auto-deposit enabled. They won't need to answer a security question, and the funds will be deposited automatically.")
+//                        Text("I acknowledge that this recipient has auto-deposit enabled. They won't need to answer a security question, and the funds will be deposited automatically.")//
+                        Text(NSLocalizedString("acknowledge_auto_deposit", comment: ""))
+
                             .font(.footnote)
                             .foregroundColor(.black)
                             .padding(.leading, 5)
                     }
                     .padding()
-                    .background(Color.purple.opacity(0.2))
+                    .background(Color.colorBlue.opacity(0.2))
                     .cornerRadius(8)
                     
-                    // ✅ Error Message
+                    // Error Message
+//                    if showError {
+//                        Text("⚠️ Please select a contact, enter an amount, and acknowledge the terms.")//
                     if showError {
-                        Text("⚠️ Please select a contact, enter an amount, and acknowledge the terms.")
+                        Text(NSLocalizedString("error_select_contact", comment: ""))
                             .foregroundColor(.red)
                             .font(.footnote)
                             .padding(.top, 5)
                     }
                     
-                    // ✅ Continue Button with Validation
+                    // Continue Button with Validation
                     Button(action: {
                         //validateAndContinue()
                         validateAndShowSummary()
                     }) {
-                        Text("Continue")
+                        //Text("Continue")//
+                        Text(NSLocalizedString("continue", comment: ""))
+
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, minHeight: 50)
@@ -228,7 +251,7 @@ struct SendMoneyView: View {
                     message: message
                 )
             }
-            .navigationBarHidden(true) // ✅ Hide top navigation bar for a full-screen look
+            .navigationBarHidden(true) // Hide top navigation bar for a full-screen look
 
             
         }
@@ -251,8 +274,8 @@ struct SendMoneyView: View {
 
     //function valiadate amount with balance and give summary
     private func validateAndShowSummary() {
-        showError = false  // ✅ Reset error state before validation
-        showPaymentError = false  // ✅ Reset payment error
+        showError = false  // Reset error state before validation
+        showPaymentError = false  // Reset payment error
 
         print("DEBUG: Starting validation...")
 
@@ -267,7 +290,7 @@ struct SendMoneyView: View {
 
         print("DEBUG: Account Balance - \(accountBalance)")
 
-        // ✅ Ensure transferAmount is valid and convert to a number
+        // Ensure transferAmount is valid and convert to a number
         let cleanedAmount = transferAmount.replacingOccurrences(of: "$", with: "").trimmingCharacters(in: .whitespaces)
         
         guard let enteredAmount = Double(cleanedAmount), !cleanedAmount.isEmpty else {
@@ -278,7 +301,7 @@ struct SendMoneyView: View {
 
         print("DEBUG: Transfer Amount - \(enteredAmount)")
 
-        // ✅ Check if a contact is selected
+        // Check if a contact is selected
         if selectedContact == nil {
             print("DEBUG: No contact selected.")
             showError = true
@@ -287,21 +310,21 @@ struct SendMoneyView: View {
 
         print("DEBUG: Contact selected - \(selectedContact?.name ?? "Unknown")")
 
-        // ✅ Ensure user acknowledges the terms
+        // Ensure user acknowledges the terms
         if !isAcknowledged {
             print("DEBUG: User did not acknowledge the terms.")
             showError = true
             return
         }
 
-        // ✅ Check if entered amount exceeds account balance
+        // Check if entered amount exceeds account balance
         if enteredAmount > accountBalance {
             print("DEBUG: Entered amount exceeds account balance.")
             showPaymentError = true
             return
         }
 
-        // ✅ If everything is valid, proceed to payment summary
+        // If everything is valid, proceed to payment summary
         print("DEBUG: Validation successful! Opening Payment Summary.")
         showError = false
         showPaymentSummarySheet = true
@@ -309,7 +332,7 @@ struct SendMoneyView: View {
 
     
     //            private func validateAndContinue() {
-    //                // ✅ Ensure that selectedAccount and balance are safely unwrapped
+    //                // Ensure that selectedAccount and balance are safely unwrapped
     //                guard let balanceString = accountManager.selectedAccount?.balance.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: ""),
     //                      let accountBalance = Double(balanceString) else {
     //                    return
@@ -325,7 +348,7 @@ struct SendMoneyView: View {
     //                    showError = true
     //                    showPaymentError = false
     //                } else if enteredAmount > accountBalance {
-    //                    showPaymentError = true // ✅ Show "Payment Failed" banner
+    //                    showPaymentError = true // Show "Payment Failed" banner
     //                    showError = false
     //                } else {
     //                    showError = false
@@ -343,9 +366,9 @@ struct SendMoneyView: View {
         @State private var navigateToMainView = false
 
         @State private var selectedTab = 0
-        @State private var isSuccess = true // ✅ Toggle for success or failure message
+        @State private var isSuccess = true // Toggle for success or failure message
 
-        // ✅ Payment Data
+        // Payment Data
         var account: BankAccount?
         var contact: Contact?
         var amount: String
@@ -354,76 +377,90 @@ struct SendMoneyView: View {
         var body: some View {
             VStack(spacing: 0) {
                 ZStack {
-                    // ✅ Full Screen White Background
+                    // Full Screen White Background
                     Color.white
                         .edgesIgnoringSafeArea(.all)
 
                     VStack(spacing: 20) {
-                        // ✅ Success / Failure Message Box
+                        // Success / Failure Message Box
                         HStack {
                             Image(systemName: isSuccess ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
                                 .foregroundColor(.white)
 
                             VStack(alignment: .leading) {
-                                Text(isSuccess ? "Payment Sent" : "Payment Failed")
+//                                Text(isSuccess ? "Payment Sent" : "Payment Failed")//
+                                Text(NSLocalizedString(isSuccess ? "payment_sent" : "payment_failed", comment: ""))
+
                                     .font(.headline)
                                     .bold()
                                     .foregroundColor(.white)
 
-                                Text(isSuccess
-                                     ? "Your money has been successfully transferred."
-                                     : "This payment amount exceeds your transaction limit. Please try again.")
+//                                Text(isSuccess
+//                                     ? "Your money has been successfully transferred."
+//                                     : "This payment amount exceeds your transaction limit. Please try again.")//
+                                Text(NSLocalizedString(isSuccess ? "transfer_sucess" : "transaction_limit_exceeded", comment: ""))
                                     .font(.subheadline)
                                     .foregroundColor(.white)
                             }
                             Spacer()
                         }
                         .padding()
-                        .background(isSuccess ? Color.green : Color.red) // ✅ Green for success, Red for failure
+                        .background(isSuccess ? Color.green : Color.red) //  Green for success, Red for failure
                         .cornerRadius(10)
                         .padding(.horizontal, 20)
 
-                        // ✅ Full Page Payment Summary Box with Increased Height
+                        // full Page Payment Summary Box with Increased Height
                         ScrollView {
                             VStack {
-                                Text("Payment Summary")
+                                //Text("Payment Summary")//
+                                Text(NSLocalizedString("payment_summary", comment: ""))
+
                                     .font(.headline)
                                     .bold()
                                     .padding(.top, 10)
 
                                 VStack(alignment: .leading, spacing: 10) {
-                                    PaymentDetailRow(title: "Transfer from", value: "\(account?.accountName ?? "N/A") - \(account?.accountNumber ?? "N/A")")
-                                    PaymentDetailRow(title: "Transfer to", value: contact?.name ?? "N/A")
-                                    PaymentDetailRow(title: "Send transfer to", value: contact?.email ?? "N/A")
-                                    PaymentDetailRow(title: "Amount", value: "$\(amount)", bold: true)
-                                    PaymentDetailRow(title: "Service fee", value: "$0.00")
-                                    PaymentDetailRow(title: "Total amount", value: "$\(amount)")
-
+//                                    PaymentDetailRow(title: "Transfer from", value: "\(account?.accountName ?? "N/A") - \(account?.accountNumber ?? "N/A")")//
+//                                    PaymentDetailRow(title: "Transfer to", value: contact?.name ?? "N/A")//
+//                                    PaymentDetailRow(title: "Send transfer to", value: contact?.email ?? "N/A")//
+//                                    PaymentDetailRow(title: "Amount", value: "$\(amount)", bold: true)//
+//                                    PaymentDetailRow(title: "Service fee", value: "$0.00")//
+//                                    PaymentDetailRow(title: "Total amount", value: "$\(amount)")//
+                                    PaymentDetailRow(title: NSLocalizedString("transfer_from", comment: ""), value: "\(account?.accountName ?? "") - \(account?.accountNumber ?? "")")
+                                    PaymentDetailRow(title: NSLocalizedString("transfer_to", comment: ""), value: contact?.name ?? "")
+                                    PaymentDetailRow(title: NSLocalizedString("send_transfer_to", comment: ""), value: contact?.email ?? "")
+                                    PaymentDetailRow(title: NSLocalizedString("amount", comment: ""), value: "\(amount)", bold: true)
+                                    PaymentDetailRow(title: NSLocalizedString("service_fee", comment: ""), value: "$0.00")
+                                    PaymentDetailRow(title: NSLocalizedString("total_amount", comment: ""), value: "\(amount)")
+                                   
                                     if !message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                                        PaymentDetailRow(title: "Message", value: message)
+//                                        PaymentDetailRow(title: "Message", value: message)//
+                                        PaymentDetailRow(title: NSLocalizedString("message", comment: ""), value: message)
                                     }
 
-                                    PaymentDetailRow(title: "Security question", value: contact?.securityQuestion ?? "N/A", bold: true)
+//                                    PaymentDetailRow(title: "Security question", value: contact?.securityQuestion ?? "N/A", bold: true)//
+                                    PaymentDetailRow(title: NSLocalizedString("security_question_label", comment: ""), value: contact?.securityQuestion ?? "N/A", bold: true)
                                 }
                                 .padding()
                             }
-                            .background(Color.white) // ✅ White background
-                            .cornerRadius(12) // ✅ Rounded corners
-                            .shadow(radius: 5) // ✅ Shadow for elevation
+                            .background(Color.white) // White background
+                            .cornerRadius(12) // Rounded corners
+                            .shadow(radius: 5) //  Shadow for elevation
                             .padding(.horizontal, 20)
-                            .frame(minHeight: 400, maxHeight: .infinity) // ✅ Increase height
+                            .frame(minHeight: 400, maxHeight: .infinity) //  Increase height
                         }
 
-                        Spacer() // ✅ Push everything to the top
+                        Spacer() //  Push everything to the top
                     }
                     .frame(maxHeight: .infinity)
                 }
-                // ✅ Done Button - Navigates to MainView()
+                //  Done Button - Navigates to MainView()
                             Button(action: {
                                 navigateToMainView = true
                             }) {
-                                Text("Done")
-                                    .font(.headline)
+                                //Text("Done")//
+                                Text(NSLocalizedString("done", comment: ""))
+.font(.headline)
                                     .foregroundColor(.white)
                                     .padding()
                                     .frame(width: 150)
@@ -433,16 +470,16 @@ struct SendMoneyView: View {
                                     .padding(.bottom, 40)
                             }
                             .fullScreenCover(isPresented: $navigateToMainView) {
-                                MainView() // ✅ Opens MainView when button is clicked
+                                MainView() // Opens MainView when button is clicked
                             }
-                // ✅ Fixed Bottom Navigation
+                // Fixed Bottom Navigation
                 //BottomNavigationBar()
 //                BottomNavigationBar(selectedTab: $selectedTab)
 //                    .edgesIgnoringSafeArea(.bottom)
-//                    .frame(height: 50) // ✅ Adjust height if needed
-                MainView()
+//                    .frame(height: 50) // Adjust height if needed
+               // MainView()
                     }
-            //.navigationBarHidden(true) // ✅ Remove the navigation bar
+            //.navigationBarHidden(true) // Remove the navigation bar
         }
     }
 
@@ -457,13 +494,15 @@ struct SendMoneyView: View {
         var contact: Contact?
         var amount: String
         var message: String
-        @State private var showPaymentSuccess = false // ✅ Show Payment Success Screen
+        @State private var showPaymentSuccess = false // Show Payment Success Screen
         
         var body: some View {
             VStack {
                 // Header
                 HStack {
-                    Text("Confirmation")
+                    //Text("Confirmation")//
+                    Text(NSLocalizedString("confirmation", comment: ""))
+
                         .font(.headline)
                         .bold()
                     Spacer()
@@ -475,32 +514,43 @@ struct SendMoneyView: View {
                 }
                 .padding()
                 
-                Text("Once you click Send Now, we’ll transfer the funds from your account. You may cancel the transfer while it is still pending. The service charge (if applicable) is non-refundable.")
+//                Text("Once you click Send Now, we’ll transfer the funds from your account. You may cancel the transfer while it is still pending. The service charge (if applicable) is non-refundable.")//
+                Text(NSLocalizedString("transfer_confirmation", comment: ""))
+
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .padding(.bottom, 10)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    PaymentDetailRow(title: "Transfer from", value: "\(account?.accountName ?? "") - \(account?.accountNumber ?? "")")
-                    PaymentDetailRow(title: "Transfer to", value: contact?.name ?? "")
-                    PaymentDetailRow(title: "Send transfer to", value: contact?.email ?? "")
-                    PaymentDetailRow(title: "Amount", value: "\(amount)", bold: true)
-                    PaymentDetailRow(title: "Service fee", value: "$0.00")
-                    PaymentDetailRow(title: "Total amount", value: "\(amount)")
+//                    PaymentDetailRow(title: "Transfer from", value: "\(account?.accountName ?? "") - \(account?.accountNumber ?? "")")
+//                    PaymentDetailRow(title: "Transfer to", value: contact?.name ?? "")
+//                    PaymentDetailRow(title: "Send transfer to", value: contact?.email ?? "")
+//                    PaymentDetailRow(title: "Amount", value: "\(amount)", bold: true)
+//                    PaymentDetailRow(title: "Service fee", value: "$0.00")
+//                    PaymentDetailRow(title: "Total amount", value: "\(amount)")
+                    PaymentDetailRow(title: NSLocalizedString("transfer_from", comment: ""), value: "\(account?.accountName ?? "") - \(account?.accountNumber ?? "")")
+                    PaymentDetailRow(title: NSLocalizedString("transfer_to", comment: ""), value: contact?.name ?? "")
+                    PaymentDetailRow(title: NSLocalizedString("send_transfer_to", comment: ""), value: contact?.email ?? "")
+                    PaymentDetailRow(title: NSLocalizedString("amount", comment: ""), value: "\(amount)", bold: true)
+                    PaymentDetailRow(title: NSLocalizedString("service_fee", comment: ""), value: "$0.00")
+                    PaymentDetailRow(title: NSLocalizedString("total_amount", comment: ""), value: "\(amount)")
 
                     if !message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        PaymentDetailRow(title: "Message", value: message)
+                        //PaymentDetailRow(title: "Message", value: message)
+                        PaymentDetailRow(title: NSLocalizedString("message", comment: ""), value: message)
                     }
 
                     PaymentDetailRow(title: "Security question", value: contact?.securityQuestion ?? "", bold: true)
                 }
                 .padding(.horizontal)
                 
-                // ✅ Confirm Button
+                // Confirm Button
                 Button(action: {
-                    showPaymentSuccess = true // ✅ Navigate to Payment Success Screen
+                    showPaymentSuccess = true // Navigate to Payment Success Screen
                 }) {
-                    Text("Confirm")
+                    //Text("Confirm")
+                    Text(NSLocalizedString("confirm", comment: ""))
+
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, minHeight: 50)
@@ -512,7 +562,7 @@ struct SendMoneyView: View {
                 Spacer()
             }
             .padding(.horizontal, 20)
-            .fullScreenCover(isPresented: $showPaymentSuccess) { // ✅ Open Payment Success Screen
+            .fullScreenCover(isPresented: $showPaymentSuccess) { // Open Payment Success Screen
                 PaymentSuccessView(
                     account: account,
                     contact: contact,
@@ -554,9 +604,11 @@ struct SendMoneyView: View {
         
         var body: some View {
             VStack {
-                // ✅ Header
+                // Header
                 HStack {
-                    Text("Transfer from")
+                    //Text("Transfer from")
+                    Text(NSLocalizedString("transfer_from", comment: ""))
+
                         .font(.headline)
                         .bold()
                     Spacer()
@@ -570,7 +622,7 @@ struct SendMoneyView: View {
                 }
                 .padding()
                 
-                // ✅ Account List
+                // Account List
                 ScrollView {
                     VStack(spacing: 10) {
                         ForEach(accountManager.accounts) { account in
@@ -580,25 +632,25 @@ struct SendMoneyView: View {
                             }) {
                                 HStack {
                                     VStack(alignment: .leading, spacing: 2) {
-                                        // ✅ Account Name (Bold)
+                                        // Account Name (Bold)
                                         Text(account.accountName)
                                             .font(.headline)
                                             .bold()
                                             .foregroundColor(.black)
                                         
-                                        // ✅ Account Type (New Line)
+                                        // Account Type (New Line)
                                         Text(account.accountType)
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
                                         
-                                        // ✅ Account Number (New Line)
+                                        // Account Number (New Line)
                                         Text(account.accountNumber)
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
                                     }
                                     Spacer()
                                     
-                                    // ✅ Balance
+                                    // Balance
                                     Text(account.balance)
                                         .font(.headline)
                                         .bold()
@@ -645,17 +697,17 @@ struct SendMoneyView: View {
         @State private var showConfirmationSheet = false
         @State private var showError = false
         
-        // ✅ Default country is Canada
+        // Default country is Canada
         @State private var selectedCountry = "+1"
 
-        // ✅ Validation States
+        // Validation States
         @State private var nameError = false
         @State private var emailError = false
         @State private var mobilePhoneError = false
         @State private var securityAnswerError = false
         @State private var reEnterSecurityAnswerError = false
         
-        // ✅ Country Code Options
+        // Country Code Options
         let countryCodes = [
             "+1",  // Canada
             "+91"   // India
@@ -663,9 +715,11 @@ struct SendMoneyView: View {
         
         var body: some View {
             VStack {
-                // ✅ Top Header
+                // Top Header
                 HStack {
-                    Text("Add contact")
+                    //Text("Add contact")
+                    Text(NSLocalizedString("add_contact", comment: ""))
+
                         .font(.headline)
                         .bold()
                     Spacer()
@@ -679,34 +733,40 @@ struct SendMoneyView: View {
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 15) {
-                        // ✅ Name Field
-                        TextField("Name", text: $name)
+                        // Name Field
+                        //TextField("Name", text: $name)
+                        TextField(NSLocalizedString("name", comment: ""), text: $name)
+
                             .padding()
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
                             .overlay(RoundedRectangle(cornerRadius: 8).stroke(nameError ? Color.red : Color.clear, lineWidth: 1))
                         if nameError {
-                            Text("Required field.")
+                            //Text("Required field.")error_required_field,error_invalid_email
+                            Text(NSLocalizedString("error_required_field", comment: ""))
+
                                 .font(.footnote)
                                 .foregroundColor(.red)
                         }
                         
-                        // ✅ Email Field
-                        TextField("Email", text: $email)
+                        // Email Field
+                        //TextField("Email", text: $email)
+                        TextField(NSLocalizedString("email", comment: ""), text: $email)
+
                             .padding()
-                            .autocapitalization(.none) // ✅ Prevents automatic capitalization
-                            .keyboardType(.emailAddress) // ✅ Optimizes keyboard for email input
+                            .autocapitalization(.none) // Prevents automatic capitalization
+                            .keyboardType(.emailAddress) // Optimizes keyboard for email input
 
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
                             //.overlay(RoundedRectangle(cornerRadius: 8).stroke(emailError ? Color.red : Color.clear, lineWidth: 1))
                         if emailError {
-                            Text(email.isEmpty ? "Required field." : "Invalid email format.")
+                            Text(email.isEmpty ? "Required field." : "Invalid email format.")//
                                 .font(.footnote)
                                 .foregroundColor(.red)
                         }
                         
-                        // ✅ Mobile Field with Country Code
+                        // Mobile Field with Country Code
                         HStack {
                             // Country Code Picker
                             Picker(selection: $selectedCountry, label: Text("")) {
@@ -722,12 +782,14 @@ struct SendMoneyView: View {
 //                                mobilePhone = "" // Reset number on country change
 //                            }
                             .onChange(of: selectedCountry) {
-                                mobilePhone = "" // ✅ Reset number when country changes
+                                mobilePhone = "" // Reset number when country changes
                             }
 
                             
                             // Mobile Number Input
-                            TextField("Mobile phone", text: $mobilePhone)
+                            //TextField("Mobile phone", text: $mobilePhone)
+                            TextField(NSLocalizedString("mobile_phone", comment: ""), text: $mobilePhone)
+
                                 .keyboardType(.numberPad)
                                 .padding()
                                 .background(Color(.systemGray6))
@@ -748,33 +810,43 @@ struct SendMoneyView: View {
                                 .foregroundColor(.red)
                         }
                         
-                        // ✅ Send Transfers By
-                        Toggle("Send transfers by Email", isOn: $sendByEmail)
-                        Toggle("Send transfers by Mobile phone", isOn: $sendByMobile)
+                        // send Transfers By
+//                        Toggle("Send transfers by Email", isOn: $sendByEmail)
+//                        Toggle("Send transfers by Mobile phone", isOn: $sendByMobile)
+                        Toggle(NSLocalizedString("send_transfers_by_email", comment: ""), isOn: $sendByEmail)
+                        Toggle(NSLocalizedString("send_transfers_by_mobile", comment: ""), isOn: $sendByMobile)
+
                         
-                        // ✅ Security Details
-                        TextField("Security question", text: $securityQuestion)
+                        // Security Details
+                        //TextField("Security question", text: $securityQuestion)
+                        TextField(NSLocalizedString("security_question", comment: ""), text: $securityQuestion)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         
-                        SecureField("Security answer", text: $securityAnswer)
+                            //SecureField("Security answer", text: $securityAnswer)
+                        SecureField(NSLocalizedString("security_answer", comment: ""), text: $securityAnswer)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(RoundedRectangle(cornerRadius: 8).stroke(securityAnswerError ? Color.red : Color.clear, lineWidth: 1))
                         if securityAnswerError {
-                            Text("Required field.")
+                            //Text("Required field.")
+                            Text(NSLocalizedString("error_required_field", comment: ""))
+
                                 .font(.footnote)
                                 .foregroundColor(.red)
                         }
                         
-                        SecureField("Re-enter security answer", text: $reEnterSecurityAnswer)
+//                        SecureField("Re-enter security answer", text: $reEnterSecurityAnswer)
+                        SecureField(NSLocalizedString("re-enter_sec_answer", comment: ""), text: $reEnterSecurityAnswer)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(RoundedRectangle(cornerRadius: 8).stroke(reEnterSecurityAnswerError ? Color.red : Color.clear, lineWidth: 1))
                         if reEnterSecurityAnswerError {
-                            Text("Answers do not match.")
+                            //Text("Answers do not match.")answer_not_match
+                            Text(NSLocalizedString("answer_not_match", comment: ""))
+
                                 .font(.footnote)
                                 .foregroundColor(.red)
                         }
                         
-                        // ✅ Review Contact Button with Validation
+                        // Review Contact Button with Validation
                         Button(action: {
                             if validateFields() {
                                 showConfirmationSheet = true
@@ -782,7 +854,9 @@ struct SendMoneyView: View {
                                 showError = true
                             }
                         }) {
-                            Text("Review Contact")
+                            //Text("Review Contact")
+                            Text(NSLocalizedString("review_contact", comment: ""))
+
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity, minHeight: 50)
@@ -811,7 +885,7 @@ struct SendMoneyView: View {
             }
         }
         
-        // ✅ Function to Validate Fields
+        // Function to Validate Fields
         func validateFields() -> Bool {
             nameError = name.isEmpty
             //emailError = email.isEmpty || !isValidEmail(email)
@@ -826,13 +900,13 @@ struct SendMoneyView: View {
 //                return email.range(of: emailRegex, options: .regularExpression, range: nil, locale: nil) != nil
 //            }
 
-        // ✅ Function to Get Full Phone Number with Country Code
+        // Function to Get Full Phone Number with Country Code
         func fullPhoneNumber() -> String {
             let countryCode = selectedCountry.contains("+91") ? "+91" : "+1"
             return "\(countryCode) \(mobilePhone)"
         }
         
-        // ✅ Function to Format Phone Number Based on Country
+        // Function to Format Phone Number Based on Country
         func formatPhoneNumber(_ number: String) -> String {
             let digits = number.filter { $0.isNumber }
             
@@ -875,14 +949,16 @@ struct SendMoneyView: View {
         var securityQuestion: String
         var securityAnswer: String
 
-        @State private var showSuccessScreen = false // ✅ State to show success screen
-        @State private var navigateToSendMoney = false // ✅ State to go back to Send Money
+        @State private var showSuccessScreen = false // State to show success screen
+        @State private var navigateToSendMoney = false // State to go back to Send Money
 
         var body: some View {
             NavigationStack {
                 VStack {
                     HStack {
-                        Text("Confirmation")
+                        //Text("Confirmation")
+                        Text(NSLocalizedString("confirmation", comment: ""))
+
                             .font(.headline)
                             .bold()
                         Spacer()
@@ -894,26 +970,41 @@ struct SendMoneyView: View {
                     }
                     .padding()
                     
-                    Text("Are you sure you want to add this contact?")
+//                    Text("Are you sure you want to add this contact?")
+                    Text(NSLocalizedString("confirm_add_contact", comment: ""))
+
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .padding(.bottom, 10)
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        DetailRow(title: "Name", value: name)
-                        DetailRow(title: "Email", value: email)
-                        DetailRow(title: "Mobile phone", value: mobilePhone)
-                        DetailRow(title: "Send transfer by", value: sendByEmail ? "Email" : "Mobile phone")
-                        DetailRow(title: "Security question", value: securityQuestion, bold: true)
-                        DetailRow(title: "Security answer", value: "*******") // Hide security answer
+//                        DetailRow(title: "Name", value: name)
+//                        DetailRow(title: "Email", value: email)
+//                        DetailRow(title: "Mobile phone", value: mobilePhone)
+//                        DetailRow(title: "Send transfer by", value: sendByEmail ? "Email" : "Mobile phone")
+//                        DetailRow(title: "Security question", value: securityQuestion, bold: true)
+//                        DetailRow(title: "Security answer", value: "*******") // Hide security answer
+                        DetailRow(title: NSLocalizedString("name", comment: ""), value: name)
+                        DetailRow(title: NSLocalizedString("email", comment: ""), value: email)
+                        DetailRow(title: NSLocalizedString("mobile_phone", comment: ""), value: mobilePhone)
+
+                        DetailRow(
+                            title: NSLocalizedString("send_transfer_by", comment: ""),
+                            value: sendByEmail ? NSLocalizedString("send_by_email", comment: "") : NSLocalizedString("send_by_mobile", comment: "")
+                        )
+
+                        DetailRow(title: NSLocalizedString("security_question", comment: ""), value: securityQuestion, bold: true)
+                        DetailRow(title: NSLocalizedString("security_answer", comment: ""), value: NSLocalizedString("hidden_security_answer", comment: "")) // Hide security answer
                     }
                     .padding(.horizontal)
 
-                    // ✅ Confirm Button
+                    // Confirm Button
                     Button(action: {
                         saveContact()
                     }) {
-                        Text("Confirm")
+                        //Text("Confirm")
+                        Text(NSLocalizedString("confirm", comment: ""))
+
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, minHeight: 50)
@@ -926,15 +1017,15 @@ struct SendMoneyView: View {
                 }
                 .padding(.horizontal, 20)
                 .fullScreenCover(isPresented: $showSuccessScreen) {
-                    ContactSuccessView(navigateToSendMoney: $navigateToSendMoney) // ✅ Pass navigation state
+                    ContactSuccessView(navigateToSendMoney: $navigateToSendMoney) // Pass navigation state
                 }
                 .navigationDestination(isPresented: $navigateToSendMoney) {
-                    SendMoneyView() // ✅ Navigate to Send Money screen
+                    SendMoneyView() // Navigate to Send Money screen
                 }
             }
         }
 
-        // ✅ Save contact function
+        // Save contact function
         private func saveContact() {
             let newContact = Contact(
                 name: name,
@@ -947,23 +1038,25 @@ struct SendMoneyView: View {
             )
             
             contactManager.addContact(newContact)
-            showSuccessScreen = true // ✅ Show success message
+            showSuccessScreen = true // show success message
         }
     }
 
 
     struct ContactSuccessView: View {
-        @Environment(\.presentationMode) var presentationMode // ✅ To dismiss both views
-        @Binding var navigateToSendMoney: Bool // ✅ State to trigger navigation
-        @State private var showSendMoneyScreen = false // ✅ State to open full screen
+        @Environment(\.presentationMode) var presentationMode // To dismiss both views
+        @Binding var navigateToSendMoney: Bool // State to trigger navigation
+        @State private var showSendMoneyScreen = false // State to open full screen
 
 
         var body: some View {
             VStack {
                 Spacer()
                 
-                // ✅ Success Message
-                Text("New Contact Added Successfully!")
+                // Success Message
+                //Text("New Contact Added Successfully!")
+                Text(NSLocalizedString("new_contact_success", comment: ""))
+
                     .font(.title2)
                     .bold()
                     .multilineTextAlignment(.center)
@@ -978,14 +1071,16 @@ struct SendMoneyView: View {
                 
                 Spacer()
                 
-                // ✅ Done Button - Navigate to "Send Money"
+                // Done Button - Navigate to "Send Money"
                 Button(action: {
-                    //navigateToSendMoney = true // ✅ Trigger navigation to "Send Money"
-                    //presentationMode.wrappedValue.dismiss() // ✅ Close success screen
-                    showSendMoneyScreen = true // ✅ Open full-screen Send Money
+                    //navigateToSendMoney = true // Trigger navigation to "Send Money"
+                    //presentationMode.wrappedValue.dismiss() // Close success screen
+                    showSendMoneyScreen = true // Open full-screen Send Money
 
                 }) {
-                    Text("Done")
+                    //Text("Done")
+                    Text(NSLocalizedString("done", comment: ""))
+
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, minHeight: 50)
@@ -995,7 +1090,7 @@ struct SendMoneyView: View {
                 .padding(.horizontal, 40)
                 .padding(.bottom, 40)
             }
-            .fullScreenCover(isPresented: $showSendMoneyScreen) { // ✅ Open in full screen
+            .fullScreenCover(isPresented: $showSendMoneyScreen) { // Open in full screen
                         SendMoneyView()
                     }
         }
@@ -1034,7 +1129,7 @@ struct SendMoneyView: View {
         @ObservedObject var contactManager: ContactManager
         @Binding var selectedContact: Contact?
         @Binding var isPresented: Bool
-        @State private var searchText: String = "" // ✅ Search text state
+        @State private var searchText: String = "" // Search text state
         
         var filteredContacts: [Contact] {
             if searchText.isEmpty {
@@ -1046,9 +1141,11 @@ struct SendMoneyView: View {
         
         var body: some View {
             VStack {
-                // ✅ Header
+                // Header
                 HStack {
-                    Text("Select Contact")
+                    //Text("Select Contact")
+                    Text(NSLocalizedString("select_account", comment: ""))
+
                         .font(.headline)
                         .bold()
                     Spacer()
@@ -1060,20 +1157,21 @@ struct SendMoneyView: View {
                 }
                 .padding()
                 
-                // ✅ Search Bar
-                TextField("Search", text: $searchText)
+                // Search Bar
+                //TextField("Search", text: $searchText)
+                TextField(NSLocalizedString("search", comment: ""), text: $searchText)
                     .padding(10)
                     .background(Color(.white))
                     .cornerRadius(10)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10) // ✅ Border shape
-                            .stroke(Color.black, lineWidth: 1) // ✅ Border color & width
+                        RoundedRectangle(cornerRadius: 10) // Border shape
+                            .stroke(Color.black, lineWidth: 1) // Border color & width
                     )
                     .padding(.horizontal)
                 
                 
                 
-                // ✅ Contact List (Filtered)
+                // Contact List (Filtered)
                 ScrollView {
                     VStack(spacing: 10) {
                         ForEach(filteredContacts) { contact in
@@ -1082,15 +1180,16 @@ struct SendMoneyView: View {
                                 isPresented = false
                             }) {
                                 HStack {
-                                    // ✅ Show only name
+                                    //  Show only name
                                     Text(contact.name)
                                         .font(.headline)
+                                        .bold()
                                         .bold()
                                         .foregroundColor(.black)
                                     
                                     Spacer()
                                     
-                                    // ✅ Show checkmark if selected
+                                    // Show checkmark if selected
                                     if selectedContact?.id == contact.id {
                                         Image(systemName: "checkmark.circle.fill")
                                             .foregroundColor(.blue)
@@ -1115,7 +1214,7 @@ struct SendMoneyView: View {
     
     
 }
-// ✅ Preview
+// Preview
 struct SendMoneyView_Previews: PreviewProvider {
     static var previews: some View {
         SendMoneyView()

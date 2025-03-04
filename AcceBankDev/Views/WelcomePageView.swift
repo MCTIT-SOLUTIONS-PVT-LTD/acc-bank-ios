@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WelcomePageView: View {
     var username: String
+    //var user: User // Receive full user details
+
     @State private var navigateToLogin = false
 
     var body: some View {
@@ -20,8 +22,9 @@ struct WelcomePageView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+                Text(NSLocalizedString("registration_success", comment: ""))
 
-                Text("You have successfully registered.")
+                //Text("You have successfully registered.")
                     .font(.title)
                     .foregroundColor(.white)
 
@@ -41,4 +44,5 @@ struct WelcomePageView: View {
 
 #Preview {
     WelcomePageView(username:"Testuser")
+   
 }
