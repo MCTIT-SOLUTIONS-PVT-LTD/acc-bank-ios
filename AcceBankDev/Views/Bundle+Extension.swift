@@ -1,18 +1,22 @@
-//
-//  Bundle+Extension.swift
-//  AcceBankDev
-//
-//  Created by MCT on 03/03/25.
-//
+import Foundation
 
-import SwiftUI
+private var bundleKey: UInt8 = 0
 
-struct Bundle_Extension: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+final class CustomBundle: Bundle {
+    override func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
+        guard let bundle = objc_getAssociatedObject(self, &bundleKey) as? Bundle else {
+            return super.localizedString(forKey: key, value: value, table: tableName)
+        }
+        return bundle.localizedString(forKey: key, value: value, table: tableName)
     }
 }
 
-#Preview {
-    Bundle_Extension()
+extension Bundle {
+    static func setLanguage(_ language: String) {
+        object_setClass(Bundle.main, CustomBundle.self)
+        guard let path = Bundle.main.path(forResource: language, ofType: "lproj") else {
+            return
+        }
+        objc_setAssociatedObject(Bundle.main, &bundleKey, Bundle(path: path), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
 }

@@ -1,18 +1,15 @@
-//
-//  LanguageManager.swift
-//  AcceBankDev
-//
-//  Created by MCT on 03/03/25.
-//
+import Foundation
 
-import SwiftUI
-
-struct LanguageManager: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class LanguageManager: ObservableObject {
+    @Published var selectedLanguage: String = UserDefaults.standard.string(forKey: "AppLanguage") ?? "en" {
+        didSet {
+            UserDefaults.standard.set([selectedLanguage], forKey: "AppleLanguages")
+            UserDefaults.standard.set(selectedLanguage, forKey: "AppLanguage")
+            UserDefaults.standard.synchronize()
+            
+            // Notify the system to update UI text
+            Bundle.setLanguage(selectedLanguage)
+            objectWillChange.send()
+        }
     }
-}
-
-#Preview {
-    LanguageManager()
 }

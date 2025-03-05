@@ -153,3 +153,73 @@
 "password_lowercase_error" = "Le mot de passe doit contenir au moins une lettre minuscule.";
 "password_number_error" = "Le mot de passe doit contenir au moins un chiffre.";
 "password_special_character_error" = "Le mot de passe doit contenir au moins un caractère spécial (@$!%*?&).";
+
+////this below is for HomePageView
+"welcome_text" = "Bienvenue %@ à";
+"bank_name" = "Acceinfo Banque";
+"greeting_text" = "Bonjour";
+"savings" = "Épargne";
+"chequing" = "Compte courant";
+"loan" = "Prêt";
+"investments" = "Investissements";
+"crypto" = "Crypto";
+"quote_of_the_day" = "CITATION DU JOUR";
+"money_quote" = "L'argent n'est pas tout, mais tout a besoin d'argent.";
+"good_afternoon" = "Bon après-midi";
+"good_evening" = "Bonsoir";
+
+//^^^^^^^^^
+
+//#########new MoveMoney files data
+"move_money_title" = "Transférer de l'argent";
+"transfers_title" = "Transferts";
+"bank_transfer" = "Virement bancaire";
+"wire_transfer" = "Virement électronique";
+"international_transfer" = "Transfert international";
+"instant_transfer" = "Transfert instantané";
+"quick_pay" = "Paiement rapide";
+"local_transfer" = "Transfert local";
+"mobile_wallet" = "Portefeuille mobile";
+"crypto_transfer" = "Transfert crypto";
+"manage_recipient"="Gérer le destinataire";
+"transfer_money"="Transférer de l'argent";
+
+
+
+"interac_transfer" = "Interac e-Transfer®";
+"send_money" = "Envoyer de l'argent";
+"request_money" = "Demander de l'argent";
+"manage_contacts" = "Gérer les contacts";
+"pending_transactions" = "Transferts en attente";
+"transfer_history" = "Historique";
+"auto_deposit" = "Paramètres de dépôt automatique";
+"profile_settings" = "Paramètres du profil";
+"security_settings" = "Paramètres de sécurité";
+"mutiple_bills"="Payer plusieurs factures";
+"schedule_transfer"="Planifier le transfert";
+
+"payments_option" = "Paiements";
+"utility_bills" = "Payer les factures";
+"credit_card_payments" = "Paiements par carte de crédit";
+"loan_repayment" = "Remboursement de prêt";
+"insurance_payments" = "Paiements d'assurance";
+"education_fees" = "Frais de scolarité";
+"online_shopping" = "Achats en ligne";
+"subscription_services" = "Services d'abonnement";
+"government_taxes" = "Taxes gouvernementales";
+
+"scheduled_transfers" = "Transferts planifiés";
+"see_more" = "Voir plus";
+"see_less" = "Voir moins";
+
+"all_options_title" = "Toutes les options de transfert";
+"select_language"="Sélectionnez la langue";
+"face_id"="Utiliser l'identification faciale";
+
+//below is for make payment
+"make_payment"="Effectuer un paiement";
+"pay_from"="Payer à partir de";
+"payee"="Bénéficiaire";
+"add_payee"="Ajouter un bénéficiaire";
+"date"="Date";
+

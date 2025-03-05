@@ -115,7 +115,7 @@ struct BottomNavigationBar: View {
 
                 Spacer()
 
-                // ✅ Move Money Button
+                // Move Money Button
                 Button(action: {
                     selectedTab = 1 // Switch to MoveMoneyView
                 }) {
@@ -129,8 +129,9 @@ struct BottomNavigationBar: View {
                 Button(action: { selectedTab = 2 }) {
                     ZStack {
                         Circle()
-                            .fill(Color.colorTeal)
-                            .frame(width: 65, height: 65)
+//                            .fill(Color.colorTeal)
+                            .fill(Constants.backgroundGradient)
+                            .frame(width: 60, height: 60)
                             .shadow(radius: 5)
                         Image(systemName: "plus")
                             .font(.system(size: 30, weight: .bold))
@@ -156,19 +157,35 @@ struct BottomNavigationBar: View {
 
                 Spacer()
             }
-            .frame(height: 90)
+            .frame(height: 70)// before 90
             .background(
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
+//                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                RoundCorner(radius: 30, corners: [.topLeft, .topRight])
+
                     .fill(Color.black.opacity(0.99))
-                    .ignoresSafeArea(.all, edges: .bottom)
+                   .ignoresSafeArea(.all, edges: .bottom)
+                 
+
             )
         }
     }
 }
+struct RoundCorner: Shape {
+    var radius: CGFloat
+    var corners: UIRectCorner
 
-// ✅ Preview
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(
+            roundedRect: rect,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
+        return Path(path.cgPath)
+    }
+}
+// Preview
 struct BottomNavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        BottomNavigationBar(selectedTab: .constant(0)) // ✅ Provide default binding
+        BottomNavigationBar(selectedTab: .constant(0)) //  Provide default binding
     }
 }

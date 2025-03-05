@@ -251,7 +251,8 @@ struct SendMoneyView: View {
                     message: message
                 )
             }
-            .navigationBarHidden(true) // Hide top navigation bar for a full-screen look
+            //.navigationBarHidden(true) // Hide top navigation bar for a full-screen look
+            .navigationBarBackButtonHidden(true)
 
             
         }
