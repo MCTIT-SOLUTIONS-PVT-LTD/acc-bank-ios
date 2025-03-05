@@ -33,6 +33,8 @@
 "interac_transfer" = "Interac e-Transfer®";
 "payments_option" = "Payments";
 "scheduled_transfers" = "Scheduled transfers & payments";
+"manage_recipient"="Manage Recipient";
+"transfer_money"="Transfer Money";
 
 // Payments Bottom Sheet
 "payments_title" = "Payments";
@@ -106,8 +108,8 @@
 "re-enter_sec_answer"="Re-enter security answer";
 "answer_not_match"="Answers do not match.";
 "search"="Search";
-"enter_transfer_amount"="enter transfer amount";
-//"message_optional"="Message(Optional)";
+"enter_transfer_amount"="Enter transfer amount";
+"message_optional"="Message(Optional)";
 "select_account"="Select Contact";
 "send_transfers_by_email"="Send transfers by Email";
 "send_transfers_by_mobile"="Send transfers by Mobile phone";
@@ -148,3 +150,67 @@
 "password_number_error" = "Password must contain at least one number.";
 "password_special_character_error" = "Password must contain at least one special character (@$!%*?&).";
 
+//this below is for HomePageView
+"welcome_text" = "Welcome %@ to";
+"bank_name" = "Acceinfo Bank";
+"greeting_text" = "Good Morning";
+"savings" = "Savings";
+"chequing" = "Chequing";
+"loan" = "Loan";
+"investments" = "Investments";
+"crypto" = "Crypto";
+"quote_of_the_day" = "QUOTE OF THE DAY";
+"money_quote" = "Money isn’t everything, but everything needs money.";
+"good_afternoon" = "Good Afternoon";
+"good_evening" = "Good Evening";
+
+//^^^^^^^^^^^^^^^^
+
+//#########new MoveMoney files data
+"move_money_title" = "Move Money";
+"transfers_title" = "Transfers";
+"bank_transfer" = "Bank Transfer";
+"wire_transfer" = "Wire Transfer";
+"international_transfer" = "International Transfer";
+"instant_transfer" = "Instant Transfer";
+"quick_pay" = "Quick Pay";
+"local_transfer" = "Local Transfer";
+"mobile_wallet" = "Mobile Wallet";
+"crypto_transfer" = "Crypto Transfer";
+
+"interac_transfer" = "Interac e-Transfer®";
+"send_money" = "Send Money";
+"request_money" = "Request Money";
+"manage_contacts" = "Manage Contacts";
+"pending_transactions" = "Pending Transfers";
+"transfer_history" = "History";
+"auto_deposit" = "Autodeposit Settings";
+"profile_settings" = "Profile Settings";
+"security_settings" = "Security Settings";
+"mutiple_bills"="Pay Mutiple Bills";
+"schedule_transfer"="Schedule Transfer";
+"payments_option" = "Payments";
+"utility_bills" = "Pay Bills";
+"credit_card_payments" = "Credit Card Payments";
+"loan_repayment" = "Loan Repayment";
+"insurance_payments" = "Insurance Payments";
+"education_fees" = "Education Fees";
+"online_shopping" = "Online Shopping";
+"subscription_services" = "Subscription Services";
+"government_taxes" = "Government Taxes";
+
+"scheduled_transfers" = "Scheduled Transfers";
+"see_more" = "See More";
+"see_less" = "See Less";
+
+"all_options_title" = "All Transfer Options";
+"select_language"="Select Language";
+"face_id"="Use Face ID";
+
+
+//below is for make payment
+"make_payment"="Make a payment";
+"pay_from"="Pay from";
+"payee"="Payee";
+"add_payee"="Add payee";
+"date"="Date";

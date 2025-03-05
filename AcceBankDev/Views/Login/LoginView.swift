@@ -5,7 +5,8 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct LoginView: View {
-    
+    @StateObject private var languageManager = LanguageManager()
+
     @State private var username: String = UserDefaults.standard.string(forKey: "SavedUsername") ?? ""
     @State private var password: String = ""
     @State private var isToggled = false
@@ -29,12 +30,52 @@ struct LoginView: View {
                 let screenHeight = geometry.size.height
                 
                 ZStack {
-                    Color.backgroundGradient.edgesIgnoringSafeArea(.all)
+                    Constants.backgroundGradient.edgesIgnoringSafeArea(.all)
                     //.edgesIgnoringSafeArea(.all)
                     
-                    ScrollView(showsIndicators: false) {
+                    //ScrollView(showsIndicators: false) {
                     VStack {
 
+//                        //logo code
+//                        HStack {
+//                            ZStack {
+//                                // Background Color
+//                                Color.white
+//                                    .frame(width: 150, height: 50) // Adjust the background size to match the logo size
+//                                    .cornerRadius(10)
+//                                Image("AppLogo") // Ensure "AppLogo" is added in Assets.xcassets
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 150, height: 50) // Adjust logo size
+//                                    //.padding(.leading, 130) // Ensure left alignment
+//                                
+//                                Spacer() // Pushes the logo to the left
+//                                
+//                            }
+//                        }
+//                        .frame(maxWidth: .infinity)
+//                        .padding(.top, 35) // Adjust spacing from top
+                        //############
+                        VStack(spacing: 0) {
+                            ZStack {
+                                Color.white
+                                    .frame(height: 100) // Fixed height for better control
+                                    .frame(maxWidth: .infinity)
+                                    .ignoresSafeArea(edges: .top) // Ensures it touches the top
+
+                                // Logo placed safely below notch
+                                Image("AppLogo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 150, height: 50)
+                                    //.padding(.top, 10) // Push just enough below the notch
+                                
+                                    .offset(y: -30) // Moves logo slightly upwards for perfect centering
+
+                            }
+                            
+                            Spacer()
+                        }
                             VStack(spacing: 5) {
                                 //Text("QUOTE OF THE DAY")
                                 Text(NSLocalizedString("quote_of_the_day", comment: ""))
@@ -44,6 +85,8 @@ struct LoginView: View {
                                     .foregroundColor(.white.opacity(0.8))
                                     .padding(.top, screenHeight * 0.05)
                                 
+                                
+                                
 //                                Text("Money isn’t everything,\n but everything needs \nmoney.")
                                 Text(NSLocalizedString("money_quote", comment: ""))
 
@@ -52,17 +95,37 @@ struct LoginView: View {
                                     .foregroundColor(.white)
                                     .padding()
                                     .lineSpacing(4)
+                                    .frame(maxWidth: .infinity) // added for remove scroll and show full text
+                                    .fixedSize(horizontal: false, vertical: true) // Prevents truncation
+                                            .padding(.horizontal, 30) //
                                 
                                 Rectangle()
                                     .frame(width: screenWidth * 0.1, height: 4.5)
                                     .foregroundColor(.white.opacity(0.7))
                                     .padding(.top, 5)
+                                
+                                //#####
+                                
+//                                HStack {
+//                                                           Image("AppLogo") // Ensure "AppLogo" is added in Assets.xcassets
+//                                                               .resizable()
+//                                                               .scaledToFit()
+//                                                               .frame(width: 200, height: 50) // Adjust logo size
+//                                                               .padding(.leading, 100) // ✅ Ensure left alignment
+//                               
+//                                                           Spacer() // Pushes the logo to the left
+//                                    
+//                                }
+//                                .padding(.top,50)
+                                //###############
                             }
-                            .padding(.bottom, screenHeight * 0.2)
+                            .padding(.bottom, screenHeight * 0.13)
                             
                             // Username & Password Fields
                             VStack(spacing: screenHeight * 0.02) {
 //                                CustomTextField(placeholder: "Username", text: $username)
+                                
+
                                 CustomTextField(placeholder: NSLocalizedString("username_placeholder", comment: ""), text: $username)
 
                                     .frame(width: screenWidth * 0.7, height: 50)
@@ -109,7 +172,33 @@ struct LoginView: View {
                             }
                             .frame(width: 350, alignment: .leading)
                             .padding(.horizontal, 40)
-                            
+                            //#########
+                        HStack {
+                            //Spacer()
+                            Menu {
+                                Button(action: {
+                                    languageManager.selectedLanguage = "en"
+                                }) {
+                                    Text("English")
+                                }
+                                Button(action: {
+                                    languageManager.selectedLanguage = "fr"
+                                }) {
+                                    Text("Français")
+                                }
+                            } label: {
+                                //Text("Select Language") //  Same style as Register
+                                Text(NSLocalizedString("select_language", comment: ""))
+
+                                    .font(.system(size: 18, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .underline()
+                            }
+                            Spacer()
+                        }
+                        .frame(width: 320) // Ensures proper width alignment
+
+                        .padding(.top, 5) // 
                             // Sign In Button
                             Button(action: {
                                 verifyLogin()
@@ -125,6 +214,9 @@ struct LoginView: View {
                                     .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
                             }
                             .padding(.top, 20)
+                            .onAppear {
+                                            Bundle.setLanguage(languageManager.selectedLanguage)
+                                        }
 //                            NavigationLink("", destination: MainView(), isActive: $navigateToWelcome)
 //                                                .hidden()
                             .fullScreenCover(isPresented: $navigateToWelcome) {
@@ -152,6 +244,10 @@ struct LoginView: View {
                                         Image(systemName: "faceid")
                                             .font(.title2)
                                         Text("Use Face ID")
+                                        //Text(NSLocalizedString("face_id", comment: ""))
+                                            //.lineLimit(1) // Allow wrapping
+                                            //.multilineTextAlignment(.center) // Center the text if it wraps
+
                                             .fontWeight(.bold)
                                     }
                                     .frame(width: min(350, screenWidth * 0.5), height: 50)
@@ -177,7 +273,7 @@ struct LoginView: View {
                             }
                         }
                     }
-                }
+                //}
                 .frame(width: screenWidth, height: screenHeight)
                 .navigationDestination(isPresented: $navigateToWelcome) {
                     MainView()

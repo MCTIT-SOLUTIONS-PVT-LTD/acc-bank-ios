@@ -2,7 +2,7 @@ import SwiftUI
 
 // Fix: Convert `backgroundGradient` into a computed property
 var backgroundGradient: some View {
-    Color.backgroundGradient.edgesIgnoringSafeArea(.all)
+    Constants.backgroundGradient.edgesIgnoringSafeArea(.all)
 }
 
 // Fix: No change needed for `actionButton`

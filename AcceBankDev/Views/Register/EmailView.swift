@@ -12,7 +12,26 @@ struct EmailView: View {
         NavigationStack{
             ZStack {
                 backgroundGradient
-                
+                VStack(spacing: 0) {
+                    ZStack {
+                        Color.white
+                            .frame(height: 100) // Fixed height for better control
+                            .frame(maxWidth: .infinity)
+                            .ignoresSafeArea(edges: .top) // Ensures it touches the top
+
+                        // Logo placed safely below notch
+                        Image("AppLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 150, height: 50)
+                            //.padding(.top, 10) // Push just enough below the notch
+                        
+                            .offset(y: -30) // Moves logo slightly upwards for perfect centering
+
+                    }
+                    
+                    Spacer()
+                }
                 VStack(spacing: 20) {
                     //Text("Enter Email Address")
                     Text(NSLocalizedString("enter_email_address", comment: ""))
