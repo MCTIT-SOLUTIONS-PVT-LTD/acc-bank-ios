@@ -15,7 +15,9 @@ struct MoveMoneyView: View {
 //                MoveMoneyOption(icon: "bitcoinsign.circle.fill", title: NSLocalizedString("crypto_transfer", comment: "")),
 //                MoveMoneyOption(icon: "house.fill", title: NSLocalizedString("local_transfer", comment: "")),
                 MoveMoneyOption(icon: "person.2.fill", title: NSLocalizedString("manage_recipient", comment: "")),
-                MoveMoneyOption(icon: "calendar.circle", title: NSLocalizedString("schedule_transfer", comment: "")),
+//                MoveMoneyOption(icon: "calendar.circle", title: NSLocalizedString("schedule_transfer", comment: "")),
+                MoveMoneyOption(icon: "person.2.fill", title: NSLocalizedString("manage_accounts", comment: "")),
+                MoveMoneyOption(icon: "calendar.circle", title: NSLocalizedString("manage_contacts", comment: "")),
                 //MoveMoneyOption(icon: "bitcoinsign.circle.fill", title: NSLocalizedString("crypto_transfer", comment: ""))
             ]
         ),
@@ -258,6 +260,8 @@ struct MoveMoneyView: View {
         let option: MoveMoneyOption
         @State private var isShowingSendMoney = false
         @State private var isShowingPayBill = false
+        @State private var showAddContactForm = false
+
         
         var body: some View {
             VStack {
@@ -278,6 +282,8 @@ struct MoveMoneyView: View {
                     isShowingSendMoney = true
                 case NSLocalizedString("utility_bills", comment: ""):
                     isShowingPayBill = true
+                case NSLocalizedString("manage_contacts", comment: ""):
+                    showAddContactForm = true
                 // Add more cases for other screens as needed
                 default:
                     break
@@ -289,6 +295,9 @@ struct MoveMoneyView: View {
             .fullScreenCover(isPresented: $isShowingPayBill) {
                 PayBillScreen()
             }
+            .fullScreenCover(isPresented: $showAddContactForm) {
+                    AddContactFormView(isPresented: .constant(true), contactManager: ContactManager()) // Show AddContactFormView
+                    }
         }
     }
 
