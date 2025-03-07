@@ -214,3 +214,13 @@
 "payee"="Payee";
 "add_payee"="Add payee";
 "date"="Date";
+
+//########
+"send_by_email"="Email";
+"send_by_mobile"="Mobile";
+"hidden_security_answer"="answer";
+"send_transfer_by"="Send transfers by";
+"manage_accounts"="Manage Accounts";
+
+//below is for transfer money screen
+"tansfer_money"="Transfer Money";
