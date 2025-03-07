@@ -73,7 +73,7 @@ struct SendMoneyView: View {
                     Text(NSLocalizedString("transfer_from", comment: ""))
                         .font(.subheadline)
                         .foregroundColor(.gray)
-                    
+                    //this is for accounts details
                     Button(action: { showAccountSheet = true }) {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
@@ -142,18 +142,34 @@ struct SendMoneyView: View {
                     }
                     
                     // Show only Security Question if a contact is selected
-                    if let contact = selectedContact, !contact.securityQuestion.isEmpty {
-                        //Text("Security Question")//
-                        Text(NSLocalizedString("security_question", comment: ""))
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                        
-                        TextField("", text: .constant(contact.securityQuestion))
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .disabled(true) // Make it non-editable
-                            .foregroundColor(.gray) // Display as read-only
-                            .padding(.bottom, 10)
+                    if let contact = selectedContact {
+                        if !contact.securityQuestion.isEmpty {
+                            // Security Question
+                            Text(NSLocalizedString("security_question", comment: ""))
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                            
+                            TextField("", text: .constant(contact.securityQuestion))
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .disabled(true) // Make it non-editable
+                                .foregroundColor(.gray) // Display as read-only
+                                .padding(.bottom, 5)
+                        }
+
+                        if !contact.email.isEmpty {
+                            // Email Field
+                            Text(NSLocalizedString("email", comment: ""))
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+
+                            TextField("", text: .constant(contact.email))
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .disabled(true) // Make it non-editable
+                                .foregroundColor(.gray) // Display as read-only
+                                .padding(.bottom, 5)
+                        }
                     }
+
                     
                     // Transfer Amount & Message Fields
                     //                    TextField("Enter transfer amount", text: $transferAmount)
@@ -762,7 +778,7 @@ struct SendMoneyView: View {
                             .cornerRadius(8)
                             //.overlay(RoundedRectangle(cornerRadius: 8).stroke(emailError ? Color.red : Color.clear, lineWidth: 1))
                         if emailError {
-                            Text(email.isEmpty ? "Required field." : "Invalid email format.")//
+                            Text(email.isEmpty ? "error_required_field" : "Invalid email format.")//
                                 .font(.footnote)
                                 .foregroundColor(.red)
                         }
@@ -776,7 +792,7 @@ struct SendMoneyView: View {
                                 }
                             }
                             .pickerStyle(MenuPickerStyle())
-                            .frame(width: 90)
+                            .frame(width: 90,height: 52)
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
 //                            .onChange(of: selectedCountry) { _ in
@@ -826,6 +842,10 @@ struct SendMoneyView: View {
                             //SecureField("Security answer", text: $securityAnswer)
                         SecureField(NSLocalizedString("security_answer", comment: ""), text: $securityAnswer)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .onChange(of: securityAnswer) { newValue in
+                                print("🔹 Security Answer Entered: \(newValue)") // ✅ Debug if value updates
+                            }
+
                             .overlay(RoundedRectangle(cornerRadius: 8).stroke(securityAnswerError ? Color.red : Color.clear, lineWidth: 1))
                         if securityAnswerError {
                             //Text("Required field.")
@@ -849,6 +869,8 @@ struct SendMoneyView: View {
                         
                         // Review Contact Button with Validation
                         Button(action: {
+                            print("Security Answer Entered Before Saving: \(securityAnswer)") // ✅ Debug
+
                             if validateFields() {
                                 showConfirmationSheet = true
                             } else {
@@ -869,7 +891,8 @@ struct SendMoneyView: View {
                 }
             }
             .padding(.horizontal, 20)
-            .sheet(isPresented: $showConfirmationSheet) {
+            //.sheet(isPresented: $showConfirmationSheet)
+            .fullScreenCover(isPresented: $showConfirmationSheet) {
                 ContactConfirmationView(
                     isPresented: $showConfirmationSheet,
                     contactManager: contactManager,
@@ -984,7 +1007,7 @@ struct SendMoneyView: View {
 //                        DetailRow(title: "Mobile phone", value: mobilePhone)
 //                        DetailRow(title: "Send transfer by", value: sendByEmail ? "Email" : "Mobile phone")
 //                        DetailRow(title: "Security question", value: securityQuestion, bold: true)
-//                        DetailRow(title: "Security answer", value: "*******") // Hide security answer
+                       // DetailRow(title: "Security answer", value: "*******") // Hide security answer
                         DetailRow(title: NSLocalizedString("name", comment: ""), value: name)
                         DetailRow(title: NSLocalizedString("email", comment: ""), value: email)
                         DetailRow(title: NSLocalizedString("mobile_phone", comment: ""), value: mobilePhone)
@@ -993,9 +1016,17 @@ struct SendMoneyView: View {
                             title: NSLocalizedString("send_transfer_by", comment: ""),
                             value: sendByEmail ? NSLocalizedString("send_by_email", comment: "") : NSLocalizedString("send_by_mobile", comment: "")
                         )
-
+                        
+                                   //Text("Debug Security Answer: \(securityAnswer)") // ✅ Debug: Check if securityAnswer is empty
                         DetailRow(title: NSLocalizedString("security_question", comment: ""), value: securityQuestion, bold: true)
-                        DetailRow(title: NSLocalizedString("security_answer", comment: ""), value: NSLocalizedString("hidden_security_answer", comment: "")) // Hide security answer
+                        //DetailRow(title: NSLocalizedString("security_answer", comment: ""), value: securityAnswer, bold: true)
+                        DetailRow(
+                            title: NSLocalizedString("security_answer", comment: ""),
+                            value: String(repeating: "*", count: securityAnswer.count), // Mask answer with asterisks
+                            bold: true
+                        )
+
+
                     }
                     .padding(.horizontal)
 
@@ -1028,7 +1059,11 @@ struct SendMoneyView: View {
 
         // Save contact function
         private func saveContact() {
+            print("🔹 Security Answer Before Saving: \(securityAnswer)") // ✅ Debug
+
             let newContact = Contact(
+                id: UUID(),
+
                 name: name,
                 email: email,
                 mobilePhone: mobilePhone,
@@ -1037,8 +1072,10 @@ struct SendMoneyView: View {
                 securityQuestion: securityQuestion,
                 securityAnswer: securityAnswer
             )
-            
+            print("Saving Contact: \(newContact)") // ✅ Debug print before saving
+
             contactManager.addContact(newContact)
+            contactManager.saveContacts()
             showSuccessScreen = true // show success message
         }
     }
@@ -1204,6 +1241,8 @@ struct SendMoneyView: View {
                     }
                     .padding()
                 }
+                //.frame(maxHeight: .infinity) // Ensures ScrollView expands fully
+                .scrollIndicators(.hidden)
             }
             .padding(.horizontal)
             .presentationDetents([.medium, .large])

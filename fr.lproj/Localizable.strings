@@ -223,3 +223,14 @@
 "add_payee"="Ajouter un bénéficiaire";
 "date"="Date";
 
+"send_by_email"="email";
+"send_by_mobile"="Mobile";
+"hidden_security_answer"="répondre";
+"send_transfer_by"="Envoyez des virements par";
+"manage_accounts"="Gérer les comptes";
+
+
+//below is for transfer money screen
+"tansfer_money"="Transférer de l'argent";
+
+

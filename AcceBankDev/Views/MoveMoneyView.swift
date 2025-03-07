@@ -82,13 +82,32 @@ struct MoveMoneyView: View {
                 Constants.backgroundGradient.edgesIgnoringSafeArea(.all)
                 
                 VStack {
+//                    VStack(spacing: 0) {
+//                        ZStack {
+//                            Color.white
+//                                .frame(height: 100) // Fixed height for better control
+//                                .frame(maxWidth: .infinity)
+//                                .ignoresSafeArea(edges: .top) // Ensures it touches the top
+//
+//                            // Logo placed safely below the notch
+//                            Image("AppLogo")
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 150, height: 50)
+//                                .offset(y: -30) // Moves logo slightly upwards for perfect centering
+//                        }
+//                    }
+                    
+
                     Text(NSLocalizedString("move_money_title", comment: ""))
+                    
                         .font(.title)
                         .bold()
                         .foregroundColor(.white)
-                        .padding(.top, 30)
+                        .padding(.top, 0)
                         .padding(.horizontal, 20)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                    
                     
                     Divider()
                     
@@ -261,8 +280,9 @@ struct MoveMoneyView: View {
         @State private var isShowingSendMoney = false
         @State private var isShowingPayBill = false
         @State private var showAddContactForm = false
+        @State private var showAddAccountForm = false // Corrected state variable
 
-        
+        @ObservedObject var accountManager = AccountManager() // Create instance of AccountManager
         var body: some View {
             VStack {
                 Image(systemName: option.icon)
@@ -282,6 +302,8 @@ struct MoveMoneyView: View {
                     isShowingSendMoney = true
                 case NSLocalizedString("utility_bills", comment: ""):
                     isShowingPayBill = true
+                case NSLocalizedString("manage_accounts", comment: ""):
+                    showAddAccountForm = true
                 case NSLocalizedString("manage_contacts", comment: ""):
                     showAddContactForm = true
                 // Add more cases for other screens as needed
@@ -295,9 +317,16 @@ struct MoveMoneyView: View {
             .fullScreenCover(isPresented: $isShowingPayBill) {
                 PayBillScreen()
             }
+//            .fullScreenCover(isPresented: $showAddContactForm) {
+//                    AddContactFormView(isPresented: .constant(true), contactManager: ContactManager()) // Show AddContactFormView
+//                    }
             .fullScreenCover(isPresented: $showAddContactForm) {
-                    AddContactFormView(isPresented: .constant(true), contactManager: ContactManager()) // Show AddContactFormView
+                AddContactFormView(isPresented: $showAddContactForm, contactManager: ContactManager()) // ✅ Fix: Pass correct binding
+            }
+            .fullScreenCover(isPresented: $showAddAccountForm) { // Show AddAccountFormView when manage_accounts is tapped
+                        AddAccountFormView(accountManager: accountManager) // Pass accountManager to AddAccountFormView
                     }
+
         }
     }
 

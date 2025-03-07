@@ -40,7 +40,8 @@ struct AddContactFormView: View {
     ]
     
     var body: some View {
-        VStack {
+        VStack (alignment: .leading, spacing:30){
+            
             // Top Header
             HStack {
                 //Text("Add contact")
@@ -57,8 +58,8 @@ struct AddContactFormView: View {
             }
             .padding()
             
-            ScrollView {
-                VStack(alignment: .leading, spacing: 15) {
+            ScrollView (showsIndicators:false){
+                VStack(alignment: .leading, spacing:20) {
                     // Name Field
                     //TextField("Name", text: $name)
                     TextField(NSLocalizedString("name", comment: ""), text: $name)
@@ -91,7 +92,7 @@ struct AddContactFormView: View {
                             .font(.footnote)
                             .foregroundColor(.red)
                     }
-                    
+        
                     // Mobile Field with Country Code
                     HStack {
                         // Country Code Picker
@@ -101,7 +102,7 @@ struct AddContactFormView: View {
                             }
                         }
                         .pickerStyle(MenuPickerStyle())
-                        .frame(width: 90)
+                        .frame(width: 90,height: 52)
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
 //                            .onChange(of: selectedCountry) { _ in
@@ -171,7 +172,7 @@ struct AddContactFormView: View {
                             .font(.footnote)
                             .foregroundColor(.red)
                     }
-                    
+                    //Spacer()
                     // Review Contact Button with Validation
                     Button(action: {
                         if validateFields() {
@@ -189,42 +190,42 @@ struct AddContactFormView: View {
                             .background(Color.black)
                             .cornerRadius(10)
                     }
+                    .padding()
                 }
                 .padding()
             }
         }
-        .padding(.horizontal, 20)
-//        .sheet(isPresented: $showConfirmationSheet) {
-//            ContactConfirmationView(
-//                isPresented: $showConfirmationSheet,
-//                contactManager: contactManager,
-//                name: name,
-//                email: email,
-//                mobilePhone: fullPhoneNumber(),
-//                sendByEmail: sendByEmail,
-//                sendByMobile: sendByMobile,
-//                securityQuestion: securityQuestion,
-//                securityAnswer: securityAnswer
-//            )
-//            .presentationDetents([.large])
-//            .presentationDragIndicator(.hidden)
-//        }
+        .padding(.horizontal, 10)
+        .frame(maxWidth: .infinity)
+       .fullScreenCover(isPresented: $showConfirmationSheet) {
+        ContactConfirmationView(
+            isPresented: $showConfirmationSheet,
+            contactManager: contactManager,
+            name: name,
+            email: email,
+            mobilePhone: fullPhoneNumber(),
+            sendByEmail: sendByEmail,
+            sendByMobile: sendByMobile,
+            securityQuestion: securityQuestion,
+            securityAnswer: securityAnswer
+        )
+    }
     }
     
     // Function to Validate Fields
     func validateFields() -> Bool {
         nameError = name.isEmpty
-        //emailError = email.isEmpty || !isValidEmail(email)
+        emailError = email.isEmpty || !isValidEmail(email)
         mobilePhoneError = mobilePhone.isEmpty || mobilePhone.count < 10
         securityAnswerError = securityAnswer.isEmpty
         reEnterSecurityAnswerError = securityAnswer != reEnterSecurityAnswer
         
         return !(nameError || emailError || mobilePhoneError || securityAnswerError || reEnterSecurityAnswerError)
     }
-//        func isValidEmail(_ email: String) -> Bool {
-//                let emailRegex = #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#
-//                return email.range(of: emailRegex, options: .regularExpression, range: nil, locale: nil) != nil
-//            }
+        func isValidEmail(_ email: String) -> Bool {
+                let emailRegex = #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#
+                return email.range(of: emailRegex, options: .regularExpression, range: nil, locale: nil) != nil
+            }
 
     // Function to Get Full Phone Number with Country Code
     func fullPhoneNumber() -> String {
@@ -261,27 +262,8 @@ struct AddContactFormView: View {
         return trimmed
     }
 }
-struct DetailRow: View {
-    var title: String
-    var value: String
-    var bold: Bool = false
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(title)
-                .font(.footnote)
-                .foregroundColor(.gray)
-            Text(value)
-                .font(bold ? .subheadline.bold() : .subheadline)
-                .foregroundColor(.black)
-                .padding(.vertical, 5)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(.systemGray6))
-                .cornerRadius(5)
-        }
-    }
-}
 
+//contact confirm
 struct ContactConfirmationView: View {
     @Binding var isPresented: Bool
     @ObservedObject var contactManager: ContactManager
@@ -328,7 +310,7 @@ struct ContactConfirmationView: View {
 //                        DetailRow(title: "Mobile phone", value: mobilePhone)
 //                        DetailRow(title: "Send transfer by", value: sendByEmail ? "Email" : "Mobile phone")
 //                        DetailRow(title: "Security question", value: securityQuestion, bold: true)
-//                        DetailRow(title: "Security answer", value: "*******") // Hide security answer
+                   // DetailRow(title: "Security answer", value: "*******") // Hide security answer
                     DetailRow(title: NSLocalizedString("name", comment: ""), value: name)
                     DetailRow(title: NSLocalizedString("email", comment: ""), value: email)
                     DetailRow(title: NSLocalizedString("mobile_phone", comment: ""), value: mobilePhone)
@@ -337,9 +319,17 @@ struct ContactConfirmationView: View {
                         title: NSLocalizedString("send_transfer_by", comment: ""),
                         value: sendByEmail ? NSLocalizedString("send_by_email", comment: "") : NSLocalizedString("send_by_mobile", comment: "")
                     )
-
+                    
+                               //Text("Debug Security Answer: \(securityAnswer)") // ✅ Debug: Check if securityAnswer is empty
                     DetailRow(title: NSLocalizedString("security_question", comment: ""), value: securityQuestion, bold: true)
-                    DetailRow(title: NSLocalizedString("security_answer", comment: ""), value: NSLocalizedString("hidden_security_answer", comment: "")) // Hide security answer
+                    //DetailRow(title: NSLocalizedString("security_answer", comment: ""), value: securityAnswer, bold: true)
+                    DetailRow(
+                        title: NSLocalizedString("security_answer", comment: ""),
+                        value: String(repeating: "*", count: securityAnswer.count), // Mask answer with asterisks
+                        bold: true
+                    )
+
+
                 }
                 .padding(.horizontal)
 
@@ -369,63 +359,14 @@ struct ContactConfirmationView: View {
             }
         }
     }
-    
-    struct ContactSuccessView: View {
-        @Environment(\.presentationMode) var presentationMode // To dismiss both views
-        @Binding var navigateToSendMoney: Bool // State to trigger navigation
-        @State private var showSendMoneyScreen = false // State to open full screen
-
-
-        var body: some View {
-            VStack {
-                Spacer()
-                
-                // Success Message
-                //Text("New Contact Added Successfully!")
-                Text(NSLocalizedString("new_contact_success", comment: ""))
-
-                    .font(.title2)
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .padding()
-                
-                Image(systemName: "checkmark.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 80, height: 80)
-                    .foregroundColor(.green)
-                    .padding()
-                
-                Spacer()
-                
-                // Done Button - Navigate to "Send Money"
-                Button(action: {
-                    //navigateToSendMoney = true // Trigger navigation to "Send Money"
-                    //presentationMode.wrappedValue.dismiss() // Close success screen
-                    showSendMoneyScreen = true // Open full-screen Send Money
-
-                }) {
-                    //Text("Done")
-                    Text(NSLocalizedString("done", comment: ""))
-
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color.black)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal, 40)
-                .padding(.bottom, 40)
-            }
-            .fullScreenCover(isPresented: $showSendMoneyScreen) { // Open in full screen
-                        SendMoneyView()
-                    }
-        }
-    }
 
     // Save contact function
     private func saveContact() {
+        print("🔹 Security Answer Before Saving: \(securityAnswer)") // ✅ Debug
+
         let newContact = Contact(
+            id: UUID(),
+
             name: name,
             email: email,
             mobilePhone: mobilePhone,
@@ -434,14 +375,89 @@ struct ContactConfirmationView: View {
             securityQuestion: securityQuestion,
             securityAnswer: securityAnswer
         )
-        
+        print("Saving Contact: \(newContact)") // ✅ Debug print before saving
+
         contactManager.addContact(newContact)
+        contactManager.saveContacts()
         showSuccessScreen = true // show success message
     }
 }
-//#Preview {
-//    AddContactForm()
-//}
+
+
+struct ContactSuccessView: View {
+    @Environment(\.presentationMode) var presentationMode // To dismiss both views
+    @Binding var navigateToSendMoney: Bool // State to trigger navigation
+    @State private var showSendMoneyScreen = false // State to open full screen
+
+
+    var body: some View {
+        VStack {
+            Spacer()
+            
+            // Success Message
+            //Text("New Contact Added Successfully!")
+            Text(NSLocalizedString("new_contact_success", comment: ""))
+
+                .font(.title2)
+                .bold()
+                .multilineTextAlignment(.center)
+                .padding()
+            
+            Image(systemName: "checkmark.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80, height: 80)
+                .foregroundColor(.green)
+                .padding()
+            
+            Spacer()
+            
+            // Done Button - Navigate to "Send Money"
+            Button(action: {
+                //navigateToSendMoney = true // Trigger navigation to "Send Money"
+                //presentationMode.wrappedValue.dismiss() // Close success screen
+                showSendMoneyScreen = true // Open full-screen Send Money
+
+            }) {
+                //Text("Done")
+                Text(NSLocalizedString("done", comment: ""))
+
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .background(Color.black)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal, 40)
+            .padding(.bottom, 40)
+        }
+        .fullScreenCover(isPresented: $showSendMoneyScreen) { // Open in full screen
+            MoveMoneyView()
+                }
+    }
+}
+// Helper View for Detail Row
+struct DetailRow: View {
+    var title: String
+    var value: String
+    var bold: Bool = false
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(title)
+                .font(.footnote)
+                .foregroundColor(.gray)
+            Text(value)
+                .font(bold ? .subheadline.bold() : .subheadline)
+                .foregroundColor(.black)
+                .padding(.vertical, 5)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(.systemGray6))
+                .cornerRadius(5)
+        }
+    }
+}
+
 #Preview {
     AddContactFormView(isPresented: .constant(true), contactManager: ContactManager())
 }

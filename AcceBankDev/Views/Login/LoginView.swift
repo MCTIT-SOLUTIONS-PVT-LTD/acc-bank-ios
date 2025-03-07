@@ -18,6 +18,7 @@ struct LoginView: View {
     @State private var showFaceIDPrompt = false
     @State private var showFaceIDButton = UserDefaults.standard.bool(forKey: "FaceIDEnabled")
 //    @EnvironmentObject var languageManager: LanguageManager  // Use Language Manager
+    @State private var isPasswordHidden: Bool = true // Default to hidden
 
     
 
@@ -131,9 +132,23 @@ struct LoginView: View {
                                     .frame(width: screenWidth * 0.7, height: 50)
                                 
 //                                CustomTextField(placeholder: "Password", text: $password, isSecure: true)
-                                CustomTextField(placeholder: NSLocalizedString("password_placeholder", comment: ""), text: $password, isSecure: true)
-
+                                ZStack(alignment: .trailing) { // Align icon to the right
+                                    CustomTextField(
+                                        placeholder: NSLocalizedString("password_placeholder", comment: ""),
+                                        text: $password,
+                                        isSecure: isPasswordHidden // Toggle secure entry
+                                    )
                                     .frame(width: screenWidth * 0.7, height: 50)
+
+                                    Button(action: {
+                                        isPasswordHidden.toggle() // Toggle password visibility
+                                    }) {
+                                        Image(systemName: isPasswordHidden ? "eye.slash" : "eye") // Toggle icon
+                                            .foregroundColor(.white)
+                                            .padding(.trailing, -5) // Add padding to avoid touching edge
+                                    }
+                                }
+
                                 
                                 if let errorMessage = errorMessage {
                                     Text(errorMessage)
