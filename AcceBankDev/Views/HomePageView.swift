@@ -19,27 +19,34 @@ struct HomePageView: View {
                     endPoint: .trailing
                 )
                 .edgesIgnoringSafeArea(.all)
+                
+                VStack(spacing:0){
+                    // Use Reusable Header
+                    
+                    HeaderView()
+                        .padding(.top, -42)
+                     //Header Section
+                  //  VStack(spacing: 0) {
+//                        HeaderView()
+//                            .padding(.bottom, 20)
 
-                VStack {
-                    // Header Section
-                    VStack(spacing: 0) {
-                        ZStack {
-                            Color.white
-                                .frame(height: geometry.size.height * 0.12) // Adjust header height dynamically
-                                .frame(maxWidth: .infinity)
-                                .ignoresSafeArea(edges: .top)
-
-                            // Logo placed centrally below the notch
-                            Image("AppLogo")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: geometry.size.width * 0.4, height: geometry.size.height * 0.05) // Adjust logo size dynamically
-//                                .padding(.top, geometry.safeAreaInsets.top * 0.3) // Adds some space below the notch
-                                .padding(.top, geometry.safeAreaInsets.top * -0.9) // Adds some space below the notch, while keeping logo inside white box
-                            
-                        }
-                        .padding(.bottom, 10)
-                    }
+//                        ZStack {
+//                            Color.white
+//                                .frame(height: geometry.size.height * 0.12) // Adjust header height dynamically
+//                                .frame(maxWidth: .infinity)
+//                                .ignoresSafeArea(edges: .top)
+//
+//                            // Logo placed centrally below the notch
+//                            Image("AppLogo")
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: geometry.size.width * 0.4, height: geometry.size.height * 0.05) // Adjust logo size dynamically
+////                                .padding(.top, geometry.safeAreaInsets.top * 0.3) // Adds some space below the notch
+//                                .padding(.top, geometry.safeAreaInsets.top * -0.9) // Adds some space below the notch, while keeping logo inside white box
+//                            
+//                        }
+                    .padding(.bottom, 30)
+ // }
 
                     // Profile Image
                     Image("profilePic")
