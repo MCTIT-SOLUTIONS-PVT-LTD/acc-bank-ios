@@ -426,8 +426,11 @@ struct SendMoneyView: View {
                         .cornerRadius(10)
                         .padding(.horizontal, 20)
 
+                        
+                        Spacer().frame(height: 30) // Adjust space as needed
+
                         // full Page Payment Summary Box with Increased Height
-                        ScrollView {
+                        //ScrollView {
                             VStack {
                                 //Text("Payment Summary")//
                                 Text(NSLocalizedString("payment_summary", comment: ""))
@@ -460,8 +463,11 @@ struct SendMoneyView: View {
                                 }
                                 .padding()
                             }
+                            //.padding(.top,90)
                             .background(Color.white) // White background
-                            .cornerRadius(12) // Rounded corners
+                           // .cornerRadius(12) // Rounded corners
+                            .clipShape(RoundedRectangle(cornerRadius: 12)) // Ensures corners are rounded
+
                             .shadow(radius: 5) //  Shadow for elevation
                             .padding(.horizontal, 20)
                             .frame(minHeight: 400, maxHeight: .infinity) //  Increase height
@@ -484,7 +490,7 @@ struct SendMoneyView: View {
                                     .background(Color.black)
                                     .cornerRadius(10)
                                     .padding(.horizontal, 20)
-                                    .padding(.bottom, 40)
+                                    .padding(.bottom, 10)
                             }
                             .fullScreenCover(isPresented: $navigateToMainView) {
                                 MainView() // Opens MainView when button is clicked
@@ -498,7 +504,7 @@ struct SendMoneyView: View {
                     }
             //.navigationBarHidden(true) // Remove the navigation bar
         }
-    }
+    //}
 
 
     
@@ -592,28 +598,51 @@ struct SendMoneyView: View {
 
     
     // Renamed DetailRow to PaymentDetailRow show all details in confirmation
+//    struct PaymentDetailRow: View {
+//        var title: String
+//        var value: String
+//        var bold: Bool = false
+//        
+//        var body: some View {
+//            VStack(alignment: .leading, spacing: 2) {
+//                Text(title)
+//                    .font(.footnote)
+//                    .foregroundColor(.gray)
+//                Text(value)
+//                    .font(bold ? .subheadline.bold() : .subheadline)
+//                    .foregroundColor(.black)
+//                    .padding(.vertical, 5)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .background(Color(.systemGray6))
+//                    .cornerRadius(5)
+//            }
+//        }
+//    }
+    
     struct PaymentDetailRow: View {
         var title: String
         var value: String
         var bold: Bool = false
-        
+
         var body: some View {
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(title)
                     .font(.footnote)
                     .foregroundColor(.gray)
+
                 Text(value)
-                    .font(bold ? .subheadline.bold() : .subheadline)
+                    .font(.body)
+                    .fontWeight(bold ? .bold : .regular)
                     .foregroundColor(.black)
-                    .padding(.vertical, 5)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(5)
+                    .padding(.bottom, 5) // Adds spacing above the line
+
+                Divider() // This adds the bottom border effect
             }
         }
     }
-    
-    
+
+
     // Bottom Sheet for Selecting Account
     struct AccountSelectionSheet: View {
         @ObservedObject var accountManager: AccountManager
@@ -1017,7 +1046,7 @@ struct SendMoneyView: View {
                             value: sendByEmail ? NSLocalizedString("send_by_email", comment: "") : NSLocalizedString("send_by_mobile", comment: "")
                         )
                         
-                                   //Text("Debug Security Answer: \(securityAnswer)") // ✅ Debug: Check if securityAnswer is empty
+                                   //Text("Debug Security Answer: \(securityAnswer)") // Debug: Check if securityAnswer is empty
                         DetailRow(title: NSLocalizedString("security_question", comment: ""), value: securityQuestion, bold: true)
                         //DetailRow(title: NSLocalizedString("security_answer", comment: ""), value: securityAnswer, bold: true)
                         DetailRow(

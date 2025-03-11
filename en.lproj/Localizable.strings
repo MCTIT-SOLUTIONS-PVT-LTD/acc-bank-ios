@@ -224,3 +224,8 @@
 
 //below is for transfer money screen
 "tansfer_money"="Transfer Money";
+"memo"="Memo";
+"transfer_to"="Transfer to";
+"transfer_from"="Transfer from";
+"onetime_payment"="Onetime";
+"recurring_payment"="Recurring";

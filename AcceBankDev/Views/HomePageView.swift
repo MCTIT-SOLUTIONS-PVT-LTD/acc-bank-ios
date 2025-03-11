@@ -22,9 +22,14 @@ struct HomePageView: View {
                 
                 VStack(spacing:0){
                     // Use Reusable Header
-                    
                     HeaderView()
-                        .padding(.top, -42)
+                        .zIndex(1) // Brings it forward
+                        .frame(height: 25)
+                        .background(Color.white) // Ensures visibility
+
+                    Spacer().frame(height: 60)
+//                    HeaderView()
+//                        .padding(.top, -42)
                      //Header Section
                   //  VStack(spacing: 0) {
 //                        HeaderView()
@@ -45,7 +50,7 @@ struct HomePageView: View {
 //                                .padding(.top, geometry.safeAreaInsets.top * -0.9) // Adds some space below the notch, while keeping logo inside white box
 //                            
 //                        }
-                    .padding(.bottom, 30)
+                    //.padding(.bottom, 30)
  // }
 
                     // Profile Image
