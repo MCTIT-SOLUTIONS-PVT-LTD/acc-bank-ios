@@ -20,6 +20,16 @@ struct RegisterView: View {
                 backgroundGradient
                
                 VStack(spacing: 20) {
+                  
+                    HeaderView()
+                                            .frame(height: 80) // Adjust height if needed
+                                            .frame(maxWidth: .infinity)
+                                            .background(Color.white)
+                                            .edgesIgnoringSafeArea(.top) // Ensures it reaches the top
+                                            .padding(.top,-180)
+                                        Spacer().frame(height: 10) // Adds spacing below the header
+
+                    
                     //Text("Register")
                     Text(NSLocalizedString("register_title", comment: ""))
 
@@ -34,8 +44,9 @@ struct RegisterView: View {
 //                    CustomTextField(placeholder: "Confirm Password", text: $confirmPassword, isSecure: true)
                     CustomTextField(placeholder: NSLocalizedString("username_placeholder", comment: ""), text: $username)
                                       CustomTextField(placeholder: NSLocalizedString("password_placeholder", comment: ""), text: $password, isSecure: true)
+                    
                                       CustomTextField(placeholder: NSLocalizedString("confirm_password_placeholder", comment: ""), text: $confirmPassword, isSecure: true)
-
+                  
 
                     if let errorMessage = errorMessage {
                         //Text(errorMessage)
@@ -185,6 +196,9 @@ struct RegisterView: View {
         }
     }
 }
+
+
+
 
 // Preview
 #Preview {

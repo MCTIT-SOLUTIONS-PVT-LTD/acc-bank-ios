@@ -278,6 +278,7 @@ struct ContactConfirmationView: View {
 
     @State private var showSuccessScreen = false // State to show success screen
     @State private var navigateToSendMoney = false // State to go back to Send Money
+    @Environment(\.presentationMode) var presentationMode // Access presentation mode
 
     var body: some View {
         NavigationStack {
@@ -289,7 +290,11 @@ struct ContactConfirmationView: View {
                         .font(.headline)
                         .bold()
                     Spacer()
-                    Button(action: { isPresented = false }) {
+                    Button(action: {
+                        //isPresented = false
+                        presentationMode.wrappedValue.dismiss() // Close the view when button is clicked
+
+                    }) {
                         Image(systemName: "xmark")
                             .font(.title3)
                             .foregroundColor(.gray)

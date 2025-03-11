@@ -35,6 +35,8 @@ struct PhoneNumberView: View {
 //                    Spacer()
 //                }
                 VStack(spacing: 20) {
+                    
+                    
                     //Text("Enter Mobile Number")
                     Text(NSLocalizedString("enter_mobile_number", comment: ""))
 

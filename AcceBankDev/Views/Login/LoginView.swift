@@ -58,24 +58,31 @@ struct LoginView: View {
 //                        .padding(.top, 35) // Adjust spacing from top
                         //############
                         VStack(spacing: 0) {
-                            ZStack {
-                                Color.white
-                                    .frame(height: 100) // Fixed height for better control
-                                    .frame(maxWidth: .infinity)
-                                    .ignoresSafeArea(edges: .top) // Ensures it touches the top
+//                            ZStack {
+//                                Color.white
+//                                    .frame(height: 100) // Fixed height for better control
+//                                    .frame(maxWidth: .infinity)
+//                                    .ignoresSafeArea(edges: .top) // Ensures it touches the top
+//
+//                                // Logo placed safely below notch
+//                                Image("AppLogo")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 150, height: 50)
+//                                    //.padding(.top, 10) // Push just enough below the notch
+//                                
+//                                    .offset(y: -30) // Moves logo slightly upwards for perfect centering
+//
+//                            }
+//                            
+//                            Spacer()
+                            HeaderView()
+                                .zIndex(1) // Brings it forward
+                                .frame(height: 25)
+                                .background(Color.white) // Ensures visibility
 
-                                // Logo placed safely below notch
-                                Image("AppLogo")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 150, height: 50)
-                                    //.padding(.top, 10) // Push just enough below the notch
-                                
-                                    .offset(y: -30) // Moves logo slightly upwards for perfect centering
+                            Spacer().frame(height: 10) // Adds space between header and content
 
-                            }
-                            
-                            Spacer()
                         }
                             VStack(spacing: 5) {
                                 //Text("QUOTE OF THE DAY")
@@ -133,20 +140,22 @@ struct LoginView: View {
                                 
 //                                CustomTextField(placeholder: "Password", text: $password, isSecure: true)
                                 ZStack(alignment: .trailing) { // Align icon to the right
-                                    CustomTextField(
-                                        placeholder: NSLocalizedString("password_placeholder", comment: ""),
-                                        text: $password,
-                                        isSecure: isPasswordHidden // Toggle secure entry
-                                    )
-                                    .frame(width: screenWidth * 0.7, height: 50)
-
-                                    Button(action: {
-                                        isPasswordHidden.toggle() // Toggle password visibility
-                                    }) {
-                                        Image(systemName: isPasswordHidden ? "eye.slash" : "eye") // Toggle icon
-                                            .foregroundColor(.white)
-                                            .padding(.trailing, -5) // Add padding to avoid touching edge
-                                    }
+//                                    CustomTextField(
+//                                        placeholder: NSLocalizedString("password_placeholder", comment: ""),
+//                                        text: $password,
+//                                        isSecure: isPasswordHidden // Toggle secure entry
+//                                    )
+//                                    .frame(width: screenWidth * 0.7, height: 50)
+//
+//                                    Button(action: {
+//                                        isPasswordHidden.toggle() // Toggle password visibility
+//                                    }) {
+//                                        Image(systemName: isPasswordHidden ? "eye.slash" : "eye") // Toggle icon
+//                                            .foregroundColor(.white)
+//                                            .padding(.trailing, -5) // Add padding to avoid touching edge
+//                                    }
+                                    CustomTextField(placeholder: NSLocalizedString("password_placeholder", comment: ""), text: $password, isSecure: true)
+                  
                                 }
 
                                 
