@@ -115,6 +115,7 @@ struct SendMoneyView: View {
                         HStack {
 //                            Text(selectedContact?.name ?? "Select Contact")
                             Text(selectedContact?.name ?? NSLocalizedString("select_contact", comment: ""))
+                            
                             Spacer()
                             Image(systemName: "chevron.down")
                         }
