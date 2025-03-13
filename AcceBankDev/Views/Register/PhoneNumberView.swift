@@ -69,6 +69,7 @@ struct PhoneNumberView: View {
                                 }
                     }
                     .frame(height: 50)
+                    .tint(.white)
                     .background(RoundedRectangle(cornerRadius: 25).fill(Color.white.opacity(0.1)))
                     //.overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white.opacity(0.8), lineWidth: 2))
                     .overlay(
@@ -97,6 +98,7 @@ struct PhoneNumberView: View {
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.white.opacity(0.2)))
                             .frame(width: 200, height: 50)
+                            .tint(.white)
 //                            //.foregroundColor(.white)
 //                            .keyboardType(.numberPad)
 //                            .multilineTextAlignment(.center)

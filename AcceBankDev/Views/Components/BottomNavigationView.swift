@@ -150,10 +150,22 @@ struct BottomNavigationBar: View {
                 Spacer()
 
                 Button(action: { selectedTab = 4 }) {
-                    Image(systemName: "house.fill")
-                        .font(.system(size: 28))
+                    Image(systemName: "line.3.horizontal")
+                        .font(.system(size: 29))
                         .foregroundColor(selectedTab == 4 ? .white : .gray)
                 }
+//                Button(action: { selectedTab = 4 }) {
+//                    VStack {
+//                        Image(systemName: "line.3.horizontal")
+//                            .font(.system(size: 29))
+//                            .foregroundColor(selectedTab == 4 ? .white : .gray)
+//                        
+//                        Text("More")
+//                            .font(.caption) // Small text
+//                            .foregroundColor(selectedTab == 4 ? .white : .gray)
+//                    }
+//                }
+
 
                 Spacer()
             }

@@ -68,7 +68,7 @@ struct EmailView: View {
                                 .stroke(Color.white, lineWidth: 2) // Force solid white border
                         )
                         .padding(.horizontal, 20) // Keeps spacing correct
-
+                        .tint(.white)
                     
                     if let errorMessage = errorMessage {
                         //Text(errorMessage)
@@ -94,6 +94,8 @@ struct EmailView: View {
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.white.opacity(0.2)))
                             .frame(width: 200, height: 50)
+                            .tint(.white)
+
                              
                     }
                     

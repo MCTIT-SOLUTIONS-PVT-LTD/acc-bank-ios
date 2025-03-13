@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 
 struct TransferMoneyScreen: View {
@@ -268,6 +266,8 @@ struct TransferMoneyScreen: View {
                                         .foregroundColor(.black)
                                 }
                                 .padding()
+                                .frame(height:70)
+
                                 .background(Color(.systemGray6))
                                 .cornerRadius(10)
                             }
@@ -278,13 +278,13 @@ struct TransferMoneyScreen: View {
                                                 isPresented_to: $isSendToSheetPresented
                                             )
                                         }
-                            if showTransferToError {
-                                                Text("This field is required")
-                                                    .foregroundColor(.red)
-                                                    .font(.caption)
-                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                    .padding(.top, 2)
-                                            }
+//                            if showTransferToError {
+//                                                Text("This field is required")
+//                                                    .foregroundColor(.red)
+//                                                    .font(.caption)
+//                                                    .frame(maxWidth: .infinity, alignment: .leading)
+//                                                    .padding(.top, 2)
+//                                            }
                             VStack(spacing: 10) {
                             HStack(spacing: 20) { // ✅ Adds spacing between the two toggle boxes
                                 // ✅ One-Time Toggle Box
@@ -432,7 +432,7 @@ struct TransferMoneyScreen: View {
                             // Continue Button
                             Button(action: {
                                 validateFields()
-                                validateAmount()
+                                //validateAmount()
 
                                 print("Continue tapped")
                             }) {
@@ -566,7 +566,7 @@ struct TransferAccountSheet: View {
 
 struct SendToSheet: View {
     @ObservedObject var accountManager_to: AccountManager
-    @Binding var selectedAccount_to: BankAccount? // ✅ Unique variable for "Send To"
+    @Binding var selectedAccount_to: BankAccount? //  Unique variable for "Send To"
     @Binding var isPresented_to: Bool
 
     var body: some View {
