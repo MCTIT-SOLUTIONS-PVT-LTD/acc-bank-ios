@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		00C2FB1E2D6C720100899E2E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2FB1D2D6C720100899E2E /* FirebaseAnalytics */; };
+		00C2FB202D6C720100899E2E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2FB1F2D6C720100899E2E /* FirebaseAuth */; };
+		00C2FB222D6C720100899E2E /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2FB212D6C720100899E2E /* FirebaseAuthCombine-Community */; };
+		00C2FB242D6C720100899E2E /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2FB232D6C720100899E2E /* FirebaseMessaging */; };
+		00C2FB282D6C74B500899E2E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2FB272D6C74B500899E2E /* FirebaseFirestore */; };
+		00C2FB2A2D6C74B500899E2E /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2FB292D6C74B500899E2E /* FirebaseFirestoreCombine-Community */; };
+		00CD9BA02D70973E00B932D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00CD9B9E2D70973E00B932D6 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		003F0DD12D6373F200EF3FA5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +37,8 @@
 		003F0DBD2D6373F100EF3FA5 /* AcceBankDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcceBankDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		003F0DD02D6373F200EF3FA5 /* AcceBankDevTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcceBankDevTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		003F0DDA2D6373F200EF3FA5 /* AcceBankDevUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcceBankDevUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00CD9B9F2D70973E00B932D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		00CD9BA12D70976B00B932D6 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +64,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00C2FB242D6C720100899E2E /* FirebaseMessaging in Frameworks */,
+				00C2FB1E2D6C720100899E2E /* FirebaseAnalytics in Frameworks */,
+				00C2FB222D6C720100899E2E /* FirebaseAuthCombine-Community in Frameworks */,
+				00C2FB2A2D6C74B500899E2E /* FirebaseFirestoreCombine-Community in Frameworks */,
+				00C2FB282D6C74B500899E2E /* FirebaseFirestore in Frameworks */,
+				00C2FB202D6C720100899E2E /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +93,7 @@
 		003F0DB42D6373F100EF3FA5 = {
 			isa = PBXGroup;
 			children = (
+				00CD9B9E2D70973E00B932D6 /* Localizable.strings */,
 				003F0DBF2D6373F100EF3FA5 /* AcceBankDev */,
 				003F0DD32D6373F200EF3FA5 /* AcceBankDevTests */,
 				003F0DDD2D6373F200EF3FA5 /* AcceBankDevUITests */,
@@ -112,6 +131,12 @@
 			);
 			name = AcceBankDev;
 			packageProductDependencies = (
+				00C2FB1D2D6C720100899E2E /* FirebaseAnalytics */,
+				00C2FB1F2D6C720100899E2E /* FirebaseAuth */,
+				00C2FB212D6C720100899E2E /* FirebaseAuthCombine-Community */,
+				00C2FB232D6C720100899E2E /* FirebaseMessaging */,
+				00C2FB272D6C74B500899E2E /* FirebaseFirestore */,
+				00C2FB292D6C74B500899E2E /* FirebaseFirestoreCombine-Community */,
 			);
 			productName = AcceBankDev;
 			productReference = 003F0DBD2D6373F100EF3FA5 /* AcceBankDev.app */;
@@ -191,10 +216,14 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				fr,
 				Base,
 			);
 			mainGroup = 003F0DB42D6373F100EF3FA5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				00C2FB1C2D6C720100899E2E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 003F0DBE2D6373F100EF3FA5 /* Products */;
 			projectDirPath = "";
@@ -212,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00CD9BA02D70973E00B932D6 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +297,18 @@
 			targetProxy = 003F0DDB2D6373F200EF3FA5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		00CD9B9E2D70973E00B932D6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00CD9B9F2D70973E00B932D6 /* en */,
+				00CD9BA12D70976B00B932D6 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		003F0DE22D6373F200EF3FA5 /* Debug */ = {
@@ -396,8 +438,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Banking App";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "I want to use this to do sign in";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
@@ -406,11 +449,13 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = mct.AcceBankDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -435,6 +480,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Banking App";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "I want to use this to do sign in";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -442,14 +489,15 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = mct.AcceBankDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -591,6 +639,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		00C2FB1C2D6C720100899E2E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		00C2FB1D2D6C720100899E2E /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00C2FB1C2D6C720100899E2E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		00C2FB1F2D6C720100899E2E /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00C2FB1C2D6C720100899E2E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		00C2FB212D6C720100899E2E /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00C2FB1C2D6C720100899E2E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
+		};
+		00C2FB232D6C720100899E2E /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00C2FB1C2D6C720100899E2E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		00C2FB272D6C74B500899E2E /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00C2FB1C2D6C720100899E2E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		00C2FB292D6C74B500899E2E /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00C2FB1C2D6C720100899E2E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 003F0DB52D6373F100EF3FA5 /* Project object */;
 }

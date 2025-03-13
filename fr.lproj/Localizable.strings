@@ -1,0 +1,242 @@
+/* 
+  Localizable.strings
+  AcceBankDev
+
+  Created by MCT on 27/02/25.
+  
+*/
+"registration_success" = "Vous vous êtes inscrit avec succès.";
+//below is for LoginView file
+"quote_of_the_day" = "CITATION DU JOUR";
+"money_quote" = "L'argent n'est pas tout,\n mais tout a besoin d'argent.";
+"username_placeholder" = "Nom d'utilisateur";
+"password_placeholder" = "Mot de passe";
+"keep_me_logged_in" = "Rester connecté";
+"register" = "S'inscrire";
+"sign_in" = "Se connecter";
+"incorrect_password" = "Mot de passe incorrect. Veuillez réessayer.";
+"enable_face_id" = "Activer Face ID?";
+"face_id_description" = "Voulez-vous utiliser Face ID pour les futures connexions ?";
+"face_id_yes" = "Oui";
+"face_id_no" = "Non";
+"use_face_id" = "Utiliser Face ID";
+"face_id_failed" = "L'activation de Face ID a échoué. Veuillez réessayer.";
+"face_id_not_available" = "Face ID n'est pas disponible sur cet appareil.";
+"login_using_faceid" = "Connexion avec Face ID";
+"user_not_found" = "Utilisateur non trouvé.";
+//^^^^^^^^^^^^^^^^^^^
+
+
+//below is for MoveMoneyView file
+// Move Money Screen
+"move_money_title" = "Déplacer de l'argent";
+"transfers_option" = "Transferts";
+"interac_transfer" = "Interac e-Transfert®";
+"payments_option" = "Paiements";
+"scheduled_transfers" = "Transferts et paiements programmés";
+
+// Payments Bottom Sheet
+"payments_title" = "Paiements";
+"pay_bills" = "Payer des factures";
+"transfer_accounts" = "Transférer entre comptes";
+"scheduled_payments" = "Gérer les paiements programmés";
+"payment_settings" = "Paramètres de paiement";
+
+// Transfer Options Bottom Sheet
+"send_money" = "Envoyer de l'argent";
+"request_money" = "Demander de l'argent";
+"manage_contacts" = "Gérer les contacts";
+"pending_transactions" = "En attente";
+"transfer_history" = "Historique";
+"auto_deposit" = "Paramètres de dépôt automatique";
+"profile_settings" = "Paramètres du profil";
+
+// General UI Elements
+"close_button" = "Fermer";
+///^^^^^^^^^^^^^^^^^^
+
+
+//below is for SendMoneyScreenView file
+// Common Labels
+"send_to"="Envoyer à";
+
+"send_money" = "Envoyer de l'argent";
+"select_contact" = "Sélectionner un contact";
+"add_contact" = "Ajouter un contact";
+"transfer_from" = "Transférer depuis";
+"transfer_to" = "Transférer vers";
+"amount" = "Montant";
+"message" = "Message (optionnel)";
+"continue" = "Continuer";
+"confirm" = "Confirmer";
+"done" = "Terminé";
+"security_question" = "Question de sécurité";
+"security_answer" = "Réponse de sécurité";
+"mobile_phone" = "Téléphone mobile";
+"name"="Nom";
+
+"email" = "E-mail";
+"review_contact" = "Vérifier le contact";
+"transaction_limit_exceeded" = "Le montant de ce paiement dépasse votre limite de transaction. Veuillez réessayer.";
+"payment_failed" = "Échec du paiement";
+"payment_sent" = "Paiement envoyé";
+"payment_summary" = "Résumé du paiement";
+"service_fee" = "Frais de service";
+"total_amount" = "Montant total";
+"acknowledge_auto_deposit" = "Je reconnais que ce destinataire a activé le dépôt automatique. Il n'aura pas besoin de répondre à une question de sécurité et les fonds seront déposés automatiquement.";
+"search" = "Rechercher";
+"confirmation" = "Confirmation";
+"new_contact_success" = "Nouveau contact ajouté avec succès !";
+"cancel" = "Annuler";
+
+// Validation Errors
+"error_select_contact" = "⚠️ Veuillez sélectionner un contact, entrer un montant et accepter les conditions.";
+"error_required_field" = "Champ obligatoire.";
+"error_invalid_email" = "Format d'e-mail invalide.";
+"error_invalid_phone" = "Format de numéro de téléphone invalide.";
+"error_answers_mismatch" = "Les réponses ne correspondent pas.";
+"error_exceeds_balance" = "Le montant saisi dépasse le solde du compte.";
+
+// Payment Summary
+"send_transfer_to" = "Envoyer le transfert à";
+"security_question_label" = "Question de sécurité";
+"security_answer_label" = "Réponse de sécurité";
+"transfer_confirmation" = "Une fois que vous cliquez sur Envoyer maintenant, nous transférerons les fonds depuis votre compte. Vous pouvez annuler le transfert tant qu'il est encore en attente. Les frais de service (le cas échéant) ne sont pas remboursables.";
+"confirm_add_contact" = "Êtes-vous sûr de vouloir ajouter ce contact?";
+
+"transfer_sucess"="Votre argent a été transféré avec succès.";
+"re-enter_sec_answer"="Entrez à nouveau la réponse de sécurité";
+"answer_not_match"="Les réponses ne correspondent pas.";
+"search"="Recherche";
+"enter_transfer_amount"="saisir le montant du transfert";
+"message_optional"="Message (facultatif)";
+"select_account"="Sélectionnez Contact";
+"send_transfers_by_email" = "Envoyer les transferts par e-mail";
+"send_transfers_by_mobile" = "Envoyer les transferts par téléphone mobile";
+
+
+
+
+
+//^^^^^^^^^^^^^^^^^
+//below is for emailview of register
+"enter_email_address" = "Entrez l'adresse e-mail";
+"email_address_placeholder" = "Adresse e-mail";
+"enter_otp" = "Entrez le code OTP";
+"submit" = "Soumettre";
+"send_otp" = "Envoyer OTP";
+"invalid_email_format" = "Format d'email invalide";
+"invalid_otp" = "Code OTP invalide. Veuillez réessayer.";
+//^^^^^^^^^
+
+//below is for phonenumberview of register
+"enter_mobile_number" = "Entrez le numéro de mobile";
+"mobile_number_placeholder" = "Numéro de mobile";
+//"enter_otp" = "Entrez le code OTP";
+"next" = "Suivant";
+//"send_otp" = "Envoyer OTP";
+"invalid_phone_number" = "Numéro de téléphone invalide pour %@";
+//"invalid_otp" = "Code OTP invalide. Veuillez réessayer.";
+
+
+//below is for register view of register
+"register_title" = "S'inscrire";
+"username_placeholder" = "Nom d'utilisateur";
+"password_placeholder" = "Mot de passe";
+"confirm_password_placeholder" = "Confirmez le mot de passe";
+"all_fields_required" = "Tous les champs sont obligatoires.";
+"passwords_do_not_match" = "Les mots de passe ne correspondent pas!";
+"user_already_registered" = "Vous êtes déjà inscrit.";
+"password_empty_error" = "Le mot de passe ne peut pas être vide.";
+"password_length_error" = "Le mot de passe doit contenir au moins 10 caractères.";
+"password_uppercase_error" = "Le mot de passe doit contenir au moins une lettre majuscule.";
+"password_lowercase_error" = "Le mot de passe doit contenir au moins une lettre minuscule.";
+"password_number_error" = "Le mot de passe doit contenir au moins un chiffre.";
+"password_special_character_error" = "Le mot de passe doit contenir au moins un caractère spécial (@$!%*?&).";
+
+////this below is for HomePageView
+"welcome_text" = "Bienvenue %@ à";
+"bank_name" = "Acceinfo Banque";
+"greeting_text" = "Bonjour";
+"savings" = "Épargne";
+"chequing" = "Compte courant";
+"loan" = "Prêt";
+"investments" = "Investissements";
+"crypto" = "Crypto";
+"quote_of_the_day" = "CITATION DU JOUR";
+"money_quote" = "L'argent n'est pas tout, mais tout a besoin d'argent.";
+"good_afternoon" = "Bon après-midi";
+"good_evening" = "Bonsoir";
+
+//^^^^^^^^^
+
+//#########new MoveMoney files data
+"move_money_title" = "Transférer de l'argent";
+"transfers_title" = "Transferts";
+"bank_transfer" = "Virement bancaire";
+"wire_transfer" = "Virement électronique";
+"international_transfer" = "Transfert international";
+"instant_transfer" = "Transfert instantané";
+"quick_pay" = "Paiement rapide";
+"local_transfer" = "Transfert local";
+"mobile_wallet" = "Portefeuille mobile";
+"crypto_transfer" = "Transfert crypto";
+"manage_recipient"="Gérer le destinataire";
+"transfer_money"="Transférer de l'argent";
+
+
+
+"interac_transfer" = "Interac e-Transfer®";
+"send_money" = "Envoyer de l'argent";
+"request_money" = "Demander de l'argent";
+"manage_contacts" = "Gérer les contacts";
+"pending_transactions" = "Transferts en attente";
+"transfer_history" = "Historique";
+"auto_deposit" = "Paramètres de dépôt automatique";
+"profile_settings" = "Paramètres du profil";
+"security_settings" = "Paramètres de sécurité";
+"mutiple_bills"="Payer plusieurs factures";
+"schedule_transfer"="Planifier le transfert";
+
+"payments_option" = "Paiements";
+"utility_bills" = "Payer les factures";
+"credit_card_payments" = "Paiements par carte de crédit";
+"loan_repayment" = "Remboursement de prêt";
+"insurance_payments" = "Paiements d'assurance";
+"education_fees" = "Frais de scolarité";
+"online_shopping" = "Achats en ligne";
+"subscription_services" = "Services d'abonnement";
+"government_taxes" = "Taxes gouvernementales";
+
+"scheduled_transfers" = "Transferts planifiés";
+"see_more" = "Voir plus";
+"see_less" = "Voir moins";
+
+"all_options_title" = "Toutes les options de transfert";
+"select_language"="Sélectionnez la langue";
+"face_id"="Utiliser l'identification faciale";
+
+//below is for make payment
+"make_payment"="Effectuer un paiement";
+"pay_from"="Payer à partir de";
+"payee"="Bénéficiaire";
+"add_payee"="Ajouter un bénéficiaire";
+"date"="Date";
+
+"send_by_email"="email";
+"send_by_mobile"="Mobile";
+"hidden_security_answer"="répondre";
+"send_transfer_by"="Envoyez des virements par";
+"manage_accounts"="Gérer les comptes";
+
+
+//below is for transfer money screen
+"tansfer_money"="Transférer de l'argent";
+"memo"="Memo";
+"transfer_to"="Transfer to";
+"transfer_from"="Transfer from";
+"onetime_payment"="Onetime";
+"recurring_payment"="Recurring";
+
+
+
