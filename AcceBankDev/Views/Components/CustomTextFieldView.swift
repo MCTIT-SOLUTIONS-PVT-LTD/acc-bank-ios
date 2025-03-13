@@ -141,7 +141,8 @@ struct CustomTextField: View {
                             .foregroundColor(.white)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
-                            .frame(width: 300, height: 50, alignment: .leading) // Adjusted width for icon space
+                            .frame(width: 300, height: 50, alignment: .leading)
+                            .tint(.white)// Adjusted width for icon space
                     } else {
                         SecureField("", text: $text)
                             .placeholder(when: text.isEmpty) {
@@ -153,7 +154,8 @@ struct CustomTextField: View {
                             .foregroundColor(.white)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
-                            .frame(width: 300, height: 50, alignment: .leading) // Adjusted width for icon space
+                            .frame(width: 300, height: 50, alignment: .leading)
+                            .tint(.white)// Adjusted width for icon space
                     }
 
                     Button(action: {
@@ -175,6 +177,7 @@ struct CustomTextField: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                         .frame(width: 350, height: 50, alignment: .leading)
+                        .tint(.white)
                 }
             }
         }

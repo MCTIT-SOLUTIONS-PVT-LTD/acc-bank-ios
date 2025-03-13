@@ -119,7 +119,7 @@ struct LoginView: View {
 //                                                               .resizable()
 //                                                               .scaledToFit()
 //                                                               .frame(width: 200, height: 50) // Adjust logo size
-//                                                               .padding(.leading, 100) // ✅ Ensure left alignment
+//                                                               .padding(.leading, 100) // Ensure left alignment
 //                               
 //                                                           Spacer() // Pushes the logo to the left
 //                                    

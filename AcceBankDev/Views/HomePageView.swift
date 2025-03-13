@@ -83,15 +83,15 @@ struct HomePageView: View {
                             VStack(spacing: 15) {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 12) {
-                                        AccountView(icon: "house.fill", title: "Home", number: "", amount: "", isSelected: selectedAccount == "Home")
+                                        AccountView(icon: "dollarsign.circle.fill", title: "Balance", number: "(6982)", amount: "$ 9006.23", isSelected: selectedAccount == "Balance")
                                             .onTapGesture {
-                                                withAnimation { selectedAccount = "Home" }
+                                                withAnimation { selectedAccount = "Balance" }
                                             }
                                         Divider()
                                             .frame(width: 1, height: 40)
                                             .background(Color.black.opacity(0.5))
 
-                                        AccountView(icon: "house.fill", title: NSLocalizedString("savings", comment: ""), number: "(1234)", amount: "$ 1245.45", isSelected: selectedAccount == "Savings")
+                                        AccountView(icon: "banknote.fill", title: NSLocalizedString("savings", comment: ""), number: "(1234)", amount: "$ 1245.45", isSelected: selectedAccount == "Savings")
                                             .onTapGesture {
                                                 withAnimation { selectedAccount = "Savings" }
                                             }
@@ -100,7 +100,7 @@ struct HomePageView: View {
                                             .frame(width: 1, height: 40)
                                             .background(Color.black.opacity(0.5))
 
-                                        AccountView(icon: "creditcard.fill", title: NSLocalizedString("chequing", comment: ""), number: "(3456)", amount: "$ 2000.45", isSelected: selectedAccount == "Chequing")
+                                        AccountView(icon: "wallet.pass", title: NSLocalizedString("chequing", comment: ""), number: "(3456)", amount: "$ 2000.45", isSelected: selectedAccount == "Chequing")
                                             .onTapGesture {
                                                 withAnimation { selectedAccount = "Chequing" }
                                             }
@@ -109,7 +109,7 @@ struct HomePageView: View {
                                             .frame(width: 1, height: 40)
                                             .background(Color.black.opacity(0.5))
 
-                                        AccountView(icon: "magnifyingglass.circle.fill", title: NSLocalizedString("loan", comment: ""), number: "(9999)", amount: "$ 5555.45", isSelected: selectedAccount == "Loan")
+                                        AccountView(icon: "dollarsign.circle.fill", title: NSLocalizedString("loan", comment: ""), number: "(9999)", amount: "$ 5555.45", isSelected: selectedAccount == "Loan")
                                             .onTapGesture {
                                                 withAnimation { selectedAccount = "Loan" }
                                             }
