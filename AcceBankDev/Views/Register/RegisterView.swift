@@ -21,13 +21,13 @@ struct RegisterView: View {
                
                 VStack(spacing: 20) {
                   
-                    HeaderView()
-                                            .frame(height: 80) // Adjust height if needed
-                                            .frame(maxWidth: .infinity)
-                                            .background(Color.white)
-                                            .edgesIgnoringSafeArea(.top) // Ensures it reaches the top
-                                            .padding(.top,-180)
-                                        Spacer().frame(height: 10) // Adds spacing below the header
+//                    HeaderView()
+//                                            .frame(height: 80) // Adjust height if needed
+//                                            .frame(maxWidth: .infinity)
+//                                            .background(Color.white)
+//                                            .edgesIgnoringSafeArea(.top) // Ensures it reaches the top
+//                                            .padding(.top,-180)
+//                                        Spacer().frame(height: 10) // Adds spacing below the header
 
                     
                     //Text("Register")
