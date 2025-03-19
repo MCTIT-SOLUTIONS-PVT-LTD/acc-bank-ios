@@ -1,8 +1,5 @@
 import SwiftUI
 import LocalAuthentication // for Face ID integration
-import FirebaseCore
-import FirebaseFirestore
-import FirebaseAuth
 
 struct LoginView: View {
     @StateObject private var languageManager = LanguageManager()
@@ -77,7 +74,7 @@ struct LoginView: View {
 //                            
 //                            Spacer()
                             HeaderView()
-                                .zIndex(1) // Brings it forward
+                                //.zIndex(1) // Brings it forward
                                 .frame(height: 25)
                                 .background(Color.white) // Ensures visibility
 
