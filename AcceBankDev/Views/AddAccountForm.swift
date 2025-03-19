@@ -77,7 +77,13 @@ struct AddAccountFormView: View {
                         }
 
                         // Balance
-                        TextField("Balance", text: $balance)
+                        //TextField("Balance", text: $balance)
+                        TextField("Balance", text: Binding(
+                            get: { balance }, // Return balance as is
+                            set: { newValue in
+                                balance = formatCurrencyInput(newValue) // Ensure proper formatting
+                            }
+                        ))
                             .padding()
                             .keyboardType(.decimalPad)
                             .background(Color(.systemGray6))
@@ -111,6 +117,23 @@ struct AddAccountFormView: View {
             }
         }
     }
+    func formatCurrencyInput(_ input: String) -> String {
+        // Remove any existing "$" to avoid duplication
+        var filtered = input.replacingOccurrences(of: "$", with: "")
+
+        // Allow only numbers and one decimal point
+        let validCharacters = "0123456789."
+        filtered = String(filtered.filter { validCharacters.contains($0) })
+
+        // Ensure only one decimal point
+        let components = filtered.split(separator: ".")
+        if components.count > 2 {
+            return "$" + components[0] + "." + components[1].prefix(2) // Limit to 2 decimal places
+        }
+
+        return "$" + filtered
+    }
+
 
     // Function to Validate Fields
     private func validateFields() -> Bool {

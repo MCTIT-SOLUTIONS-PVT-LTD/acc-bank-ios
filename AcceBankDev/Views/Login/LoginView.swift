@@ -77,7 +77,7 @@ struct LoginView: View {
 //                            
 //                            Spacer()
                             HeaderView()
-                                .zIndex(1) // Brings it forward
+                                //.zIndex(1) // Brings it forward
                                 .frame(height: 25)
                                 .background(Color.white) // Ensures visibility
 

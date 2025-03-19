@@ -40,7 +40,7 @@ struct HeaderView: View {
                     .scaledToFit()
                     .frame(width: UIScreen.main.bounds.width * 0.4, height: 40)
                     .padding(.top, 10) // Prevents overlap with the notch
-                    .padding(.top,-15)
+                    .padding(.top,-19)
 //                    .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top ?? -15) // ✅ Prevents logo from overlapping with notch
 
             }
