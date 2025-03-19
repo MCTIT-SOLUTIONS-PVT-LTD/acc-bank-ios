@@ -14,6 +14,9 @@
 		00C2FB282D6C74B500899E2E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2FB272D6C74B500899E2E /* FirebaseFirestore */; };
 		00C2FB2A2D6C74B500899E2E /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 00C2FB292D6C74B500899E2E /* FirebaseFirestoreCombine-Community */; };
 		00CD9BA02D70973E00B932D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00CD9B9E2D70973E00B932D6 /* Localizable.strings */; };
+		CDE0F6D22D8946F30059ECA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDE0F6D12D8946F30059ECA9 /* Assets.xcassets */; };
+		CDE0F6D32D8946F30059ECA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDE0F6D12D8946F30059ECA9 /* Assets.xcassets */; };
+		CDE0F6D42D8946F30059ECA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDE0F6D12D8946F30059ECA9 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +42,7 @@
 		003F0DDA2D6373F200EF3FA5 /* AcceBankDevUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcceBankDevUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00CD9B9F2D70973E00B932D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		00CD9BA12D70976B00B932D6 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CDE0F6D12D8946F30059ECA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -93,6 +97,7 @@
 		003F0DB42D6373F100EF3FA5 = {
 			isa = PBXGroup;
 			children = (
+				CDE0F6D12D8946F30059ECA9 /* Assets.xcassets */,
 				00CD9B9E2D70973E00B932D6 /* Localizable.strings */,
 				003F0DBF2D6373F100EF3FA5 /* AcceBankDev */,
 				003F0DD32D6373F200EF3FA5 /* AcceBankDevTests */,
@@ -242,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00CD9BA02D70973E00B932D6 /* Localizable.strings in Resources */,
+				CDE0F6D22D8946F30059ECA9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDE0F6D32D8946F30059ECA9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDE0F6D42D8946F30059ECA9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +442,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AcceBankDev/Preview Content\"";
-				DEVELOPMENT_TEAM = YWL2QQB65F;
+				DEVELOPMENT_TEAM = JD5Z9BT8SU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -456,7 +464,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = mct.AcceBankDev;
+				PRODUCT_BUNDLE_IDENTIFIER = "mct.AcceBankDev-v1.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -476,7 +484,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AcceBankDev/Preview Content\"";
-				DEVELOPMENT_TEAM = YWL2QQB65F;
+				DEVELOPMENT_TEAM = JD5Z9BT8SU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -498,7 +506,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = mct.AcceBankDev;
+				PRODUCT_BUNDLE_IDENTIFIER = "mct.AcceBankDev-v1.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
