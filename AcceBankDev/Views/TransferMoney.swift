@@ -1,3 +1,5 @@
+
+
 import SwiftUI
 
 struct TransferMoneyScreen: View {
@@ -7,7 +9,9 @@ struct TransferMoneyScreen: View {
     @Environment(\.presentationMode) var presentationMode // To dismiss the modal
     @StateObject private var accountManager = AccountManager()
 
-    @State private var selectedPaymentType: String? = nil // Track selected payment type
+    //@State private var selectedPaymentType: String? = nil // Track selected payment type
+    @State private var selectedPaymentType: String? = "My accounts" // Set "My accounts" as default
+
     @State private var showAccountSheet = false // Toggle for full-screen modal
     @State private var selectedContact: Contact?
     @State private var showContactSheet = false // Show Contact Selection Sheet
@@ -21,26 +25,27 @@ struct TransferMoneyScreen: View {
     @State private var date = Date()
     @State private var dateText: String? = nil //  TextField remains empty until date is selected
     @State private var isRecurring = false // Toggle state for One-Time/Recurring
-        @State private var selectedFrequency = "Weekly" // De
+    @State private var selectedFrequency = "Weekly" // De
     @State private var onetime = false // Toggle for email transfers
     
     @State private var showTransferToError = false
-       @State private var showAmountError = false
+    @State private var showAmountError = false
     @State private var showMemoError = false
 
-       @State private var showDateError = false
+    @State private var showDateError = false
     @State private var showError: Bool = false
 
-        @State private var recurring = false //
+    @State private var recurring = false //
     @State private var showFromAccountSheet = false // Separate modal for "Transfer From"
-        @State private var showToAccountSheet = false // Separate modal for "Transfer To"
+    @State private var showToAccountSheet = false // Separate modal for "Transfer To"
 //        @State private var selectedFromAccount: Account? = nil // Separate state for "Transfer From"
 //        @State private var selectedToAccount: Account? = nil
     @State private var selectedFromAccount: BankAccount? // For "Send From"
     @State private var selectedToAccount: BankAccount?   // For "Send To"
 
     @State private var showTransferFromError = false
-    
+    @State private var showConfirmationSheet = false // Controls Confirmation Screen
+
     
     @State private var showToAccountSheet_to = false //this is state for transfer to
     
@@ -71,6 +76,34 @@ struct TransferMoneyScreen: View {
                     Spacer()
                 }
                 .padding()
+                if showInsufficientFundsError {
+                    HStack {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(.white)
+                            .padding(.leading, 10)
+
+                        VStack(alignment: .leading) {
+                            Text("Payment failed")
+                                .font(.headline)
+                                .foregroundColor(.white)
+
+                            Text("This transfer amount exceeds your transaction limit. Please try again.")
+                                .font(.subheadline)
+                                .foregroundColor(.white)
+                        }
+                        .padding(.leading, 5)
+
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.red)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                    .transition(.opacity)
+                    .animation(.easeInOut) // ✅ Smooth UI update when error appears/disappears
+                }
+
 
                 VStack(alignment: .leading, spacing: 15) {
                     HStack(spacing: 0) { // No spacing between buttons
@@ -107,7 +140,7 @@ struct TransferMoneyScreen: View {
 
                                                                                     )
                                         .foregroundColor(selectedPaymentType == "My accounts" ? .white : .gray) // Text color
-                                        .cornerRadius(30) // Rounded corners for the button
+                                                          .cornerRadius(30) // Rounded corners for the button
                                 }
 
                                 // Saving Button (Unselected)
@@ -206,7 +239,7 @@ struct TransferMoneyScreen: View {
                                         .foregroundColor(.black)
                                 }
                                 .padding()
-                                .frame(height:70)
+                               // .frame(height:70)
                                 .background(Color(.systemGray6))
                                 .cornerRadius(10)
                             }
@@ -266,8 +299,6 @@ struct TransferMoneyScreen: View {
                                         .foregroundColor(.black)
                                 }
                                 .padding()
-                                .frame(height:70)
-
                                 .background(Color(.systemGray6))
                                 .cornerRadius(10)
                             }
@@ -278,72 +309,84 @@ struct TransferMoneyScreen: View {
                                                 isPresented_to: $isSendToSheetPresented
                                             )
                                         }
-//                            if showTransferToError {
-//                                                Text("This field is required")
-//                                                    .foregroundColor(.red)
-//                                                    .font(.caption)
-//                                                    .frame(maxWidth: .infinity, alignment: .leading)
-//                                                    .padding(.top, 2)
-//                                            }
+                            if showTransferToError {
+                                                Text("This field is required")
+                                                    .foregroundColor(.red)
+                                                    .font(.caption)
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                    .padding(.top, 2)
+                                            }
                             VStack(spacing: 10) {
-                            HStack(spacing: 20) { // ✅ Adds spacing between the two toggle boxes
-                                // ✅ One-Time Toggle Box
-                                VStack {
-                                    Toggle(NSLocalizedString("onetime_payment", comment: ""), isOn: $onetime)
+                                HStack(spacing: 20) { // Adds spacing between the two toggle boxes
+                                    // One-Time Toggle Box
+                                    VStack {
+                                        Toggle(NSLocalizedString("onetime_payment", comment: ""), isOn: Binding(
+                                            get: { onetime },
+                                            set: { newValue in
+                                                onetime = newValue
+                                                if newValue { recurring = false } // Deselect recurring when selecting one-time
+                                            }
+                                        ))
                                         .toggleStyle(SwitchToggleStyle(tint: .blue))
-                                        .scaleEffect(0.8) // ✅ Reduces the size of the toggle
+                                        .scaleEffect(0.8) // Reduces the size of the toggle
                                         .lineLimit(1)
+                                        .padding(.horizontal, 10) // Adjusts padding inside the box
+                                    }
+                                    .frame(width: 160, height: 60) // Ensures equal-sized boxes
+                                    .background(Color(.systemGray6)) //  Adds gray background
+                                    .cornerRadius(10) // Rounds corners
 
-                                        .padding(.horizontal, 10) // ✅ Adjusts padding inside the box
-                                }
-                                .frame(width: 160, height: 60) // ✅ Ensures equal-sized boxes
-                                .background(Color(.systemGray6)) // ✅ Adds gray background
-                                .cornerRadius(10) // ✅ Rounds corners
-
-                                // ✅ Recurring Toggle Box
-                                VStack {
-                                    Toggle(NSLocalizedString("recurring_payment", comment: ""), isOn: $recurring)
+                                    // Recurring Toggle Box
+                                    VStack {
+                                        Toggle(NSLocalizedString("recurring_payment", comment: ""), isOn: Binding(
+                                            get: { recurring },
+                                            set: { newValue in
+                                                recurring = newValue
+                                                if newValue { onetime = false } // Deselect one-time when selecting recurring
+                                            }
+                                        ))
                                         .toggleStyle(SwitchToggleStyle(tint: .blue))
-                                        .scaleEffect(0.8) // ✅ Reduces the size of the toggle
+                                        .scaleEffect(0.8) // Reduces the size of the toggle
                                         .lineLimit(1)
-
-
-                                        .padding(.horizontal, 10) // ✅ Adjusts padding inside the box
+                                        .padding(.horizontal, 10) // Adjusts padding inside the box
+                                    }
+                                    .frame(width: 160, height: 60) // Ensures equal-sized boxes
+                                    .background(Color(.systemGray6)) // Adds gray background
+                                    .cornerRadius(10) // Rounds corners
                                 }
-                                
-                                
-                                .frame(width: 160, height: 60) // ✅ Ensures equal-sized boxes
-                                .background(Color(.systemGray6)) // ✅ Adds gray background
-                                .cornerRadius(10) // ✅ Rounds corners
-                            }
-                            .padding(.horizontal, 10) // ✅ Adjusts outer spacing
+                                .padding(.horizontal, 10) // Adjusts outer spacing
 
                                 if recurring {
-                                      VStack {
-                                          Text("Select Frequency")
-                                              .font(.subheadline)
-                                              .foregroundColor(.gray)
-                                              .frame(maxWidth: .infinity, alignment: .leading)
-                                              .padding(.top, 5)
+                                    VStack {
+                                        Text("Select Frequency")
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .padding(.top, 5)
 
-                                          Picker("Frequency", selection: $selectedFrequency) {
-                                              Text("Weekly").tag("Weekly")
-                                              Text("Monthly").tag("Monthly")
-                                              Text("Yearly").tag("Yearly")
-                                          }
-                                          .pickerStyle(SegmentedPickerStyle()) // ✅ Clean segmented style
-                                          .padding()
-                                      }
-                                      .transition(.opacity) // ✅ Smooth fade-in effect
-                                  }
+                                        Picker("Frequency", selection: $selectedFrequency) {
+                                            Text("Weekly").tag("Weekly")
+                                            Text("Monthly").tag("Monthly")
+                                            Text("Yearly").tag("Yearly")
+                                        }
+                                        .pickerStyle(SegmentedPickerStyle()) // Clean segmented style
+                                        .padding()
+                                    }
+                                    .transition(.opacity) // Smooth fade-in effect
+                                }
+
                               }
-                              .animation(.easeInOut) // ✅
+                              .animation(.easeInOut) //
                             
                             // "Amount" Text Field
                             TextField("enter_transfer_amount", text: $amount)
                                 .keyboardType(.decimalPad)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+                                .onChange(of: amount) { newValue in
+                                    amount = formatCurrencyInput(newValue)
+                                }
+                                
                             if showAmountError {
                                                Text("This field is required")
                                                    .foregroundColor(.red)
@@ -435,6 +478,11 @@ struct TransferMoneyScreen: View {
                                 //validateAmount()
 
                                 print("Continue tapped")
+                                if !showInsufficientFundsError {
+                                    print("Valid amount entered. Showing confirmation screen.")
+
+                                    }
+
                             }) {
                                 Text("Continue")
                                     .font(.headline)
@@ -455,18 +503,53 @@ struct TransferMoneyScreen: View {
                         }
                 .padding(.horizontal, 10)
                     }
-                }.sheet(isPresented: $showAccountSheet) {
-                    AccountSelectionSheet(accountManager: accountManager, isPresented: $showAccountSheet)
                 }
+//        .sheet(isPresented: $showAccountSheet) {
+//                    AccountSelectionSheet(accountManager: accountManager, isPresented: $showAccountSheet)
+//                }
+        
         
             }
+//    private func validateFields() {
+//            showTransferFromError = selectedFromAccount == nil
+//            showTransferToError = selectedToAccount == nil
+//            showAmountError = amount.trimmingCharacters(in: .whitespaces).isEmpty
+//            showDateError = dateText == nil
+//        showMemoError=text.trimmingCharacters(in: .whitespaces).isEmpty
+//        }
     private func validateFields() {
-            showTransferFromError = selectedFromAccount == nil
-            showTransferToError = selectedToAccount == nil
-            showAmountError = amount.trimmingCharacters(in: .whitespaces).isEmpty
-            showDateError = dateText == nil
-        showMemoError=text.trimmingCharacters(in: .whitespaces).isEmpty
+        // Trim whitespace and ensure amount is a valid number
+        let enteredAmount = Double(amount.replacingOccurrences(of: "$", with: "").trimmingCharacters(in: .whitespaces)) ?? 0.0
+        let availableBalance = Double(selectedAccount_from?.balance.replacingOccurrences(of: "$", with: "").trimmingCharacters(in: .whitespaces) ?? "0") ?? 0.0
+
+        // Validate required fields
+        showTransferFromError = selectedFromAccount == nil
+        showTransferToError = selectedToAccount == nil
+        showAmountError = amount.trimmingCharacters(in: .whitespaces).isEmpty
+        showDateError = dateText == nil
+        showMemoError = text.trimmingCharacters(in: .whitespaces).isEmpty
+
+        // Check if entered amount exceeds available balance
+        if enteredAmount > availableBalance {
+            showInsufficientFundsError = true
+        } else {
+            showInsufficientFundsError = false
         }
+    }
+
+    
+    func formatCurrencyInput(_ input: String) -> String {
+        // Remove non-numeric characters except `.`
+        let filtered = input.filter { "0123456789.".contains($0) }
+        
+        // Ensure there is at most one `.`
+        let components = filtered.split(separator: ".")
+        if components.count > 2 {
+            return "$" + String(components[0]) + "." + String(components[1].prefix(2)) // Keep two decimal places
+        }
+        
+        return "$" + filtered
+    }
 
         }
 
@@ -566,7 +649,7 @@ struct TransferAccountSheet: View {
 
 struct SendToSheet: View {
     @ObservedObject var accountManager_to: AccountManager
-    @Binding var selectedAccount_to: BankAccount? //  Unique variable for "Send To"
+    @Binding var selectedAccount_to: BankAccount? // ✅ Unique variable for "Send To"
     @Binding var isPresented_to: Bool
 
     var body: some View {

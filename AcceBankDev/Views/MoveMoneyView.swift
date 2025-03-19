@@ -126,11 +126,11 @@ struct MoveMoneyView: View {
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 15) {
-                        InteracOptionRow(icon: "arrow.left.arrow.right", title: "Transfer Money")
-                        InteracOptionRow(icon: "person.crop.circle.fill", title: "Manage Recipient")
+                        InteracOptionRow(icon: "arrow.left.arrow.right", title: "Between Your Accounts")
+                        InteracOptionRow(icon: "building.columns.fill", title: "To Another Bank")
                         //InteracOptionRow(icon: "clock.fill", title: "Scheduled Transfers")
-                        InteracOptionRow(icon: "person.3.fill", title: "Manage Contacts")
-                        InteracOptionRow(icon: "person.fill", title: "Manage Accounts")
+                        InteracOptionRow(icon: "building.columns.fill", title: "Manage Contacts")
+                        InteracOptionRow(icon: "clock.fill", title: "Manage Accounts")
                     }
                     .padding()
                 }
@@ -174,7 +174,7 @@ struct MoveMoneyView: View {
                     VStack(alignment: .leading, spacing: 15) {
                         InteracOptionRow(icon: "paperplane.fill", title: "Send money")
                         InteracOptionRow(icon: "arrow.down.doc.fill", title: "Request money")
-//                        InteracOptionRow(icon: "person.crop.circle.fill", title: "Manage contacts")
+                        InteracOptionRow(icon: "person.crop.circle.fill", title: "Manage contacts")
                         InteracOptionRow(icon: "clock.fill", title: "Pending")
                         InteracOptionRow(icon: "list.bullet", title: "History")
                         InteracOptionRow(icon: "gearshape.fill", title: "Autodeposit settings")
@@ -221,7 +221,7 @@ struct MoveMoneyView: View {
                 if title == "Send money" {
                     isShowingSendMoney = true
                 }
-                else if title == "Transfer Money" {
+                else if title == "Request money" {
                     isShowingTransferMoney = true
                 }
                 else if title == "Manage Contacts" {
