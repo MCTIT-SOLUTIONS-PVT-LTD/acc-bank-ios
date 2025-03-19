@@ -199,6 +199,8 @@ struct MoveMoneyView: View {
         @State private var isShowingSendMoney = false
         @State private var isShowingTransferMoney = false
         @State private var isShowingContactForm = false
+        @State private var isShowingAccountForm = false
+
 
         var body: some View {
             HStack {
@@ -227,6 +229,10 @@ struct MoveMoneyView: View {
                 else if title == "Manage Contacts" {
                     isShowingContactForm = true
                 }
+                else if title == "Manage Accounts" {
+                    isShowingAccountForm = true
+                }
+                
             }
             .fullScreenCover(isPresented: $isShowingSendMoney) {
                 SendMoneyView()
@@ -236,6 +242,11 @@ struct MoveMoneyView: View {
             }
             .fullScreenCover(isPresented: $isShowingContactForm) {
                 AddContactFormView(isPresented: $isShowingContactForm, contactManager: ContactManager())
+            }
+            .fullScreenCover(isPresented: $isShowingAccountForm) {
+                //TransferMoneyScreen()
+                AddAccountFormView(accountManager: AccountManager())
+
             }
         }
     }
