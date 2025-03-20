@@ -238,7 +238,9 @@ struct MoveMoneyView: View {
                 SendMoneyView()
             }
             .fullScreenCover(isPresented: $isShowingTransferMoney) {
+                //TransferMoneyScreen(showContactSheet: .constant(false))
                 TransferMoneyScreen()
+
             }
             .fullScreenCover(isPresented: $isShowingContactForm) {
                 AddContactFormView(isPresented: $isShowingContactForm, contactManager: ContactManager())

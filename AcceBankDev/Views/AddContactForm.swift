@@ -215,7 +215,7 @@ struct AddContactFormView: View {
     // Function to Validate Fields
     func validateFields() -> Bool {
         nameError = name.isEmpty
-        emailError = email.isEmpty || !isValidEmail(email)
+        //emailError = email.isEmpty || !isValidEmail(email)
         mobilePhoneError = mobilePhone.isEmpty || mobilePhone.count < 10
         securityAnswerError = securityAnswer.isEmpty
         reEnterSecurityAnswerError = securityAnswer != reEnterSecurityAnswer

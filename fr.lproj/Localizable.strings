@@ -9,7 +9,7 @@
 //below is for LoginView file
 "quote_of_the_day" = "CITATION DU JOUR";
 "money_quote" = "L'argent n'est pas tout,\n mais tout a besoin d'argent.";
-"username_placeholder" = "Nom d'utilisateur";
+"username_placeholder" = "Nom d'utilisateur ou numéro de carte";
 "password_placeholder" = "Mot de passe";
 "keep_me_logged_in" = "Rester connecté";
 "register" = "S'inscrire";
