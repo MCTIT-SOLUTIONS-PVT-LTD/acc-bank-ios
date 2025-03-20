@@ -9,7 +9,7 @@
 //below is for LoginView file
 "quote_of_the_day" = "QUOTE OF THE DAY";
 "money_quote" = "Money isn’t everything,\n but everything needs \nmoney.";
-"username_placeholder" = "Username";
+"username_placeholder" = "Username or card number";
 "password_placeholder" = "Password";
 "keep_me_logged_in" = "Keep me logged in";
 "register" = "Register";
